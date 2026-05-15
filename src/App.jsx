@@ -35,6 +35,8 @@ const consultationStats = [
   { label: 'Booking support', value: 'Flights, hotel, clinic, aftercare' },
 ]
 
+const heroTitleClass = 'font-display text-[56px] font-extrabold leading-none md:text-[96px]'
+
 const priceChartRows = [
   {
     procedure: 'IVF',
@@ -75,14 +77,14 @@ const priceChartRows = [
 ]
 
 const itineraryDays = [
-  { day: 'Day 1', title: 'Arrive in Da Nang', body: 'Airport fast-track, private transfer, quiet hotel check-in.', image: 'https://source.unsplash.com/800x1200/?vietnam,airport,arrival' },
-  { day: 'Day 2', title: 'Free day', body: 'Light meals, beach air, an easy evening by the water.', image: 'https://source.unsplash.com/800x1200/?vietnam,beach,relax' },
+  { day: 'Day 1', title: 'Arrive in Da Nang', body: 'Airport fast-track, private transfer, quiet hotel check-in.', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80' },
+  { day: 'Day 2', title: 'Free day', body: 'Light meals, beach air, an easy evening by the water.', image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80' },
   { day: 'Day 3', title: 'Procedure day', body: 'Minimal schedule, chauffeur, clinic coordination, no stress.', muted: true },
-  { day: 'Day 4', title: 'Poolside recovery', body: 'Breakfast in room, shade, sea breeze, zero logistics.', image: 'https://source.unsplash.com/800x1200/?vietnam,resort,pool' },
-  { day: 'Day 5', title: 'Hoi An at golden hour', body: 'Lantern light, gentle walking, early dinner, back to rest.', image: 'https://source.unsplash.com/800x1200/?hoi-an,lanterns' },
+  { day: 'Day 4', title: 'Poolside recovery', body: 'Breakfast in room, shade, sea breeze, zero logistics.', image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80' },
+  { day: 'Day 5', title: 'Hoi An at golden hour', body: 'Lantern light, gentle walking, early dinner, back to rest.', image: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80' },
   { day: 'Day 6', title: 'Procedure follow-up', body: 'Quick check-in, then straight back to the coast.', muted: true },
-  { day: 'Day 7', title: 'Quiet cultural day', body: 'Tea, tailoring, old town, tailored pace.', image: 'https://source.unsplash.com/800x1200/?vietnam,cafe,old-town' },
-  { day: 'Day 8', title: 'Fly home', body: 'Documentation packed, aftercare plan confirmed, car waiting.', image: 'https://source.unsplash.com/800x1200/?airport,departure' },
+  { day: 'Day 7', title: 'Quiet cultural day', body: 'Tea, tailoring, old town, tailored pace.', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80' },
+  { day: 'Day 8', title: 'Fly home', body: 'Documentation packed, aftercare plan confirmed, car waiting.', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80' },
 ]
 
 const chatMessages = [
@@ -119,9 +121,9 @@ function SectionTitle({ eyebrow, title, body, className = '', dark = false }) {
 
 function CTAButton({ children }) {
   return (
-    <button className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-bold text-navy transition hover:bg-[#C9943A] md:px-7 md:py-4 md:text-base">
+    <button className="inline-flex items-center gap-3 rounded-full bg-gold px-10 py-5 text-lg font-bold text-navy transition hover:bg-[#C9943A]">
       {children}
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="h-5 w-5" />
     </button>
   )
 }
@@ -163,27 +165,27 @@ function Header({ activeTab, onTabClick }) {
 
 function PriceComparisonChart() {
   return (
-    <div className="space-y-8 rounded-[2rem] bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.08)] md:p-10">
+    <div className="space-y-14 rounded-[2rem] bg-navy p-8 text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)] md:p-12">
       {priceChartRows.map((row) => (
         <div key={row.procedure}>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h3 className="font-display text-xl text-[#1c1b21] md:text-2xl">{row.procedure}</h3>
-            <span className="text-xs uppercase tracking-[0.24em] text-[#8f8b82]">illustrative package pricing</span>
+            <h3 className="font-display text-2xl text-white md:text-3xl">{row.procedure}</h3>
+            <span className="text-xs uppercase tracking-[0.24em] text-white/55">illustrative package pricing</span>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-6">
             {row.markets.map((market) => (
               <div
                 key={`${row.procedure}-${market.country}`}
                 className={cn(
-                  'rounded-2xl px-3 py-3 transition md:px-4',
-                  market.highlight ? 'bg-[#fff6dc]' : 'bg-[#f7f7f8]',
+                  'rounded-2xl px-4 py-4 transition md:px-5',
+                  market.highlight ? 'bg-[#2b2843]' : 'bg-white/5',
                 )}
               >
-                <div className="mb-2 flex items-center justify-between text-sm text-[#2a2a2e]">
+                <div className="mb-3 flex items-center justify-between text-sm text-white md:text-base">
                   <span className="font-medium">{market.country}</span>
                   <span>{market.price}</span>
                 </div>
-                <div className="h-3 rounded-full bg-[#e3e7ea]">
+                <div className="h-3 rounded-full bg-white/10">
                   <div
                     className={cn('h-3 rounded-full', market.highlight ? 'bg-gold' : 'bg-[#4A6A8A]')}
                     style={{ width: market.width }}
@@ -232,38 +234,30 @@ function ChatBubble({ message, index, animateKey }) {
 function TabOne() {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-[#faf8f2] shadow-warm">
-      <section className="relative bg-white px-6 pb-16 pt-8 md:px-12 md:pb-24 md:pt-14">
-        <div className="grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#7f7a72]">Specialist seeker concept</p>
-            <h1 className="font-display text-[3.4rem] leading-[0.9] text-black md:text-[7rem]">
-              Second
-              <br />
-              Opinion<span className="align-top text-[1.2em]">?</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#2f2f34] md:text-lg">
-              Your doctor is right about what you need. Your hospital&apos;s price tag is a different conversation. IVF in Australia costs
-              $15,000. The same procedure, with comparable accreditation and success rates, costs $5,500 in Vietnam. Voya handles the rest.
-            </p>
-            <div className="mt-8">
-              <CTAButton>Get your free second opinion - 30-minute call, no obligation</CTAButton>
-            </div>
+      <section className="relative bg-white px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="flex min-h-[55vh] flex-col items-center justify-center text-center">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-[#7f7a72]">Specialist seeker concept</p>
+          <h1 className={cn(heroTitleClass, 'text-black')}>
+            Second Opinion<span className="align-top text-[1.05em]">?</span>
+          </h1>
+          <p className="mt-8 max-w-3xl text-lg leading-8 text-[#2f2f34] md:text-[22px]">
+            Your doctor is right about what you need. Your hospital&apos;s price tag is a different conversation. IVF in Australia costs
+            $15,000. The same procedure, with comparable accreditation and success rates, costs $5,500 in Vietnam. Voya handles the rest.
+          </p>
+          <div className="mt-10">
+            <CTAButton>Get your free second opinion - 30-minute call, no obligation</CTAButton>
           </div>
-          <div className="relative">
-            <img
-              src="https://source.unsplash.com/1600x900/?hospital,invoice,medical"
-              alt="Medical invoice"
-              className="h-[420px] w-full rounded-[2rem] object-cover shadow-[0_24px_80px_rgba(0,0,0,0.12)] md:h-[560px]"
-            />
-            <div className="absolute bottom-6 left-6 rounded-2xl bg-white/95 p-4 shadow-lg backdrop-blur">
-              <div className="text-xs uppercase tracking-[0.26em] text-[#888277]">Sticker shock moment</div>
-              <div className="mt-2 text-sm leading-6 text-[#26262d]">Built for Cambodia, Laos, India, with Australia and the UK as secondary markets.</div>
-            </div>
-          </div>
+        </div>
+        <div className="mt-14">
+          <img
+            src="https://images.unsplash.com/photo-1584820927498-0e507e52f09e?w=1600&q=80"
+            alt="Medical invoice"
+            className="h-[420px] w-full rounded-[2rem] object-cover shadow-[0_24px_80px_rgba(0,0,0,0.12)] md:h-[620px]"
+          />
         </div>
       </section>
 
-      <section className="bg-[#f8f2df] px-6 py-14 md:px-12 md:py-20">
+      <section className="bg-[#f8f2df] px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="Data confidence"
           title="Vietnam wins when price transparency meets specialist care."
@@ -274,19 +268,19 @@ function TabOne() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,#f8f2df_0%,#f4e3bd_18%,#eecb88_100%)] px-6 py-16 md:px-12 md:py-24">
+      <section className="bg-[linear-gradient(180deg,#f8f2df_0%,#f4e3bd_18%,#eecb88_100%)] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-[2rem] bg-white/70 p-8 backdrop-blur">
-            <h3 className="font-display text-2xl text-[#1A1A2E]">What changes.</h3>
-            <ul className="mt-5 space-y-4 text-sm leading-7 text-[#414049] md:text-base">
+          <div className="rounded-[2rem] bg-white p-10 shadow-[0_20px_60px_rgba(46,32,4,0.14)] md:p-10">
+            <h3 className="font-display text-3xl text-[#1A1A2E]">What changes.</h3>
+            <ul className="mt-5 space-y-4 text-base leading-8 text-[#414049]">
               <li>Price drops meaningfully versus Bangkok, Singapore, Australia, or premium Indian hospital groups.</li>
               <li>Recovery happens in a warmer, more restorative setting than a domestic city apartment.</li>
               <li>One concierge arranges flights, hotel, procedure, transfers, and follow-up support.</li>
             </ul>
           </div>
-          <div className="rounded-[2rem] bg-[#1A1A2E] p-8 text-white">
-            <h3 className="font-display text-2xl">What doesn&apos;t.</h3>
-            <ul className="mt-5 space-y-4 text-sm leading-7 text-white/80 md:text-base">
+          <div className="rounded-[2rem] bg-[#1A1A2E] p-10 text-[#F5A623] shadow-[0_20px_60px_rgba(46,32,4,0.14)] md:p-10">
+            <h3 className="font-display text-3xl text-[#F5A623]">What doesn&apos;t.</h3>
+            <ul className="mt-5 space-y-4 text-base leading-8 text-[#F5A623]">
               <li>Accreditation standards, internationally trained physicians, and modern equipment.</li>
               <li>Published success-rate scrutiny for fertility and specialist procedures.</li>
               <li>The ability to ask hard questions before committing to anything.</li>
@@ -294,8 +288,8 @@ function TabOne() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(46,32,4,0.14)]">
+          <div className="mt-10 grid gap-8 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(46,32,4,0.14)]">
             <div className="flex flex-wrap gap-3">
               {consultationStats.map((stat) => (
                 <div key={stat.label} className="rounded-full bg-[#f4ead3] px-4 py-2 text-sm text-[#2b2e32]">
@@ -319,7 +313,7 @@ function TabOne() {
           </div>
           <div className="overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_60px_rgba(46,32,4,0.14)]">
             <img
-              src="https://source.unsplash.com/1200x900/?modern,clinic,doctor"
+              src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&q=80"
               alt="Modern Vietnamese clinic interior"
               className="h-72 w-full object-cover"
             />
@@ -341,15 +335,15 @@ function TabTwo() {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-[#f4eadc] shadow-warm">
       <section
-        className="relative min-h-[680px] bg-cover bg-center px-6 py-20 md:px-12 md:py-28"
+        className="relative min-h-[680px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
         style={{
           backgroundImage:
-            "linear-gradient(135deg, rgba(36,30,18,0.66), rgba(68,54,35,0.26)), url('https://source.unsplash.com/1600x900/?vietnam,spa,wellness,woman')",
+            "linear-gradient(135deg, rgba(36,30,18,0.66), rgba(68,54,35,0.26)), url('https://images.unsplash.com/photo-1540555700478-4be290a303f4?w=1600&q=80')",
         }}
       >
         <div className="mx-auto max-w-3xl text-center text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Opportunistic vacationer concept</p>
-          <h1 className="mt-6 font-display text-5xl italic leading-tight md:text-7xl">You&apos;ve Earned This.</h1>
+          <h1 className={cn(heroTitleClass, 'mt-6 italic text-white')}>You&apos;ve Earned This.</h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
             The procedure you&apos;ve been putting off. The trip to Vietnam you&apos;ve been meaning to take. Voya combines them, because taking care of yourself should never feel like a compromise.
           </p>
@@ -359,7 +353,7 @@ function TabTwo() {
         </div>
       </section>
 
-      <section className="px-6 py-14 md:px-12 md:py-20">
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="Self-investment frame"
           title="A trip itinerary disguised as a service package."
@@ -381,7 +375,7 @@ function TabTwo() {
         </div>
       </section>
 
-      <section className="bg-[#ead7bf] px-6 py-16 md:px-12 md:py-20">
+      <section className="bg-[#ead7bf] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { name: 'Dental refresh', copy: 'Veneers, whitening, aligners, rebuilt as warm menu cards rather than medical SKUs.' },
@@ -417,15 +411,15 @@ function TabThree() {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-[#e7f1f0] shadow-warm">
       <section
-        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-12 md:py-28"
+        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
         style={{
           backgroundImage:
-            "linear-gradient(135deg, rgba(14,45,62,0.62), rgba(37,104,96,0.20)), url('https://source.unsplash.com/1600x900/?vietnam,resort,pool,ocean')",
+            "linear-gradient(135deg, rgba(14,45,62,0.62), rgba(37,104,96,0.20)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1600&q=80')",
         }}
       >
         <div className="max-w-3xl text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Travel-first recovery concept</p>
-          <h1 className="mt-6 font-display text-5xl leading-none md:text-7xl">While You Recover.</h1>
+          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>While You Recover.</h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
             Most people spend their post-procedure days on the sofa. Voya patients spend theirs here.
           </p>
@@ -435,7 +429,7 @@ function TabThree() {
         </div>
       </section>
 
-      <section className="px-6 py-14 md:px-12 md:py-20">
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="A different kind of recovery"
           title="Lead with Phu Quoc, Da Nang, or Hoi An. Let the procedure be the quiet middle."
@@ -464,7 +458,7 @@ function TabThree() {
         </div>
       </section>
 
-      <section className="bg-[#d7ebe8] px-6 py-16 md:px-12 md:py-20">
+      <section className="bg-[#d7ebe8] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-6 md:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] bg-white p-8 shadow-sm">
             <h3 className="font-display text-3xl text-[#17353f]">What Voya arranges</h3>
@@ -509,7 +503,7 @@ function TabThree() {
 function TabFour({ animateKey }) {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-[#f3f4f7] shadow-warm">
-      <section className="px-6 py-14 md:px-12 md:py-20">
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
           <div className="rounded-[2rem] bg-[#e9efe7] p-5 shadow-sm md:p-8">
             <div className="mb-4 flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-[#6b766b]">
@@ -524,7 +518,7 @@ function TabFour({ animateKey }) {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#68718b]">Social proof concept</p>
-            <h1 className="mt-5 font-display text-5xl leading-tight text-[#232b3b] md:text-7xl">Your Friend Already Did It.</h1>
+            <h1 className={cn(heroTitleClass, 'mt-5 text-[#232b3b]')}>Your Friend Already Did It.</h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-[#525968] md:text-lg">
               She just didn&apos;t tell you where she booked. This page borrows the visual language of forwarded screenshots, DMs, and group posts because trust is the medium as much as the message.
             </p>
@@ -535,7 +529,7 @@ function TabFour({ animateKey }) {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16 md:px-12 md:py-20">
+      <section className="bg-white px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="What they&apos;re saying"
           title="Each market gets its own native trust aesthetic."
@@ -594,15 +588,15 @@ function TabFive() {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-[#f4ebd8] shadow-warm">
       <section
-        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-12 md:py-28"
+        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
         style={{
           backgroundImage:
-            "linear-gradient(135deg, rgba(27,49,36,0.58), rgba(165,28,48,0.18)), url('https://source.unsplash.com/1600x900/?vietnam,family,beach,holiday')",
+            "linear-gradient(135deg, rgba(27,49,36,0.58), rgba(165,28,48,0.18)), url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&q=80')",
         }}
       >
         <div className="max-w-3xl text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">VNTrip consumer holiday concept</p>
-          <h1 className="mt-6 font-display text-5xl leading-none md:text-7xl">Holiday, Handled.</h1>
+          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>Holiday, Handled.</h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
             You use VNTrip every time you travel for work. The flights, the hotels, the points. Your family&apos;s next holiday is the same app, same account, and the points are already waiting.
           </p>
@@ -612,7 +606,7 @@ function TabFive() {
         </div>
       </section>
 
-      <section className="px-6 py-16 md:px-12 md:py-20">
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="Owned-channel growth"
           title="Not a new audience. Just a new use case."
@@ -634,7 +628,7 @@ function TabFive() {
         </div>
       </section>
 
-      <section className="bg-[#e5d7b4] px-6 py-16 md:px-12 md:py-20">
+      <section className="bg-[#e5d7b4] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
           <div className="rounded-[2rem] bg-[#1f3427] p-8 text-white shadow-sm">
             <div className="text-xs uppercase tracking-[0.3em] text-white/55">Points callout</div>
@@ -711,8 +705,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-navy text-[#1A1A2E]">
       <Header activeTab={activeTab} onTabClick={setActiveTab} />
-      <main className="px-4 pb-6 pt-[84px] md:px-6">
-        <div className="mx-auto max-w-[900px]">
+      <main className="px-4 pb-6 pt-[84px] md:px-16">
+        <div className="mx-auto max-w-[1100px]">
           <div
             className={cn(
               'transition-all duration-300',
