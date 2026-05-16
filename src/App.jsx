@@ -15,17 +15,17 @@ import {
 
 const tabs = [
   'Second Opinion?',
-  "You've Earned This",
-  'While You Recover',
-  'Your Friend Already Did It',
+  'At Last.',
+  'Stay A Little Longer.',
+  'Word Travels.',
   'Holiday, Handled',
 ]
 
 const tabThemes = {
   'Second Opinion?': 'bg-[#faf8f2]',
-  "You've Earned This": 'bg-[#f4eadc]',
-  'While You Recover': 'bg-[#e7f1f0]',
-  'Your Friend Already Did It': 'bg-[#f3f4f7]',
+  'At Last.': 'bg-[#f4eadc]',
+  'Stay A Little Longer.': 'bg-[#e7f1f0]',
+  'Word Travels.': 'bg-[#f3f4f7]',
   'Holiday, Handled': 'bg-[#f4ebd8]',
 }
 
@@ -343,9 +343,9 @@ function TabTwo() {
       >
         <div className="mx-auto max-w-3xl text-center text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Opportunistic vacationer concept</p>
-          <h1 className={cn(heroTitleClass, 'mt-6 italic text-white')}>You&apos;ve Earned This.</h1>
+          <h1 className={cn(heroTitleClass, 'mt-6 italic text-white')}>At Last.</h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
-            The procedure you&apos;ve been putting off. The trip to Vietnam you&apos;ve been meaning to take. Voya combines them, because taking care of yourself should never feel like a compromise.
+            The trip you meant to take. The appointment you&apos;ve been putting off. Voya brings them together beautifully, with just enough structure to let the whole thing feel easy.
           </p>
           <div className="mt-10">
             <CTAButton>Tell us what you need - we&apos;ll build your itinerary</CTAButton>
@@ -355,9 +355,9 @@ function TabTwo() {
 
       <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
-          eyebrow="Self-investment frame"
-          title="A trip itinerary disguised as a service package."
-          body="Every detail is designed to feel invitational rather than clinical. Indonesia gets proximity and better travel texture. Malaysia gets friction removal. Singapore gets premium convenience."
+          eyebrow="For once, for you"
+          title="A premium self-investment story, softened by travel."
+          body="Every detail is meant to feel invitational rather than clinical. Indonesia gets proximity and better travel texture. Malaysia gets friction removed. Singapore gets premium convenience, wrapped in a trip worth wanting."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-4">
           {[
@@ -378,9 +378,9 @@ function TabTwo() {
       <section className="bg-[#ead7bf] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { name: 'Dental refresh', copy: 'Veneers, whitening, aligners, rebuilt as warm menu cards rather than medical SKUs.' },
-            { name: 'Skin and aesthetics', copy: 'Low-anxiety treatments that fit naturally into a Vietnam trip already on the calendar.' },
-            { name: 'Wellness screening', copy: 'Premium check-ups and diagnostic packages for Singaporeans who value convenience over discounting.' },
+            { name: 'What you have been putting off', copy: 'Veneers, whitening, aligners, and low-anxiety aesthetic work presented with the calm of a beauty editorial rather than a clinic brochure.' },
+            { name: 'The trip you meant to take', copy: 'Spa mornings, lantern-lit evenings, quiet hotel rooms, and a pace that makes the decision feel considered instead of rushed.' },
+            { name: 'Make room for yourself', copy: 'Premium screenings and tailored care packages for travelers who are not chasing the lowest price, only the most graceful way to finally do it.' },
           ].map((item) => (
             <div key={item.name} className="rounded-[2rem] bg-[#fff8ef] p-7 shadow-sm">
               <Sparkles className="h-6 w-6 text-[#b76e33]" />
@@ -419,9 +419,9 @@ function TabThree() {
       >
         <div className="max-w-3xl text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Travel-first recovery concept</p>
-          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>While You Recover.</h1>
+          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>Stay A Little Longer.</h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
-            Most people spend their post-procedure days on the sofa. Voya patients spend theirs here.
+            Most recoveries are something to get through. This one is something to plan well, with sea air, slower mornings, and every practical detail already taken care of.
           </p>
           <div className="mt-10">
             <CTAButton>Build your recovery itinerary - free to plan</CTAButton>
@@ -431,9 +431,9 @@ function TabThree() {
 
       <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
-          eyebrow="A different kind of recovery"
+          eyebrow="Rest, arranged"
           title="Lead with Phu Quoc, Da Nang, or Hoi An. Let the procedure be the quiet middle."
-          body="For Indonesia, Malaysia, and Singapore, this is a specific Vietnam trip done in a smarter way. For Cambodia and Laos, it compresses into a restorative long weekend."
+          body="For Indonesia, Malaysia, and Singapore, this is a specific Vietnam trip done in a more thoughtful way. For Cambodia and Laos, it compresses into a restorative long weekend with just enough texture to feel worthwhile."
         />
         <div className="mt-10 overflow-x-auto pb-4">
           <div className="flex min-w-max gap-5">
@@ -461,7 +461,7 @@ function TabThree() {
       <section className="bg-[#d7ebe8] px-6 py-16 md:px-16 md:py-[120px]">
         <div className="grid gap-6 md:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] bg-white p-8 shadow-sm">
-            <h3 className="font-display text-3xl text-[#17353f]">What Voya arranges</h3>
+            <h3 className="font-display text-3xl text-[#17353f]">Where recovery begins</h3>
             <div className="mt-6 grid gap-4">
               {[
                 ['Flights', 'Timed around procedure and follow-up windows'],
@@ -518,9 +518,9 @@ function TabFour({ animateKey }) {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#68718b]">Social proof concept</p>
-            <h1 className={cn(heroTitleClass, 'mt-5 text-[#232b3b]')}>Your Friend Already Did It.</h1>
+            <h1 className={cn(heroTitleClass, 'mt-5 text-[#232b3b]')}>Word Travels.</h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-[#525968] md:text-lg">
-              She just didn&apos;t tell you where she booked. This page borrows the visual language of forwarded screenshots, DMs, and group posts because trust is the medium as much as the message.
+              The best recommendations rarely arrive as advertisements. They arrive in screenshots, voice notes, forwarded posts, and messages from someone whose opinion you already trust.
             </p>
             <div className="mt-8">
               <CTAButton>Join the Voya community - ask real patients your questions before you decide</CTAButton>
@@ -531,9 +531,9 @@ function TabFour({ animateKey }) {
 
       <section className="bg-white px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
-          eyebrow="What they&apos;re saying"
+          eyebrow="Before you ask us, ask them"
           title="Each market gets its own native trust aesthetic."
-          body="Indonesia leans WhatsApp and TikTok honesty. Malaysia leans Facebook group depth. Singapore needs named, professional specificity. Cambodia and Laos rely on tighter community nodes."
+          body="Indonesia leans WhatsApp and TikTok honesty. Malaysia leans Facebook group depth. Singapore needs named, professional specificity. Cambodia and Laos rely on tighter community nodes. The brand should feel designed, but never over-rehearsed."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
@@ -609,8 +609,8 @@ function TabFive() {
       <section className="px-6 py-16 md:px-16 md:py-[120px]">
         <SectionTitle
           eyebrow="Owned-channel growth"
-          title="Not a new audience. Just a new use case."
-          body="This tab intentionally breaks away from Voya medical tourism. It is a lower-ambition, faster-conversion consumer holiday message aimed at VNTrip&apos;s existing corporate-user base."
+          title="Not a new audience. Just a warmer, more joyful use case."
+          body="This tab intentionally breaks away from Voya medical tourism. It should feel friendly, useful, and lightly celebratory: the same account people already trust for work, now pointed toward beach weekends, family trips, and points they forgot they had."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-4">
           {[
@@ -685,15 +685,15 @@ export default function App() {
     return () => window.clearTimeout(switchTimer)
   }, [activeTab, displayedTab])
 
-  const content = useMemo(() => {
+      const content = useMemo(() => {
     switch (displayedTab) {
       case 'Second Opinion?':
         return <TabOne />
-      case "You've Earned This":
+      case 'At Last.':
         return <TabTwo />
-      case 'While You Recover':
+      case 'Stay A Little Longer.':
         return <TabThree />
-      case 'Your Friend Already Did It':
+      case 'Word Travels.':
         return <TabFour animateKey={animateKey} />
       case 'Holiday, Handled':
         return <TabFive />
