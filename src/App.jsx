@@ -6,6 +6,7 @@ import {
   HeartHandshake,
   MapPinned,
   Plane,
+  Quote,
   ShieldCheck,
   Sparkles,
   Stethoscope,
@@ -18,138 +19,117 @@ const tabs = [
   'At Last.',
   'Stay A Little Longer.',
   'Word Travels.',
-  'Holiday, Handled',
+  'Holiday, Handled.',
 ]
 
-const tabThemes = {
-  'Second Opinion?': 'bg-[#faf8f2]',
-  'At Last.': 'bg-[#f4eadc]',
-  'Stay A Little Longer.': 'bg-[#e7f1f0]',
-  'Word Travels.': 'bg-[#f3f4f7]',
-  'Holiday, Handled': 'bg-[#f4ebd8]',
+const themeShell = {
+  'Second Opinion?': 'bg-[#f7f4ee]',
+  'At Last.': 'bg-[#efe4d2]',
+  'Stay A Little Longer.': 'bg-[#dfeceb]',
+  'Word Travels.': 'bg-[#f2f2ef]',
+  'Holiday, Handled.': 'bg-[#efe3cc]',
 }
 
-const consultationStats = [
-  { label: 'IVM pathway', value: 'Vietnam leads ASEAN on access' },
-  { label: 'Doctor training', value: 'Singapore, Australia, Europe' },
-  { label: 'Booking support', value: 'Flights, hotel, clinic, aftercare' },
-]
-
-const heroTitleClass = 'font-display text-[56px] font-extrabold leading-none md:text-[96px]'
-
-const priceChartRows = [
+const priceRows = [
   {
     procedure: 'IVF',
-    markets: [
-      { country: 'Australia', price: '$15,000', width: '100%' },
-      { country: 'Bangkok', price: '$10,000', width: '67%' },
-      { country: 'India', price: '$5,000', width: '33%' },
-      { country: 'Vietnam', price: '$5,500', width: '37%', highlight: true },
+    items: [
+      { market: 'Australia', price: '$15,000', width: '100%' },
+      { market: 'Bangkok', price: '$10,000', width: '67%' },
+      { market: 'India', price: '$5,000', width: '33%' },
+      { market: 'Vietnam', price: '$5,500', width: '37%', vietnam: true },
     ],
   },
   {
     procedure: 'Dental Implants',
-    markets: [
-      { country: 'Singapore', price: '$7,500', width: '100%' },
-      { country: 'Malaysia', price: '$5,200', width: '69%' },
-      { country: 'Bangkok', price: '$4,800', width: '64%' },
-      { country: 'Vietnam', price: '$3,100', width: '41%', highlight: true },
+    items: [
+      { market: 'Singapore', price: '$7,500', width: '100%' },
+      { market: 'Malaysia', price: '$5,200', width: '69%' },
+      { market: 'Bangkok', price: '$4,800', width: '64%' },
+      { market: 'Vietnam', price: '$3,100', width: '41%', vietnam: true },
     ],
   },
   {
     procedure: 'Knee Replacement',
-    markets: [
-      { country: 'Australia', price: '$28,000', width: '100%' },
-      { country: 'Bangkok', price: '$18,500', width: '66%' },
-      { country: 'India', price: '$14,000', width: '50%' },
-      { country: 'Vietnam', price: '$11,500', width: '41%', highlight: true },
+    items: [
+      { market: 'Australia', price: '$28,000', width: '100%' },
+      { market: 'Bangkok', price: '$18,500', width: '66%' },
+      { market: 'India', price: '$14,000', width: '50%' },
+      { market: 'Vietnam', price: '$11,500', width: '41%', vietnam: true },
     ],
   },
   {
     procedure: 'Full-Body Health Scan',
-    markets: [
-      { country: 'Singapore', price: '$2,300', width: '100%' },
-      { country: 'Malaysia', price: '$1,500', width: '65%' },
-      { country: 'Bangkok', price: '$1,250', width: '54%' },
-      { country: 'Vietnam', price: '$780', width: '34%', highlight: true },
+    items: [
+      { market: 'Singapore', price: '$2,300', width: '100%' },
+      { market: 'Malaysia', price: '$1,500', width: '65%' },
+      { market: 'Bangkok', price: '$1,250', width: '54%' },
+      { market: 'Vietnam', price: '$780', width: '34%', vietnam: true },
     ],
   },
 ]
 
-const itineraryDays = [
-  { day: 'Day 1', title: 'Arrive in Da Nang', body: 'Airport fast-track, private transfer, quiet hotel check-in.', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80' },
-  { day: 'Day 2', title: 'Free day', body: 'Light meals, beach air, an easy evening by the water.', image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80' },
-  { day: 'Day 3', title: 'Procedure day', body: 'Minimal schedule, chauffeur, clinic coordination, no stress.', muted: true },
-  { day: 'Day 4', title: 'Poolside recovery', body: 'Breakfast in room, shade, sea breeze, zero logistics.', image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80' },
-  { day: 'Day 5', title: 'Hoi An at golden hour', body: 'Lantern light, gentle walking, early dinner, back to rest.', image: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80' },
-  { day: 'Day 6', title: 'Procedure follow-up', body: 'Quick check-in, then straight back to the coast.', muted: true },
-  { day: 'Day 7', title: 'Quiet cultural day', body: 'Tea, tailoring, old town, tailored pace.', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80' },
-  { day: 'Day 8', title: 'Fly home', body: 'Documentation packed, aftercare plan confirmed, car waiting.', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80' },
+const recoveryDays = [
+  { label: 'Day 1', title: 'Arrive in Da Nang', body: 'Airport meet-and-greet, quiet check-in, dinner sent up.', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80' },
+  { label: 'Day 3', title: 'Procedure day', body: 'Minimal schedule. Chauffeur. No loose ends.', muted: true },
+  { label: 'Day 4', title: 'Poolside recovery', body: 'Breakfast in room, shade, sea air, nothing urgent.', image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80' },
+  { label: 'Day 6', title: 'Hoi An at dusk', body: 'Short walk, lantern light, early return, easy evening.', image: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80' },
 ]
 
-const chatMessages = [
-  { side: 'left', author: 'AN', initials: 'AN', text: 'Wait. You got your veneers in Da Nang?' },
-  { side: 'right', author: 'ME', initials: 'ME', text: 'Yes. Flights, hotel, clinic. I booked it through Voya and barely had to think.' },
-  { side: 'left', author: 'AN', initials: 'AN', text: 'Was it actually good or are you being nice?' },
-  { side: 'right', author: 'ME', initials: 'ME', text: 'I am being annoyingly serious. Just DM Voya. They explained everything before I paid anything.' },
+const socialTiles = [
+  {
+    market: 'Indonesia',
+    platform: 'TikTok honesty',
+    quote: 'I was not planning to tell anyone, and then everyone asked where I got it done.',
+    accent: 'from-[#f59b7a] to-[#f05d85]',
+  },
+  {
+    market: 'Malaysia',
+    platform: 'Facebook group depth',
+    quote: 'Long post incoming. The clinic, the hotel, the costs, and the part I was most nervous about.',
+    accent: 'from-[#6ea1ff] to-[#3657b0]',
+  },
+  {
+    market: 'Singapore',
+    platform: 'Professional trust',
+    quote: 'I am not usually public about things like this, but enough friends asked that I wrote it all down.',
+    accent: 'from-[#9aa1ac] to-[#515866]',
+  },
 ]
 
 const holidayDestinations = [
-  { place: 'Phu Quoc', note: 'Beach reset with points-friendly resorts' },
-  { place: 'Da Nang', note: 'Easy flights, family hotels, fast weekends' },
-  { place: 'Da Lat', note: 'Cool air, slower days, coffee and pine forests' },
-  { place: 'Ha Long Bay', note: 'Big scenery, boat nights, easy school-break win' },
+  { place: 'Phu Quoc', note: 'Beach weekends, easy points burn, family-resort logic.' },
+  { place: 'Da Nang', note: 'Fast flights, good hotels, school-break friendly.' },
+  { place: 'Da Lat', note: 'Cooler air, coffee, pine trees, slower family pace.' },
+  { place: 'Ha Long Bay', note: 'Big scenery, one dramatic trip, little planning friction.' },
 ]
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function SectionTitle({ eyebrow, title, body, className = '', dark = false }) {
+function Header({ activeTab, onTabChange }) {
   return (
-    <div className={className}>
-      {eyebrow && (
-        <p className={cn('mb-3 text-xs font-semibold uppercase tracking-[0.28em]', dark ? 'text-white/60' : 'text-[#7e6a48]')}>
-          {eyebrow}
-        </p>
-      )}
-      <h2 className={cn('font-display text-3xl leading-tight md:text-5xl', dark ? 'text-white' : 'text-[#1A1A2E]')}>{title}</h2>
-      {body && <p className={cn('mt-4 max-w-3xl text-sm leading-7 md:text-base', dark ? 'text-white/75' : 'text-[#49464d]')}>{body}</p>}
-    </div>
-  )
-}
-
-function CTAButton({ children }) {
-  return (
-    <button className="inline-flex items-center gap-3 rounded-full bg-gold px-10 py-5 text-lg font-bold text-navy transition hover:bg-[#C9943A]">
-      {children}
-      <ArrowRight className="h-5 w-5" />
-    </button>
-  )
-}
-
-function Header({ activeTab, onTabClick }) {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-gold/80 bg-navy">
-      <div className="mx-auto flex h-[60px] max-w-[1400px] items-center gap-4 px-4 md:px-6">
-        <div className="min-w-fit text-base font-semibold tracking-[0.08em] text-white md:text-lg">Voya by VNTrip</div>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#f5a623]/70 bg-[#121625]/95 backdrop-blur">
+      <div className="mx-auto flex h-[68px] max-w-[1440px] items-center gap-6 px-4 md:px-8">
+        <div className="shrink-0 text-[17px] font-semibold tracking-[0.08em] text-white">Voya by VNTrip</div>
         <div className="flex-1 overflow-x-auto">
-          <div className="mx-auto flex min-w-max items-center justify-center gap-2 px-1">
+          <div className="mx-auto flex min-w-max items-center justify-center gap-2">
             {tabs.map((tab) => {
-              const active = tab === activeTab
+              const active = activeTab === tab
               return (
                 <button
                   key={tab}
-                  onClick={() => onTabClick(tab)}
+                  onClick={() => onTabChange(tab)}
                   className={cn(
-                    'relative whitespace-nowrap rounded-full px-4 py-2 text-sm transition md:text-[15px]',
-                    active ? 'text-white' : 'text-white/55 hover:text-white/80',
+                    'relative rounded-full px-4 py-2 text-sm transition md:px-5 md:text-[15px]',
+                    active ? 'text-white' : 'text-white/55 hover:text-white/85',
                   )}
                 >
                   {tab}
                   <span
                     className={cn(
-                      'absolute inset-x-4 -bottom-[8px] h-[3px] rounded-full bg-gold transition-opacity',
+                      'absolute inset-x-4 -bottom-[11px] h-[3px] rounded-full bg-[#f5a623] transition-opacity',
                       active ? 'opacity-100' : 'opacity-0',
                     )}
                   />
@@ -163,504 +143,504 @@ function Header({ activeTab, onTabClick }) {
   )
 }
 
-function PriceComparisonChart() {
+function CTAButton({ children, dark = false }) {
   return (
-    <div className="space-y-14 rounded-[2rem] bg-navy p-8 text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)] md:p-12">
-      {priceChartRows.map((row) => (
-        <div key={row.procedure}>
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <h3 className="font-display text-2xl text-white md:text-3xl">{row.procedure}</h3>
-            <span className="text-xs uppercase tracking-[0.24em] text-white/55">illustrative package pricing</span>
-          </div>
-          <div className="space-y-6">
-            {row.markets.map((market) => (
-              <div
-                key={`${row.procedure}-${market.country}`}
-                className={cn(
-                  'rounded-2xl px-4 py-4 transition md:px-5',
-                  market.highlight ? 'bg-[#2b2843]' : 'bg-white/5',
-                )}
-              >
-                <div className="mb-3 flex items-center justify-between text-sm text-white md:text-base">
-                  <span className="font-medium">{market.country}</span>
-                  <span>{market.price}</span>
-                </div>
-                <div className="h-3 rounded-full bg-white/10">
-                  <div
-                    className={cn('h-3 rounded-full', market.highlight ? 'bg-gold' : 'bg-[#4A6A8A]')}
-                    style={{ width: market.width }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function ChatBubble({ message, index, animateKey }) {
-  const delay = `${index * 400}ms`
-  return (
-    <div
-      key={`${animateKey}-${index}`}
-      className={cn('flex items-end gap-3 opacity-0', message.side === 'right' ? 'justify-end' : 'justify-start')}
-      style={{ animation: `bubbleIn 500ms ease forwards`, animationDelay: delay }}
+    <button
+      className={cn(
+        'inline-flex items-center gap-3 rounded-full px-10 py-5 text-lg font-bold transition',
+        dark ? 'bg-[#1a1a2e] text-white hover:bg-[#23233c]' : 'bg-[#f5a623] text-[#1a1a2e] hover:bg-[#d79729]',
+      )}
     >
-      {message.side === 'left' && (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d7dde8] text-xs font-bold text-[#31405f]">
-          {message.initials}
-        </div>
-      )}
-      <div
-        className={cn(
-          'max-w-[75%] rounded-[22px] px-4 py-3 text-sm leading-6 shadow-sm md:text-base',
-          message.side === 'right' ? 'rounded-br-md bg-[#DCF8C6] text-[#17301b]' : 'rounded-bl-md bg-white text-[#2b2f37]',
-        )}
-      >
-        <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/35">{message.author}</div>
-        {message.text}
-      </div>
-      {message.side === 'right' && (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1f8f5f] text-xs font-bold text-white">
-          {message.initials}
-        </div>
-      )}
+      {children}
+      <ArrowRight className="h-5 w-5" />
+    </button>
+  )
+}
+
+function Shell({ children, tone = 'bg-white' }) {
+  return <div className={cn('overflow-hidden rounded-[32px] shadow-[0_28px_80px_rgba(16,20,32,0.16)]', tone)}>{children}</div>
+}
+
+function HeroKicker({ children, light = false }) {
+  return (
+    <p className={cn('text-xs font-semibold uppercase tracking-[0.34em]', light ? 'text-white/60' : 'text-[#8a7757]')}>
+      {children}
+    </p>
+  )
+}
+
+function HeroTitle({ children, light = false, italic = false }) {
+  return (
+    <h1 className={cn('font-display text-[56px] font-extrabold leading-none md:text-[96px]', light ? 'text-white' : 'text-[#17181f]', italic && 'italic')}>
+      {children}
+    </h1>
+  )
+}
+
+function BodyCopy({ children, light = false, className = '' }) {
+  return <p className={cn('text-[18px] leading-8 md:text-[21px]', light ? 'text-white/80' : 'text-[#4e5059]', className)}>{children}</p>
+}
+
+function SectionHeading({ eyebrow, title, body, light = false }) {
+  return (
+    <div className="max-w-3xl">
+      <HeroKicker light={light}>{eyebrow}</HeroKicker>
+      <h2 className={cn('mt-4 font-display text-[38px] leading-tight md:text-[56px]', light ? 'text-white' : 'text-[#17181f]')}>{title}</h2>
+      {body && <p className={cn('mt-5 text-[17px] leading-8 md:text-[19px]', light ? 'text-white/75' : 'text-[#50525b]')}>{body}</p>}
     </div>
   )
 }
 
-function TabOne() {
+function PriceChart() {
   return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#faf8f2] shadow-warm">
-      <section className="relative bg-white px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="flex min-h-[55vh] flex-col items-center justify-center text-center">
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-[#7f7a72]">Specialist seeker concept</p>
-          <h1 className={cn(heroTitleClass, 'text-black')}>
-            Second Opinion<span className="align-top text-[1.05em]">?</span>
-          </h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-[#2f2f34] md:text-[22px]">
-            Your doctor is right about what you need. Your hospital&apos;s price tag is a different conversation. IVF in Australia costs
-            $15,000. The same procedure, with comparable accreditation and success rates, costs $5,500 in Vietnam. Voya handles the rest.
-          </p>
-          <div className="mt-10">
-            <CTAButton>Get your free second opinion - 30-minute call, no obligation</CTAButton>
-          </div>
-        </div>
-        <div className="mt-14">
-          <img
-            src="https://images.unsplash.com/photo-1584820927498-0e507e52f09e?w=1600&q=80"
-            alt="Medical invoice"
-            className="h-[420px] w-full rounded-[2rem] object-cover shadow-[0_24px_80px_rgba(0,0,0,0.12)] md:h-[620px]"
-          />
-        </div>
-      </section>
-
-      <section className="bg-[#f8f2df] px-6 py-16 md:px-16 md:py-[120px]">
-        <SectionTitle
-          eyebrow="Data confidence"
-          title="Vietnam wins when price transparency meets specialist care."
-          body="This concept starts cold and clinical, then warms the moment the economics become undeniable. Vietnam is framed as the rational decision first, the beautiful one second."
-        />
-        <div className="mt-10">
-          <PriceComparisonChart />
-        </div>
-      </section>
-
-      <section className="bg-[linear-gradient(180deg,#f8f2df_0%,#f4e3bd_18%,#eecb88_100%)] px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-[2rem] bg-white p-10 shadow-[0_20px_60px_rgba(46,32,4,0.14)] md:p-10">
-            <h3 className="font-display text-3xl text-[#1A1A2E]">What changes.</h3>
-            <ul className="mt-5 space-y-4 text-base leading-8 text-[#414049]">
-              <li>Price drops meaningfully versus Bangkok, Singapore, Australia, or premium Indian hospital groups.</li>
-              <li>Recovery happens in a warmer, more restorative setting than a domestic city apartment.</li>
-              <li>One concierge arranges flights, hotel, procedure, transfers, and follow-up support.</li>
-            </ul>
-          </div>
-          <div className="rounded-[2rem] bg-[#1A1A2E] p-10 text-[#F5A623] shadow-[0_20px_60px_rgba(46,32,4,0.14)] md:p-10">
-            <h3 className="font-display text-3xl text-[#F5A623]">What doesn&apos;t.</h3>
-            <ul className="mt-5 space-y-4 text-base leading-8 text-[#F5A623]">
-              <li>Accreditation standards, internationally trained physicians, and modern equipment.</li>
-              <li>Published success-rate scrutiny for fertility and specialist procedures.</li>
-              <li>The ability to ask hard questions before committing to anything.</li>
-            </ul>
-          </div>
-        </div>
-
-          <div className="mt-10 grid gap-8 md:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(46,32,4,0.14)]">
-            <div className="flex flex-wrap gap-3">
-              {consultationStats.map((stat) => (
-                <div key={stat.label} className="rounded-full bg-[#f4ead3] px-4 py-2 text-sm text-[#2b2e32]">
-                  <span className="font-semibold">{stat.label}:</span> {stat.value}
-                </div>
-              ))}
+    <div className="rounded-[28px] bg-[#1a1a2e] px-8 py-10 text-white md:px-12 md:py-12">
+      <div className="space-y-14">
+        {priceRows.map((row) => (
+          <div key={row.procedure}>
+            <div className="mb-6 flex items-center justify-between gap-6">
+              <h3 className="font-display text-[28px] md:text-[34px]">{row.procedure}</h3>
+              <span className="text-xs uppercase tracking-[0.28em] text-white/45">illustrative package pricing</span>
             </div>
-            <div className="mt-8 grid gap-6 sm:grid-cols-3">
-              {[
-                { icon: BadgeCheck, heading: 'JCI-aligned partners', copy: 'Clinic shortlist built for outcome certainty.' },
-                { icon: Stethoscope, heading: 'Doctor profiles', copy: 'Specialists with cross-border patient experience.' },
-                { icon: ShieldCheck, heading: 'Transparent packages', copy: 'Itemized pricing before any commitment.' },
-              ].map(({ icon: Icon, heading, copy }) => (
-                <div key={heading} className="rounded-[1.5rem] border border-[#ead8b5] p-5">
-                  <Icon className="h-6 w-6 text-[#b57d21]" />
-                  <div className="mt-4 text-lg font-semibold text-[#1A1A2E]">{heading}</div>
-                  <p className="mt-2 text-sm leading-6 text-[#4f4d56]">{copy}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_60px_rgba(46,32,4,0.14)]">
-            <img
-              src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&q=80"
-              alt="Modern Vietnamese clinic interior"
-              className="h-72 w-full object-cover"
-            />
-            <div className="p-8">
-              <div className="text-xs uppercase tracking-[0.28em] text-[#8b7a58]">Priya and Sai archetype</div>
-              <h3 className="mt-3 font-display text-3xl text-[#1A1A2E]">They weren&apos;t chasing cheaper IVF. They were chasing IVM.</h3>
-              <p className="mt-4 text-sm leading-7 text-[#49464d] md:text-base">
-                Indian-origin, Dubai-based, six months of research, one decisive trip. The emotional proof point is not bargain hunting. It&apos;s access to a protocol that changed the quality of the decision.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function TabTwo() {
-  return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#f4eadc] shadow-warm">
-      <section
-        className="relative min-h-[680px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, rgba(36,30,18,0.66), rgba(68,54,35,0.26)), url('https://images.unsplash.com/photo-1540555700478-4be290a303f4?w=1600&q=80')",
-        }}
-      >
-        <div className="mx-auto max-w-3xl text-center text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Opportunistic vacationer concept</p>
-          <h1 className={cn(heroTitleClass, 'mt-6 italic text-white')}>At Last.</h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
-            The trip you meant to take. The appointment you&apos;ve been putting off. Voya brings them together beautifully, with just enough structure to let the whole thing feel easy.
-          </p>
-          <div className="mt-10">
-            <CTAButton>Tell us what you need - we&apos;ll build your itinerary</CTAButton>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-16 md:px-16 md:py-[120px]">
-        <SectionTitle
-          eyebrow="For once, for you"
-          title="A premium self-investment story, softened by travel."
-          body="Every detail is meant to feel invitational rather than clinical. Indonesia gets proximity and better travel texture. Malaysia gets friction removed. Singapore gets premium convenience, wrapped in a trip worth wanting."
-        />
-        <div className="mt-10 grid gap-6 md:grid-cols-4">
-          {[
-            { day: 'Day 1', title: 'Arrive Da Nang', body: 'Airport pickup, boutique hotel, easy dinner.' },
-            { day: 'Day 2', title: 'Consultation', body: 'Quiet appointment, no waiting-room chaos.' },
-            { day: 'Day 3', title: 'Procedure', body: 'Handled discreetly, then back to your room.' },
-            { day: 'Days 4-8', title: 'Recover beautifully', body: 'Pool, beach walks, Vietnamese meals, slow mornings.' },
-          ].map((item) => (
-            <div key={item.day} className="rounded-[1.75rem] bg-[#fff9f0] p-6 shadow-sm">
-              <div className="text-xs uppercase tracking-[0.24em] text-[#a6844b]">{item.day}</div>
-              <div className="mt-3 font-display text-2xl text-[#3f2f24]">{item.title}</div>
-              <p className="mt-3 text-sm leading-7 text-[#6a5a4d]">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#ead7bf] px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { name: 'What you have been putting off', copy: 'Veneers, whitening, aligners, and low-anxiety aesthetic work presented with the calm of a beauty editorial rather than a clinic brochure.' },
-            { name: 'The trip you meant to take', copy: 'Spa mornings, lantern-lit evenings, quiet hotel rooms, and a pace that makes the decision feel considered instead of rushed.' },
-            { name: 'Make room for yourself', copy: 'Premium screenings and tailored care packages for travelers who are not chasing the lowest price, only the most graceful way to finally do it.' },
-          ].map((item) => (
-            <div key={item.name} className="rounded-[2rem] bg-[#fff8ef] p-7 shadow-sm">
-              <Sparkles className="h-6 w-6 text-[#b76e33]" />
-              <h3 className="mt-4 font-display text-3xl italic text-[#523527]">{item.name}</h3>
-              <p className="mt-3 text-sm leading-7 text-[#70594d]">{item.copy}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {[
-            { flag: 'Indonesia', quote: 'Added one appointment to a Vietnam trip I was already planning. The rest of the week felt like a reward.' },
-            { flag: 'Malaysia', quote: 'I already knew Vietnam was good for dental. I just did not want to coordinate flights, hotel, clinic, and transfers myself.' },
-            { flag: 'Singapore', quote: 'This was not about saving money. It was about finally doing the thing and pairing it with a trip I wanted anyway.' },
-          ].map((item) => (
-            <div key={item.flag} className="rounded-[1.75rem] border border-white/50 bg-white/60 p-6 backdrop-blur">
-              <div className="text-xs uppercase tracking-[0.28em] text-[#8e7d67]">{item.flag}</div>
-              <p className="mt-4 font-display text-2xl leading-snug text-[#3d3029]">&ldquo;{item.quote}&rdquo;</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function TabThree() {
-  return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#e7f1f0] shadow-warm">
-      <section
-        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, rgba(14,45,62,0.62), rgba(37,104,96,0.20)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1600&q=80')",
-        }}
-      >
-        <div className="max-w-3xl text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">Travel-first recovery concept</p>
-          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>Stay A Little Longer.</h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
-            Most recoveries are something to get through. This one is something to plan well, with sea air, slower mornings, and every practical detail already taken care of.
-          </p>
-          <div className="mt-10">
-            <CTAButton>Build your recovery itinerary - free to plan</CTAButton>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-16 md:px-16 md:py-[120px]">
-        <SectionTitle
-          eyebrow="Rest, arranged"
-          title="Lead with Phu Quoc, Da Nang, or Hoi An. Let the procedure be the quiet middle."
-          body="For Indonesia, Malaysia, and Singapore, this is a specific Vietnam trip done in a more thoughtful way. For Cambodia and Laos, it compresses into a restorative long weekend with just enough texture to feel worthwhile."
-        />
-        <div className="mt-10 overflow-x-auto pb-4">
-          <div className="flex min-w-max gap-5">
-            {itineraryDays.map((item) => (
-              <div
-                key={item.day}
-                className={cn(
-                  'relative h-[300px] w-[200px] shrink-0 overflow-hidden rounded-[1.75rem]',
-                  item.muted ? 'bg-[#cad8d5]' : 'bg-slate-300',
-                )}
-              >
-                {item.image && <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />}
-                <div className={cn('absolute inset-0', item.muted ? 'bg-[#cad8d5]' : 'bg-gradient-to-t from-black/70 via-black/20 to-transparent')} />
-                <div className={cn('absolute inset-x-0 bottom-0 p-5', item.muted ? 'text-[#183135]' : 'text-white')}>
-                  <div className="text-xs uppercase tracking-[0.24em] opacity-80">{item.day}</div>
-                  <div className="mt-2 font-display text-2xl leading-tight">{item.title}</div>
-                  <p className="mt-2 text-sm leading-6 opacity-90">{item.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#d7ebe8] px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="grid gap-6 md:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[2rem] bg-white p-8 shadow-sm">
-            <h3 className="font-display text-3xl text-[#17353f]">Where recovery begins</h3>
-            <div className="mt-6 grid gap-4">
-              {[
-                ['Flights', 'Timed around procedure and follow-up windows'],
-                ['Hotel', 'Minimum 4-star, recovery-appropriate room setup'],
-                ['Clinic', 'Appointment coordination and translator support'],
-                ['Transfers', 'Airport, clinic, and easy day-trip movement'],
-                ['In-country contact', 'One WhatsApp or Zalo thread for everything'],
-              ].map(([title, copy]) => (
-                <div key={title} className="flex gap-4 rounded-2xl bg-[#eef6f5] p-4">
-                  <BadgeCheck className="mt-1 h-5 w-5 text-[#2e7b76]" />
-                  <div>
-                    <div className="font-semibold text-[#17353f]">{title}</div>
-                    <div className="text-sm leading-6 text-[#4b6462]">{copy}</div>
+            <div className="space-y-6">
+              {row.items.map((item) => (
+                <div key={`${row.procedure}-${item.market}`}>
+                  <div className="mb-3 flex items-center justify-between text-sm text-white/92 md:text-base">
+                    <span>{item.market}</span>
+                    <span>{item.price}</span>
+                  </div>
+                  <div className="h-[14px] rounded-full bg-white/10">
+                    <div
+                      className={cn('h-[14px] rounded-full', item.vietnam ? 'bg-[#f5a623]' : 'bg-[#4a6a8a]')}
+                      style={{ width: item.width }}
+                    />
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SplitStatement({ leftTitle, leftItems, rightTitle, rightItems }) {
+  return (
+    <div className="grid gap-8 md:grid-cols-2">
+      <div className="rounded-[28px] bg-white p-10 md:p-[40px]">
+        <h3 className="font-display text-[30px] text-[#1a1a2e] md:text-[38px]">{leftTitle}</h3>
+        <div className="mt-6 space-y-4">
+          {leftItems.map((item) => (
+            <p key={item} className="text-[17px] leading-8 text-[#44474f]">
+              {item}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div className="rounded-[28px] bg-[#1a1a2e] p-10 text-[#f5a623] md:p-[40px]">
+        <h3 className="font-display text-[30px] md:text-[38px]">{rightTitle}</h3>
+        <div className="mt-6 space-y-4">
+          {rightItems.map((item) => (
+            <p key={item} className="text-[17px] leading-8 text-[#f3d18d]">
+              {item}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TabSecondOpinion() {
+  return (
+    <Shell tone="bg-[#f7f4ee]">
+      <section className="bg-white px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="mx-auto flex min-h-[55vh] max-w-4xl flex-col items-center justify-center text-center">
+          <HeroKicker>Specialist seeker concept</HeroKicker>
+          <HeroTitle>Second Opinion?</HeroTitle>
+          <BodyCopy className="mt-8 max-w-3xl">
+            Your doctor may be right about what you need. Your hospital&apos;s price tag is a different conversation. IVF in Australia costs
+            $15,000. A comparable pathway in Vietnam can land around $5,500. Voya handles the rest.
+          </BodyCopy>
+          <div className="mt-10">
+            <CTAButton>Get your free second opinion</CTAButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
+        <SectionHeading
+          eyebrow="Decision intelligence"
+          title="A smarter answer to specialist sticker shock."
+          body="This concept should feel like expensive information: precise, restrained, and quietly confident. The argument lands first. The warmth arrives later."
+        />
+        <div className="mt-14">
+          <PriceChart />
+        </div>
+      </section>
+
+      <section className="bg-[linear-gradient(180deg,#f7f4ee_0%,#efdec1_28%,#d1aa63_100%)] px-6 py-16 md:px-16 md:py-[120px]">
+        <SplitStatement
+          leftTitle="What changes."
+          leftItems={[
+            'Price drops versus Bangkok, Singapore, Australia, or premium Indian hospital groups.',
+            'Recovery shifts from a domestic city apartment to a better physical setting.',
+            'One concierge handles flights, hotel, clinic coordination, transfers, and follow-up.',
+          ]}
+          rightTitle="What does not."
+          rightItems={[
+            'Doctor credentials, accreditation standards, and modern equipment.',
+            'The expectation of transparent clinical answers before any commitment.',
+            'The seriousness of the decision, or the scrutiny the patient should bring to it.',
+          ]}
+        />
+
+        <div className="mt-16 grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-end">
+          <div>
+            <HeroKicker>Why it earns trust</HeroKicker>
+            <h3 className="mt-4 font-display text-[38px] leading-tight text-[#17181f] md:text-[56px]">They were not chasing cheaper IVF. They were chasing IVM.</h3>
+            <p className="mt-5 text-[18px] leading-8 text-[#32343c]">
+              The Priya-and-Sai archetype is powerful because the story is not about bargain hunting. It is about access, clarity, and one
+              decisive trip for a protocol their home market could not offer well.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3 text-sm text-[#272932]">
+              {['JCI-aligned partners', 'Doctor profiles with cross-border experience', 'Itemized packages before commitment'].map((item) => (
+                <span key={item} className="rounded-full border border-[#8c6b35]/20 bg-white/70 px-4 py-2">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&q=80"
+            alt="Modern clinic interior"
+            className="h-[540px] w-full rounded-[28px] object-cover"
+          />
+        </div>
+      </section>
+    </Shell>
+  )
+}
+
+function TabAtLast() {
+  return (
+    <Shell tone="bg-[#efe4d2]">
+      <section
+        className="relative overflow-hidden px-6 py-16 md:px-16 md:py-[120px]"
+        style={{
+          backgroundImage:
+            "linear-gradient(115deg, rgba(32,24,18,0.52), rgba(32,24,18,0.08)), url('https://images.unsplash.com/photo-1540555700478-4be290a303f4?w=1600&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-3xl">
+          <HeroKicker light>Premium self-investment concept</HeroKicker>
+          <HeroTitle light italic>
+            At Last.
+          </HeroTitle>
+          <BodyCopy light className="mt-8 max-w-2xl">
+            The trip you meant to take. The appointment you&apos;ve been putting off. Voya brings them together with just enough structure to let the whole thing feel easy.
+          </BodyCopy>
+          <div className="mt-10">
+            <CTAButton>Tell us what you need</CTAButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-start">
+          <SectionHeading
+            eyebrow="For once, for you"
+            title="A beauty-editorial mood with travel underneath it."
+            body="This tab should feel softer and slower than the others. Not clinical. Not performatively luxurious. Just considered, warm, and emotionally resolved."
+          />
+          <div className="grid gap-8">
             {[
-              { place: 'Phu Quoc', mood: 'Soft reset', note: 'Private resort energy and total disconnection.' },
-              { place: 'Da Nang', mood: 'Easy balance', note: 'Urban enough for logistics, coastal enough for recovery.' },
-              { place: 'Hoi An', mood: 'Golden-hour calm', note: 'A slower, more atmospheric kind of healing.' },
+              {
+                title: 'What you have been putting off',
+                body: 'Dental refreshes, skin work, and low-anxiety aesthetic procedures presented with the calm of a luxury beauty brochure rather than a medical menu.',
+              },
+              {
+                title: 'The trip you meant to take',
+                body: 'Da Nang mornings, lantern-lit evenings, one beautiful hotel room, and a schedule that leaves enough space to enjoy the decision you made.',
+              },
+              {
+                title: 'Make room for yourself',
+                body: 'The value is not only cost. It is how gracefully the whole experience comes together, especially for travelers who want care without chaos.',
+              },
             ].map((item) => (
-              <div key={item.place} className="rounded-[1.75rem] bg-[#17353f] p-6 text-white shadow-sm">
-                <MapPinned className="h-5 w-5 text-[#b9ded7]" />
-                <div className="mt-4 text-xs uppercase tracking-[0.24em] text-white/60">{item.mood}</div>
-                <div className="mt-2 font-display text-3xl">{item.place}</div>
-                <p className="mt-3 text-sm leading-7 text-white/75">{item.note}</p>
+              <div key={item.title} className="border-t border-[#b49769]/35 pt-6">
+                <h3 className="font-display text-[28px] italic text-[#382920] md:text-[38px]">{item.title}</h3>
+                <p className="mt-3 text-[17px] leading-8 text-[#675447]">{item.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
+        <img
+          src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1600&q=80"
+          alt="Elegant hotel interior"
+          className="h-[520px] w-full object-cover md:h-[720px]"
+        />
+        <div className="flex flex-col justify-between bg-[#d7bf99] px-6 py-16 md:px-16 md:py-[120px]">
+          <div>
+            <HeroKicker>What women are really buying</HeroKicker>
+            <h3 className="mt-4 font-display text-[38px] leading-tight text-[#231b16] md:text-[56px]">Not a discount procedure. A better-composed decision.</h3>
+            <p className="mt-5 text-[18px] leading-8 text-[#47392f]">
+              Indonesia gets proximity and a more textured trip than Bangkok. Malaysia gets friction removed. Singapore gets self-investment with hospitality polish instead of administrative drag.
+            </p>
+          </div>
+          <div className="mt-12">
+            <CTAButton dark>Start planning your Voya</CTAButton>
+          </div>
+        </div>
+      </section>
+    </Shell>
   )
 }
 
-function TabFour({ animateKey }) {
+function TabStayLonger() {
   return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#f3f4f7] shadow-warm">
+    <Shell tone="bg-[#dfeceb]">
+      <section
+        className="relative overflow-hidden px-6 py-16 md:px-16 md:py-[120px]"
+        style={{
+          backgroundImage:
+            "linear-gradient(120deg, rgba(15,52,66,0.60), rgba(15,52,66,0.14)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1600&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-3xl">
+          <HeroKicker light>Recovery-as-destination concept</HeroKicker>
+          <HeroTitle light>Stay A Little Longer.</HeroTitle>
+          <BodyCopy light className="mt-8 max-w-2xl">
+            Most recoveries are something to get through. This one is something to plan well, with sea air, slower mornings, and every practical detail already taken care of.
+          </BodyCopy>
+          <div className="mt-10">
+            <CTAButton>Build your recovery itinerary</CTAButton>
+          </div>
+        </div>
+      </section>
+
       <section className="px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
-          <div className="rounded-[2rem] bg-[#e9efe7] p-5 shadow-sm md:p-8">
-            <div className="mb-4 flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-[#6b766b]">
+        <SectionHeading
+          eyebrow="Rest, arranged"
+          title="Lead with the destination. Let the procedure stay in the quiet middle."
+          body="For Indonesia, Malaysia, and Singapore, this is a more thoughtful Vietnam trip. For Cambodia and Laos, it compresses into a restorative long weekend with very little wasted motion."
+        />
+        <div className="mt-14 overflow-x-auto pb-2">
+          <div className="flex min-w-max gap-6">
+            {recoveryDays.map((day) => (
+              <div key={day.label} className="relative h-[360px] w-[250px] overflow-hidden rounded-[26px] bg-[#c9d9d8]">
+                {day.image && <img src={day.image} alt={day.title} className="absolute inset-0 h-full w-full object-cover" />}
+                <div className={cn('absolute inset-0', day.muted ? 'bg-[#c9d9d8]' : 'bg-gradient-to-t from-black/70 via-black/15 to-transparent')} />
+                <div className={cn('absolute inset-x-0 bottom-0 p-6', day.muted ? 'text-[#17353f]' : 'text-white')}>
+                  <div className="text-xs uppercase tracking-[0.28em] opacity-75">{day.label}</div>
+                  <div className="mt-3 font-display text-[28px] leading-tight">{day.title}</div>
+                  <p className="mt-3 text-sm leading-7 opacity-90">{day.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#103845] px-6 py-16 text-white md:px-16 md:py-[120px]">
+        <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr]">
+          <SectionHeading
+            eyebrow="Where recovery begins"
+            title="Voya handles the practical details so the atmosphere can do its job."
+            body="Ground-floor rooms if needed. Quiet hotel choices. Translator support. Transfers that run on time. A single contact thread that prevents little anxieties from multiplying."
+            light
+          />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {[
+              { icon: Plane, title: 'Flights timed well', copy: 'Scheduled around procedure windows and follow-up constraints.' },
+              { icon: BadgeCheck, title: 'Hotels chosen for recovery', copy: 'Not just beautiful. Quiet, easy, and physically sensible.' },
+              { icon: MapPinned, title: 'Destinations that help', copy: 'Da Nang, Hoi An, and Phu Quoc chosen for tone as much as logistics.' },
+              { icon: ShieldCheck, title: 'One thread for everything', copy: 'WhatsApp or Zalo support without scattered vendor coordination.' },
+            ].map(({ icon: Icon, title, copy }) => (
+              <div key={title} className="border-t border-white/20 pt-5">
+                <Icon className="h-5 w-5 text-[#a8d7cf]" />
+                <h3 className="mt-4 font-display text-[28px]">{title}</h3>
+                <p className="mt-2 text-[16px] leading-7 text-white/72">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </Shell>
+  )
+}
+
+function TabWordTravels() {
+  return (
+    <Shell tone="bg-[#f2f2ef]">
+      <section className="overflow-hidden px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-start">
+          <div>
+            <HeroKicker>Designed-native social proof concept</HeroKicker>
+            <HeroTitle>Word Travels.</HeroTitle>
+            <BodyCopy className="mt-8 max-w-2xl">
+              The best recommendations rarely arrive as advertisements. They arrive in screenshots, voice notes, forwarded posts, and messages from someone whose opinion you already trust.
+            </BodyCopy>
+            <div className="mt-10">
+              <CTAButton>Join the Voya community</CTAButton>
+            </div>
+          </div>
+
+          <div className="rotate-[-2deg] rounded-[28px] border border-[#d7d7d2] bg-white p-6 shadow-[0_20px_50px_rgba(16,20,32,0.10)]">
+            <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-[#7d817d]">
               <span>WhatsApp thread</span>
               <span>11:24 PM</span>
             </div>
-            <div className="space-y-4">
-              {chatMessages.map((message, index) => (
-                <ChatBubble key={`${animateKey}-${index}`} message={message} index={index} animateKey={animateKey} />
+            <div className="mt-6 space-y-4">
+              {[
+                { right: false, text: 'Wait. You got your veneers in Da Nang?' },
+                { right: true, text: 'Yes. Flights, hotel, clinic. I booked it through Voya and barely had to think.' },
+                { right: false, text: 'Was it actually good or are you being nice?' },
+                { right: true, text: 'Being annoyingly serious. Before you ask them, ask the people who have done it.' },
+              ].map((item, index) => (
+                <div key={index} className={cn('flex', item.right ? 'justify-end' : 'justify-start')}>
+                  <div className={cn('max-w-[78%] rounded-[22px] px-4 py-3 text-[15px] leading-7', item.right ? 'rounded-br-md bg-[#DCF8C6] text-[#203024]' : 'rounded-bl-md bg-[#f3f4f5] text-[#2f3340]')}>
+                    {item.text}
+                  </div>
+                </div>
               ))}
-            </div>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#68718b]">Social proof concept</p>
-            <h1 className={cn(heroTitleClass, 'mt-5 text-[#232b3b]')}>Word Travels.</h1>
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#525968] md:text-lg">
-              The best recommendations rarely arrive as advertisements. They arrive in screenshots, voice notes, forwarded posts, and messages from someone whose opinion you already trust.
-            </p>
-            <div className="mt-8">
-              <CTAButton>Join the Voya community - ask real patients your questions before you decide</CTAButton>
             </div>
           </div>
         </div>
       </section>
 
       <section className="bg-white px-6 py-16 md:px-16 md:py-[120px]">
-        <SectionTitle
+        <SectionHeading
           eyebrow="Before you ask us, ask them"
-          title="Each market gets its own native trust aesthetic."
-          body="Indonesia leans WhatsApp and TikTok honesty. Malaysia leans Facebook group depth. Singapore needs named, professional specificity. Cambodia and Laos rely on tighter community nodes. The brand should feel designed, but never over-rehearsed."
+          title="The page should feel passed around, not hard-sold."
+          body="Indonesia gets TikTok candor. Malaysia gets fuller Facebook-group detail. Singapore gets named professional specificity. Cambodia and Laos rely on tighter trust networks."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {[
-            { market: 'Indonesia', platform: 'TikTok honesty', quote: 'okay so I have been dodging these teeth questions and I should probably just tell the whole story properly' },
-            { market: 'Malaysia', platform: 'Facebook group depth', quote: 'Long post incoming. Full breakdown of clinic, hotel, cost, what I wish I knew, and whether I would do it again.' },
-            { market: 'Singapore', platform: 'Professional trust', quote: 'I am a fairly private person, but enough colleagues have asked that I thought I should write down what I actually did.' },
-            { market: 'Cambodia and Laos', platform: 'Community referral', quote: 'Someone in my family circle had already done it. That was the only reason I listened in the first place.' },
-          ].map((item, idx) => (
-            <div key={item.market} className="rounded-[2rem] border border-[#e5e8ef] bg-[#f9fafc] p-6 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div className="text-xs uppercase tracking-[0.24em] text-[#7d869c]">{item.market}</div>
-                <div
-                  className={cn(
-                    'rounded-full px-3 py-1 text-xs font-semibold',
-                    idx === 0 && 'bg-[#dff5e7] text-[#1b6e48]',
-                    idx === 1 && 'bg-[#e9eefc] text-[#3657b0]',
-                    idx === 2 && 'bg-[#eef0f4] text-[#47505e]',
-                    idx === 3 && 'bg-[#f6ead7] text-[#8b5b18]',
-                  )}
-                >
-                  {item.platform}
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {socialTiles.map((tile) => (
+            <div key={tile.market} className="overflow-hidden rounded-[26px] border border-[#e5e6e2] bg-[#fafaf8]">
+              <div className={cn('h-3 bg-gradient-to-r', tile.accent)} />
+              <div className="p-6">
+                <div className="text-xs uppercase tracking-[0.28em] text-[#8a8d94]">{tile.platform}</div>
+                <h3 className="mt-4 font-display text-[30px] leading-tight text-[#23262f]">{tile.market}</h3>
+                <div className="mt-5 flex items-start gap-3">
+                  <Quote className="mt-1 h-5 w-5 shrink-0 text-[#b4b7bd]" />
+                  <p className="text-[16px] leading-8 text-[#494d57]">{tile.quote}</p>
                 </div>
               </div>
-              <p className="mt-5 font-display text-2xl leading-snug text-[#293245]">&ldquo;{item.quote}&rdquo;</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {[
-            { creator: 'Indonesian beauty creator', followers: '84k followers' },
-            { creator: 'Malaysian mothers group admin', followers: '21k members' },
-            { creator: 'Singapore wellness micro-influencer', followers: '16k followers' },
-          ].map((item) => (
-            <div key={item.creator} className="rounded-[2rem] bg-[#111827] p-5 text-white shadow-sm">
-              <div className="flex h-44 items-center justify-center rounded-[1.5rem] bg-[radial-gradient(circle_at_top,#ff8f70_0%,#f05d85_35%,#845ef7_70%,#111827_100%)]">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur">
-                  <div className="ml-1 h-0 w-0 border-y-[12px] border-y-transparent border-l-[18px] border-l-white" />
-                </div>
-              </div>
-              <div className="mt-4 text-sm font-semibold">{item.creator}</div>
-              <div className="mt-1 text-sm text-white/60">{item.followers}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function TabFive() {
-  return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#f4ebd8] shadow-warm">
-      <section
-        className="relative min-h-[620px] bg-cover bg-center px-6 py-20 md:px-16 md:py-[120px]"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, rgba(27,49,36,0.58), rgba(165,28,48,0.18)), url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&q=80')",
-        }}
-      >
-        <div className="max-w-3xl text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">VNTrip consumer holiday concept</p>
-          <h1 className={cn(heroTitleClass, 'mt-6 text-white')}>Holiday, Handled.</h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-xl">
-            You use VNTrip every time you travel for work. The flights, the hotels, the points. Your family&apos;s next holiday is the same app, same account, and the points are already waiting.
-          </p>
-          <div className="mt-10">
-            <CTAButton>See your points balance - you might be closer to a holiday than you think</CTAButton>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-16 md:px-16 md:py-[120px]">
-        <SectionTitle
-          eyebrow="Owned-channel growth"
-          title="Not a new audience. Just a warmer, more joyful use case."
-          body="This tab intentionally breaks away from Voya medical tourism. It should feel friendly, useful, and lightly celebratory: the same account people already trust for work, now pointed toward beach weekends, family trips, and points they forgot they had."
-        />
-        <div className="mt-10 grid gap-6 md:grid-cols-4">
-          {[
-            { icon: Plane, title: 'Flights', copy: 'Domestic and regional routes users already trust for work.' },
-            { icon: Ticket, title: 'Hotels', copy: 'Family-ready stays surfaced with practical filters.' },
-            { icon: CircleDollarSign, title: 'Points', copy: 'Make invisible loyalty balances suddenly tangible.' },
-            { icon: HeartHandshake, title: 'Support', copy: 'Same account, same service relationship, lower anxiety.' },
-          ].map(({ icon: Icon, title, copy }) => (
-            <div key={title} className="rounded-[1.75rem] bg-white/80 p-6 shadow-sm">
-              <Icon className="h-6 w-6 text-[#a51c30]" />
-              <div className="mt-4 font-display text-2xl text-[#1f3427]">{title}</div>
-              <p className="mt-2 text-sm leading-7 text-[#5d615a]">{copy}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-[#e5d7b4] px-6 py-16 md:px-16 md:py-[120px]">
-        <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[2rem] bg-[#1f3427] p-8 text-white shadow-sm">
-            <div className="text-xs uppercase tracking-[0.3em] text-white/55">Points callout</div>
-            <h3 className="mt-3 font-display text-4xl">You&apos;ve earned points on work trips. Most users have no idea how many.</h3>
-            <p className="mt-4 text-sm leading-7 text-white/75 md:text-base">
-              This concept makes the hidden balance visible and emotionally legible: a family flight, a resort night, a school-break trip that suddenly feels within reach.
-            </p>
-            <div className="mt-8 rounded-[1.5rem] bg-white/10 p-5">
-              <div className="text-sm text-white/60">In-app notification concept</div>
-              <p className="mt-3 text-lg leading-8">
-                You&apos;ve earned 18,400 points on work trips this year. That&apos;s a return flight to Da Nang for your family, and a night at a 4-star hotel.
-              </p>
-            </div>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {holidayDestinations.map((item) => (
-              <div key={item.place} className="rounded-[1.75rem] bg-white/80 p-6 shadow-sm">
-                <SunMedium className="h-5 w-5 text-[#b57f24]" />
-                <div className="mt-4 font-display text-3xl text-[#1f3427]">{item.place}</div>
-                <p className="mt-3 text-sm leading-7 text-[#5d615a]">{item.note}</p>
+      <section className="bg-[#191d28] px-6 py-16 text-white md:px-16 md:py-[120px]">
+        <div className="grid gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+          <SectionHeading
+            eyebrow="Why this works"
+            title="Trust moves faster when the brand steps back."
+            body="Micro and nano creators should not sound briefed. The campaign should feel like an accumulation of real stories, surfaced elegantly and given just enough structure by Voya."
+            light
+          />
+          <div className="space-y-8">
+            {['TikTok and Reels for candid reveal stories', 'Facebook groups for detailed breakdowns and reassurance', 'Community-led referrals in Cambodia and Laos', 'A named, more polished testimonial mode for Singapore'].map((item) => (
+              <div key={item} className="border-t border-white/15 pt-5 text-[17px] leading-8 text-white/78">
+                {item}
               </div>
             ))}
           </div>
         </div>
       </section>
-    </div>
+    </Shell>
+  )
+}
+
+function TabHolidayHandled() {
+  return (
+    <Shell tone="bg-[#efe3cc]">
+      <section
+        className="relative overflow-hidden px-6 py-16 md:px-16 md:py-[120px]"
+        style={{
+          backgroundImage:
+            "linear-gradient(120deg, rgba(27,49,36,0.54), rgba(27,49,36,0.16)), url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-3xl">
+          <HeroKicker light>Warm consumer holiday concept</HeroKicker>
+          <HeroTitle light>Holiday, Handled.</HeroTitle>
+          <BodyCopy light className="mt-8 max-w-2xl">
+            You already trust VNTrip for work. The flights, the hotels, the points. Your family&apos;s next trip is sitting in the same account, waiting for someone to remember it is there.
+          </BodyCopy>
+          <div className="mt-10">
+            <CTAButton>See your points balance</CTAButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr]">
+          <SectionHeading
+            eyebrow="Owned-channel growth"
+            title="Not a new audience. Just a warmer, more joyful use case."
+            body="This page should feel practical and friendly, but still polished. The key emotional unlock is not luxury. It is the pleasant surprise that work travel has already earned something fun."
+          />
+          <div className="grid gap-6 sm:grid-cols-2">
+            {[
+              { icon: Plane, title: 'Flights', copy: 'Domestic and regional routes users already book with VNTrip.' },
+              { icon: Ticket, title: 'Hotels', copy: 'Family-ready stays surfaced with easier decision making.' },
+              { icon: CircleDollarSign, title: 'Points', copy: 'A hidden balance turned into a visible weekend.' },
+              { icon: HeartHandshake, title: 'Support', copy: 'Same account, same service relationship, less planning stress.' },
+            ].map(({ icon: Icon, title, copy }) => (
+              <div key={title} className="rounded-[26px] bg-white/70 p-6">
+                <Icon className="h-5 w-5 text-[#a51c30]" />
+                <h3 className="mt-4 font-display text-[30px] text-[#203124]">{title}</h3>
+                <p className="mt-2 text-[16px] leading-7 text-[#596258]">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#dabc86] px-6 py-16 md:px-16 md:py-[120px]">
+        <div className="grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+          <div>
+            <HeroKicker>Where your points take you</HeroKicker>
+            <h3 className="mt-4 font-display text-[38px] leading-tight text-[#1e281f] md:text-[56px]">A family trip should feel closer than people think.</h3>
+            <p className="mt-5 text-[18px] leading-8 text-[#3f473d]">
+              This is the tab that can be warmer, simpler, and a little more fun. The message is not aspirational reinvention. It is useful delight.
+            </p>
+            <div className="mt-10 rounded-[28px] bg-[#1f3427] p-7 text-white">
+              <div className="text-sm uppercase tracking-[0.24em] text-white/55">Notification concept</div>
+              <p className="mt-3 text-[20px] leading-8">
+                You&apos;ve earned 18,400 points on work trips this year. That&apos;s a return flight to Da Nang for your family, plus a night at a 4-star hotel.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {holidayDestinations.map((item) => (
+              <div key={item.place} className="border-t border-[#856632]/35 pt-5">
+                <SunMedium className="h-5 w-5 text-[#8c641a]" />
+                <h3 className="mt-4 font-display text-[30px] text-[#1f3427]">{item.place}</h3>
+                <p className="mt-2 text-[16px] leading-7 text-[#495248]">{item.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </Shell>
   )
 }
 
 function Footer() {
   return (
-    <footer className="mx-auto mt-10 max-w-[900px] px-4 pb-12 text-center text-sm text-white/65">
+    <footer className="mx-auto mt-10 max-w-[1100px] px-4 pb-12 text-center text-sm text-white/60">
       Voya by VNTrip · Vietnam&apos;s health and travel package · © 2026
     </footer>
   )
@@ -670,50 +650,42 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(tabs[0])
   const [displayedTab, setDisplayedTab] = useState(tabs[0])
   const [visible, setVisible] = useState(true)
-  const [animateKey, setAnimateKey] = useState(0)
 
   useEffect(() => {
     if (activeTab === displayedTab) return
     setVisible(false)
-    const switchTimer = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setDisplayedTab(activeTab)
-      setAnimateKey((key) => key + 1)
       setVisible(true)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }, 300)
 
-    return () => window.clearTimeout(switchTimer)
+    return () => window.clearTimeout(timer)
   }, [activeTab, displayedTab])
 
-      const content = useMemo(() => {
+  const content = useMemo(() => {
     switch (displayedTab) {
       case 'Second Opinion?':
-        return <TabOne />
+        return <TabSecondOpinion />
       case 'At Last.':
-        return <TabTwo />
+        return <TabAtLast />
       case 'Stay A Little Longer.':
-        return <TabThree />
+        return <TabStayLonger />
       case 'Word Travels.':
-        return <TabFour animateKey={animateKey} />
-      case 'Holiday, Handled':
-        return <TabFive />
+        return <TabWordTravels />
+      case 'Holiday, Handled.':
+        return <TabHolidayHandled />
       default:
         return null
     }
-  }, [displayedTab, animateKey])
+  }, [displayedTab])
 
   return (
-    <div className="min-h-screen bg-navy text-[#1A1A2E]">
-      <Header activeTab={activeTab} onTabClick={setActiveTab} />
-      <main className="px-4 pb-6 pt-[84px] md:px-16">
+    <div className="min-h-screen bg-[#121625]">
+      <Header activeTab={activeTab} onTabChange={setActiveTab} />
+      <main className="px-4 pb-6 pt-[92px] md:px-8">
         <div className="mx-auto max-w-[1100px]">
-          <div
-            className={cn(
-              'transition-all duration-300',
-              visible ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
-              tabThemes[displayedTab],
-            )}
-          >
+          <div className={cn('transition-all duration-300', visible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0', themeShell[displayedTab])}>
             {content}
           </div>
         </div>
