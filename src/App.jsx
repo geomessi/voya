@@ -414,7 +414,7 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#111827]/92 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 md:px-8">
-        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">Vntrip</div>
+        <div />
         <nav className="hidden items-center gap-6 text-sm text-[#9CA3AF] lg:flex">
           <a href="#campaign-lab" className="transition hover:text-white">
             Campaigns
@@ -453,7 +453,7 @@ function CTAButton({ children, dark = false }) {
     <button
       className={cn(
         'inline-flex items-center gap-3 rounded-full px-8 py-4 text-[16px] font-bold transition md:px-10 md:py-5 md:text-[18px]',
-        dark ? 'bg-[#1F2937] text-[#F9FAFB] hover:bg-[#283243]' : 'bg-[#F5A623] text-[#111827] hover:bg-[#C9943A]',
+        dark ? 'bg-[#1F2937] text-[#F9FAFB] hover:bg-[#283243]' : 'bg-[#1F2937] text-[#F9FAFB] hover:bg-[#283243]',
       )}
     >
       {children}
@@ -789,7 +789,7 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden rounded-[40px] bg-[linear-gradient(145deg,#0e1625_0%,#111827_42%,#0f172a_100%)] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
+      className="relative overflow-hidden rounded-[40px] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(245,166,35,0.14),transparent_28%),radial-gradient(circle_at_18%_18%,rgba(125,211,252,0.12),transparent_24%),radial-gradient(circle_at_82%_22%,rgba(196,181,253,0.12),transparent_24%)]" />
       <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[#7DD3FC]/10 blur-3xl" />
@@ -800,44 +800,16 @@ function HeroSection() {
       <div className="relative flex flex-col items-center text-center">
         <div className="max-w-[42rem] pt-2">
           <Eyebrow>Vntrip Presents</Eyebrow>
-          <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
-            Voya
+          <h1 className="group mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
+            <span className="inline-block transition duration-500 group-hover:-translate-y-1 group-hover:scale-[1.03] group-hover:text-white group-hover:[text-shadow:0_0_28px_rgba(196,181,253,0.35)]">
+              Voya
+            </span>
           </h1>
           <p className="mx-auto mt-5 max-w-[34rem] text-[18px] leading-8 text-[#D1D5DB] md:text-[20px]">
             A premium concierge for travelers coming to Vietnam for care, recovery, and better-coordinated decisions.
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            {[
-              'Verified clinics',
-              'Local concierge intelligence',
-              'Recovery-aware journeys',
-            ].map((item, index) => (
-              <div
-                key={item}
-                className={cn(
-                  'rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] backdrop-blur-xl',
-                  index === 1
-                    ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F6D08A]'
-                    : 'border-white/10 bg-white/6 text-white/68',
-                )}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
         </div>
         <div className="relative mt-8 w-full">
-          <div className="pointer-events-none absolute left-[8%] top-[12%] hidden rounded-[24px] border border-white/10 bg-white/6 px-4 py-3 text-left shadow-[0_18px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl lg:block">
-            <div className="text-[10px] uppercase tracking-[0.24em] text-white/42">Why it feels real</div>
-            <div className="mt-2 text-[15px] text-[#F9FAFB]">One product system for care, travel, and follow-through.</div>
-          </div>
-          <div className="pointer-events-none absolute right-[7%] top-[18%] hidden rounded-[24px] border border-white/10 bg-[#14213A]/70 px-4 py-3 text-left shadow-[0_18px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl lg:block">
-            <div className="text-[10px] uppercase tracking-[0.24em] text-[#9CA3AF]">Product world</div>
-            <div className="mt-2 flex items-center gap-2 text-[15px] text-[#F9FAFB]">
-              <span className="h-2 w-2 rounded-full bg-[#22C55E]" />
-              Concierge online
-            </div>
-          </div>
           <div className="pointer-events-none absolute inset-x-[14%] top-6 h-[58%] rounded-full bg-[radial-gradient(circle,rgba(245,166,35,0.12),transparent_58%)] blur-3xl" />
           <img
             src={heroMockupImage}
@@ -1323,6 +1295,9 @@ function CampaignLab() {
         <Body className="mt-5 max-w-3xl">
           These are example campaign territories the team can use to position Voya for different audiences, decision moments, and acquisition channels, while keeping one master product story intact.
         </Body>
+        <div className="mt-6 rounded-[24px] border border-white/8 bg-[#1F2937]/88 px-5 py-4 text-[15px] leading-7 text-[#D1D5DB]">
+          Same concierge product underneath every acquisition story.
+        </div>
       </div>
 
       <div className="flex overflow-x-auto pb-2">
@@ -1378,7 +1353,6 @@ function CampaignLab() {
               ))}
             </div>
             <div className="relative mt-8 flex flex-wrap items-center gap-4">
-              <CTAButton>{data.cta}</CTAButton>
               <div className="text-[12px] uppercase tracking-[0.24em] text-white/38">{identity.motionLabel}</div>
             </div>
           </div>
@@ -1402,12 +1376,6 @@ function CampaignLab() {
                   compact
                 />
               </div>
-            </div>
-            <div className="mt-8 rounded-[30px] border border-white/10 bg-[#1F2937]/94 p-6">
-              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Master product promise</div>
-              <p className="mt-3 max-w-[18rem] text-[28px] font-semibold leading-[1] tracking-[-0.04em] text-[#F9FAFB]">
-                Same concierge product underneath every acquisition story.
-              </p>
             </div>
           </div>
         </div>
@@ -1457,7 +1425,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#111827] font-sans">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#0e1625_0%,#111827_28%,#101827_70%,#0f172a_100%)] font-sans">
       <Header />
       <main className="px-4 pb-8 pt-[92px] md:px-8">
         <div className="mx-auto grid max-w-[1280px] gap-12 md:gap-16">
@@ -1466,8 +1434,6 @@ export default function App() {
           <ProductExperience />
           <MessagingLab />
           <ArtifactsSection />
-          <EntrySelectorSection />
-          <ClosingSection />
         </div>
         <Footer />
       </main>
