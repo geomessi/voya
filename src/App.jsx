@@ -622,6 +622,18 @@ function ProductExperience() {
   )
 }
 
+function ProductTieCard({ title, body }) {
+  return (
+    <div className="rounded-[30px] border border-white/10 bg-[#1F2937] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.16)]">
+      <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">
+        <Sparkles className="h-3.5 w-3.5 text-[#F5A623]" />
+        <span>{title}</span>
+      </div>
+      <p className="mt-4 text-[18px] leading-8 text-[#F9FAFB]">{body}</p>
+    </div>
+  )
+}
+
 function TrustLayer() {
   return (
     <section
