@@ -774,7 +774,7 @@ function HeroSection() {
           <img
             src={heroMockupImage}
             alt="Voya product mockups"
-            className="relative z-10 mx-auto w-full max-w-[1020px] object-contain"
+            className="relative z-10 mx-auto w-full max-w-[680px] object-contain"
           />
         </div>
       </div>
