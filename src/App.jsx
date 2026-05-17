@@ -26,6 +26,94 @@ const campaignTabs = [
   'Holiday, Handled',
 ]
 
+const campaignIdentities = {
+  'Second Opinion?': {
+    theme: 'Longevity / Diagnostics',
+    tagline: 'Precision care. Transparent totals.',
+    palette: ['#F9FAFB', '#CBD5E1', '#94A3B8', '#7DD3FC', '#22D3EE'],
+    chipClass: 'bg-[#122033] text-[#7DD3FC]',
+    tabActiveClass: 'bg-[#dff7ff] text-[#0f172a] shadow-[0_0_0_1px_rgba(125,211,252,0.25)]',
+    panelClass: 'bg-[linear-gradient(155deg,#eef8ff_0%,#c2d9e8_6%,#111827_22%,#0f172a_100%)]',
+    borderClass: 'border-[#7DD3FC]/25',
+    overlayClass: 'bg-[radial-gradient(circle_at_top_left,rgba(125,211,252,0.18),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_28%)]',
+    textureClass: 'before:absolute before:inset-0 before:bg-[linear-gradient(transparent_0%,transparent_96%,rgba(125,211,252,0.08)_100%),linear-gradient(90deg,transparent_0%,transparent_96%,rgba(125,211,252,0.08)_100%)] before:bg-[size:100%_14px,14px_100%] before:opacity-30',
+    titleClass: 'font-sans uppercase tracking-[0.02em] md:tracking-[0.01em]',
+    sloganHoverClass: 'hover:-translate-y-0.5 hover:border-[#7DD3FC]/30 hover:bg-[#172538]',
+    motionLabel: 'Scanning shimmer',
+    motif: 'diagnostics',
+    icon: CircleDollarSign,
+    visualType: 'comparison',
+  },
+  'At Last.': {
+    theme: "Women's Health",
+    tagline: 'Something for yourself, finally.',
+    palette: ['#F3E8D7', '#D9B6A3', '#8D4D52', '#5B2D3E', '#E7C6C8'],
+    chipClass: 'bg-[#2c1d26] text-[#e8c6c8]',
+    tabActiveClass: 'bg-[#f5e3d6] text-[#3b2430] shadow-[0_0_0_1px_rgba(243,232,215,0.28)]',
+    panelClass: 'bg-[linear-gradient(160deg,#2d1f24_0%,#40252c_26%,#1d1822_78%,#111827_100%)]',
+    borderClass: 'border-[#d9b6a3]/25',
+    overlayClass: 'bg-[radial-gradient(circle_at_top_left,rgba(217,182,163,0.18),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(139,76,82,0.22),transparent_35%)]',
+    textureClass: 'before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_20%_28%,rgba(243,232,215,0.08)_0,rgba(243,232,215,0.08)_2px,transparent_3px),radial-gradient(circle_at_80%_72%,rgba(232,198,200,0.08)_0,rgba(232,198,200,0.08)_2px,transparent_3px)] before:bg-[size:120px_120px,150px_150px] before:opacity-70',
+    titleClass: 'font-serif italic tracking-[-0.04em]',
+    sloganHoverClass: 'hover:-translate-y-1 hover:border-[#d9b6a3]/28 hover:bg-[#302028]',
+    motionLabel: 'Bloom reveal',
+    motif: 'bloom',
+    icon: HeartHandshake,
+    visualType: 'clinic',
+  },
+  'Stay A Little Longer.': {
+    theme: 'Recovery / Wellness',
+    tagline: 'Recovery, recast as retreat.',
+    palette: ['#F1E9DD', '#CDBFAE', '#8FA598', '#6E867A', '#2F3A37'],
+    chipClass: 'bg-[#1c2823] text-[#b7cdbf]',
+    tabActiveClass: 'bg-[#ecede2] text-[#243129] shadow-[0_0_0_1px_rgba(143,165,152,0.28)]',
+    panelClass: 'bg-[linear-gradient(160deg,#202a28_0%,#2d3a36_20%,#152126_78%,#111827_100%)]',
+    borderClass: 'border-[#8FA598]/25',
+    overlayClass: 'bg-[radial-gradient(circle_at_top_left,rgba(205,191,174,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(143,165,152,0.18),transparent_40%)]',
+    textureClass: 'before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_1.5px)] before:bg-[size:28px_28px] before:opacity-20',
+    titleClass: 'font-serif tracking-[-0.05em]',
+    sloganHoverClass: 'hover:-translate-y-1 hover:border-[#8FA598]/28 hover:bg-[#1f2c2a]',
+    motionLabel: 'Slow float',
+    motif: 'ripples',
+    icon: Hotel,
+    visualType: 'destination',
+  },
+  'Word Travels.': {
+    theme: 'Adventure / Exploration',
+    tagline: 'Private proof, passed along.',
+    palette: ['#081F3A', '#0E5A76', '#2EC4B6', '#E58A3A', '#F6C56F'],
+    chipClass: 'bg-[#18283a] text-[#f6c56f]',
+    tabActiveClass: 'bg-[#f8d9a0] text-[#162236] shadow-[0_0_0_1px_rgba(246,197,111,0.22)]',
+    panelClass: 'bg-[linear-gradient(160deg,#11243b_0%,#12344a_28%,#0d1d31_74%,#111827_100%)]',
+    borderClass: 'border-[#F6C56F]/25',
+    overlayClass: 'bg-[radial-gradient(circle_at_top_left,rgba(229,138,58,0.22),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(46,196,182,0.16),transparent_40%)]',
+    textureClass: 'before:absolute before:inset-0 before:bg-[linear-gradient(55deg,transparent_0%,transparent_48%,rgba(246,197,111,0.08)_49%,transparent_50%),radial-gradient(circle_at_12%_20%,rgba(46,196,182,0.1)_0,rgba(46,196,182,0.1)_2px,transparent_3px)] before:bg-[size:180px_180px,120px_120px] before:opacity-70',
+    titleClass: 'font-serif tracking-[-0.05em]',
+    sloganHoverClass: 'hover:-translate-y-1 hover:border-[#F6C56F]/30 hover:bg-[#162738]',
+    motionLabel: 'Route drift',
+    motif: 'routes',
+    icon: MapPinned,
+    visualType: 'whatsapp',
+  },
+  'Holiday, Handled': {
+    theme: 'AI Concierge / Agent',
+    tagline: 'One guide. One plan. One trip.',
+    palette: ['#EDE9FE', '#B6B0FF', '#8B7FFF', '#5C6AC4', '#111827'],
+    chipClass: 'bg-[#1f2037] text-[#d7d3ff]',
+    tabActiveClass: 'bg-[#ece9ff] text-[#1c1f33] shadow-[0_0_0_1px_rgba(182,176,255,0.25)]',
+    panelClass: 'bg-[linear-gradient(160deg,#171d32_0%,#1f2340_26%,#12192f_76%,#111827_100%)]',
+    borderClass: 'border-[#B6B0FF]/25',
+    overlayClass: 'bg-[radial-gradient(circle_at_top_left,rgba(182,176,255,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(139,127,255,0.15),transparent_42%)]',
+    textureClass: 'before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_30%_35%,rgba(237,233,254,0.09)_0,rgba(237,233,254,0.09)_1.5px,transparent_2px),radial-gradient(circle_at_70%_70%,rgba(182,176,255,0.12)_0,rgba(182,176,255,0.12)_1.5px,transparent_2px)] before:bg-[size:70px_70px,110px_110px] before:opacity-70',
+    titleClass: 'font-sans tracking-[-0.05em]',
+    sloganHoverClass: 'hover:-translate-y-0.5 hover:border-[#B6B0FF]/30 hover:bg-[#1f2539]',
+    motionLabel: 'Predictive drift',
+    motif: 'particles',
+    icon: Sparkles,
+    visualType: 'summary',
+  },
+}
+
 const entryOptions = [
   {
     label: 'I need a second opinion',
@@ -77,6 +165,7 @@ const entryOptions = [
 const campaignData = {
   'Second Opinion?': {
     segment: 'Specialist seeker',
+    tagline: 'Precision care. Transparent totals.',
     headline: 'Question the quote. Not the care.',
     insight: 'Sticker shock becomes the entry point.',
     sloganStack: [
@@ -92,6 +181,7 @@ const campaignData = {
   },
   'At Last.': {
     segment: 'Opportunistic vacationer',
+    tagline: 'Something for yourself, finally.',
     headline: 'Self-investment, beautifully handled.',
     insight: 'Travel desire softens care friction.',
     sloganStack: [
@@ -107,6 +197,7 @@ const campaignData = {
   },
   'Stay A Little Longer.': {
     segment: 'Recovery-first traveler',
+    tagline: 'Recovery, recast as retreat.',
     headline: 'Recovery becomes part of the product.',
     insight: 'The days after matter as much as the appointment.',
     sloganStack: [
@@ -122,6 +213,7 @@ const campaignData = {
   },
   'Word Travels.': {
     segment: 'Peer-led decision maker',
+    tagline: 'Private proof, passed along.',
     headline: 'Recommendation is the channel.',
     insight: 'Trust is passed along, not announced.',
     sloganStack: [
@@ -137,6 +229,7 @@ const campaignData = {
   },
   'Holiday, Handled': {
     segment: 'Owned-channel Vntrip user',
+    tagline: 'One guide. One plan. One trip.',
     headline: 'The trusted Vntrip account, now for life beyond work.',
     insight: 'Owned channels make this fast and practical.',
     sloganStack: [
@@ -729,14 +822,124 @@ function ProductExperience() {
   )
 }
 
-function ProductTieCard({ title, body }) {
+function ProductTieCard({ title, body, className = '' }) {
   return (
-    <div className="rounded-[30px] border border-white/10 bg-[#1F2937] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.16)]">
+    <div className={cn('rounded-[30px] border border-white/10 bg-[#1F2937] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.16)]', className)}>
       <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">
         <Sparkles className="h-3.5 w-3.5 text-[#F5A623]" />
         <span>{title}</span>
       </div>
       <p className="mt-4 text-[18px] leading-8 text-[#F9FAFB]">{body}</p>
+    </div>
+  )
+}
+
+function CampaignMotif({ motif }) {
+  if (motif === 'diagnostics') {
+    return (
+      <svg viewBox="0 0 240 140" className="h-full w-full" fill="none">
+        <circle cx="120" cy="70" r="36" stroke="rgba(125,211,252,0.55)" strokeWidth="1.5" />
+        <circle cx="120" cy="70" r="58" stroke="rgba(125,211,252,0.18)" strokeWidth="1.5" />
+        <circle cx="120" cy="70" r="82" stroke="rgba(125,211,252,0.10)" strokeWidth="1.5" />
+        <path d="M20 70H220" stroke="rgba(125,211,252,0.35)" strokeDasharray="3 8" />
+        {[40, 78, 120, 168, 202].map((x) => (
+          <circle key={x} cx={x} cy="70" r="3.5" fill="rgba(125,211,252,0.92)" />
+        ))}
+      </svg>
+    )
+  }
+
+  if (motif === 'bloom') {
+    return (
+      <svg viewBox="0 0 240 140" className="h-full w-full" fill="none">
+        <circle cx="120" cy="70" r="12" fill="rgba(243,232,215,0.8)" />
+        {[0, 72, 144, 216, 288].map((deg) => (
+          <ellipse
+            key={deg}
+            cx="120"
+            cy="70"
+            rx="24"
+            ry="52"
+            transform={`rotate(${deg} 120 70)`}
+            fill="rgba(217,182,163,0.13)"
+            stroke="rgba(232,198,200,0.22)"
+          />
+        ))}
+      </svg>
+    )
+  }
+
+  if (motif === 'ripples') {
+    return (
+      <svg viewBox="0 0 240 140" className="h-full w-full" fill="none">
+        <path d="M20 78C44 66 68 66 92 78C116 90 140 90 164 78C188 66 212 66 220 70" stroke="rgba(205,191,174,0.7)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 96C44 84 68 84 92 96C116 108 140 108 164 96C188 84 212 84 220 88" stroke="rgba(143,165,152,0.55)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 60C44 48 68 48 92 60C116 72 140 72 164 60C188 48 212 48 220 52" stroke="rgba(255,255,255,0.24)" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    )
+  }
+
+  if (motif === 'routes') {
+    return (
+      <svg viewBox="0 0 240 140" className="h-full w-full" fill="none">
+        <path d="M28 106C72 28 118 36 150 70C172 94 192 94 212 44" stroke="rgba(246,197,111,0.78)" strokeWidth="2" strokeDasharray="5 7" strokeLinecap="round" />
+        <circle cx="28" cy="106" r="6" stroke="rgba(46,196,182,0.8)" strokeWidth="2" />
+        <circle cx="150" cy="70" r="5" fill="rgba(229,138,58,0.9)" />
+        <circle cx="212" cy="44" r="8" stroke="rgba(246,197,111,0.8)" strokeWidth="2" />
+        <rect x="76" y="24" width="38" height="28" rx="8" fill="rgba(8,31,58,0.8)" stroke="rgba(255,255,255,0.16)" />
+        <path d="M88 30V46M102 30V46M84 38H106" stroke="rgba(246,197,111,0.7)" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 240 140" className="h-full w-full" fill="none">
+      <circle cx="86" cy="72" r="18" fill="rgba(182,176,255,0.3)" />
+      <circle cx="128" cy="60" r="24" stroke="rgba(182,176,255,0.38)" />
+      <circle cx="170" cy="78" r="14" fill="rgba(237,233,254,0.22)" />
+      <path d="M86 72C108 64 114 64 128 60C142 56 150 62 170 78" stroke="rgba(237,233,254,0.42)" strokeWidth="1.5" strokeDasharray="2 8" strokeLinecap="round" />
+      {[64, 112, 182].map((x) => (
+        <circle key={x} cx={x} cy="30" r="2.5" fill="rgba(237,233,254,0.7)" />
+      ))}
+    </svg>
+  )
+}
+
+function CampaignIdentityStrip({ identity }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex gap-2">
+        {identity.palette.map((color) => (
+          <span key={color} className="h-3 w-8 rounded-full border border-white/10" style={{ backgroundColor: color }} />
+        ))}
+      </div>
+      <div className="text-[10px] uppercase tracking-[0.24em] text-white/42">{identity.motionLabel}</div>
+    </div>
+  )
+}
+
+function CampaignVisualCard({ identity, title }) {
+  const Icon = identity.icon
+
+  return (
+    <div className={cn('group relative overflow-hidden rounded-[30px] border bg-[#131c2b] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.16)] transition duration-500', identity.borderClass)}>
+      <div className={cn('absolute inset-0', identity.overlayClass)} />
+      <div className={cn('absolute inset-0', identity.textureClass)} />
+      <div className="relative">
+        <div className="flex items-center justify-between">
+          <div className={cn('rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.24em]', identity.chipClass)}>{identity.theme}</div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/82">
+            <Icon className="h-4 w-4" />
+          </div>
+        </div>
+        <div className="mt-5 h-[138px] overflow-hidden rounded-[24px] border border-white/8 bg-[#0f172a]/60 p-4">
+          <CampaignMotif motif={identity.motif} />
+        </div>
+        <div className="mt-4 flex items-center justify-between">
+          <div className="text-[15px] font-medium text-[#F9FAFB]">{title}</div>
+          <div className="text-[11px] uppercase tracking-[0.24em] text-white/38">Visual motif</div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -874,6 +1077,8 @@ function CampaignLab() {
   }, [active, displayed])
 
   const data = useMemo(() => campaignData[displayed], [displayed])
+  const identity = useMemo(() => campaignIdentities[displayed], [displayed])
+  const activeVisualType = identity.visualType
 
   return (
     <section id="campaign-lab" className="grid gap-12 py-4">
@@ -887,15 +1092,17 @@ function CampaignLab() {
         <div className="mx-auto flex min-w-max gap-2 rounded-full border border-white/8 bg-[#1F2937] p-2 shadow-[0_10px_30px_rgba(0,0,0,0.16)]">
           {campaignTabs.map((tab) => {
             const selected = tab === active
+            const tabIdentity = campaignIdentities[tab]
             return (
               <button
                 key={tab}
                 onClick={() => setActive(tab)}
                 className={cn(
-                  'rounded-full px-4 py-3 text-sm transition md:px-5',
-                  selected ? 'bg-[#F5A623] text-[#111827]' : 'text-[#9CA3AF] hover:text-[#F9FAFB]',
+                  'flex items-center gap-2 rounded-full px-4 py-3 text-sm transition md:px-5',
+                  selected ? tabIdentity.tabActiveClass : 'text-[#9CA3AF] hover:text-[#F9FAFB]',
                 )}
               >
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: tabIdentity.palette[3] }} />
                 {tab}
               </button>
             )
@@ -905,52 +1112,61 @@ function CampaignLab() {
 
       <div className={cn('overflow-hidden rounded-[40px] border border-white/8 bg-[#111827] shadow-[0_30px_80px_rgba(0,0,0,0.24)] transition-all duration-300', visible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0')}>
         <div className="grid gap-0 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="px-6 py-10 text-white md:px-10 md:py-12">
+          <div className="relative overflow-hidden px-6 py-10 text-white md:px-10 md:py-12">
+            <div className={cn('pointer-events-none absolute inset-0 opacity-80', identity.overlayClass)} />
             <div className="flex flex-wrap items-center gap-3">
-              <div className="rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623]">{data.segment}</div>
+              <div className={cn('rounded-full px-3 py-1 text-[12px]', identity.chipClass)}>{data.segment}</div>
               <div className="text-[11px] uppercase tracking-[0.28em] text-[#9CA3AF]">{displayed}</div>
             </div>
-            <h3 className="mt-5 max-w-[14ch] text-[40px] font-semibold leading-[0.94] tracking-[-0.05em] text-[#F9FAFB] md:text-[60px]">{data.headline}</h3>
-            <p className="mt-6 max-w-[18rem] text-[18px] leading-8 text-[#F5A623]">{data.insight}</p>
-            <div className="mt-8 grid gap-3">
+            <div className="relative mt-6">
+              <div className="text-[11px] uppercase tracking-[0.28em] text-white/42">{identity.theme}</div>
+              <h3 className={cn('mt-4 max-w-[14ch] text-[42px] font-semibold leading-[0.94] text-[#F9FAFB] md:text-[64px]', identity.titleClass)}>{displayed}</h3>
+              <p className="mt-4 max-w-[22rem] text-[22px] leading-[1.3] text-[#F9FAFB]">{data.tagline}</p>
+              <p className="mt-5 max-w-[24rem] text-[17px] leading-8 text-[#9CA3AF]">{data.headline} {data.insight}</p>
+            </div>
+            <div className="relative mt-8">
+              <CampaignIdentityStrip identity={identity} />
+            </div>
+            <div className="relative mt-8 grid gap-3">
               {data.sloganStack.map((line) => (
-                <div key={line} className="rounded-[22px] border border-white/8 bg-[#1F2937] px-4 py-4 text-[18px] font-medium leading-tight text-[#F9FAFB]">
+                <div
+                  key={line}
+                  className={cn(
+                    'rounded-[22px] border border-white/8 bg-[#1F2937]/90 px-4 py-4 text-[18px] font-medium leading-tight text-[#F9FAFB] transition duration-500',
+                    identity.sloganHoverClass,
+                  )}
+                >
                   {line}
                 </div>
               ))}
             </div>
-            <div className="mt-8">
+            <div className="relative mt-8 flex flex-wrap items-center gap-4">
               <CTAButton>{data.cta}</CTAButton>
+              <div className="text-[12px] uppercase tracking-[0.24em] text-white/38">{identity.motionLabel}</div>
             </div>
           </div>
 
-          <div className={cn('flex flex-col justify-between border-t border-white/10 px-6 py-10 text-white md:px-10 md:py-12 lg:border-l lg:border-t-0', data.accent)}>
+          <div className={cn('flex flex-col justify-between border-t border-white/10 px-6 py-10 text-white md:px-10 md:py-12 lg:border-l lg:border-t-0', identity.panelClass)}>
             <div className="grid gap-5">
-              <div className="rounded-[30px] border border-white/10 bg-[#1F2937] p-6">
-                <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Sample ad moment</div>
-                <p className="mt-4 text-[18px] leading-8 text-[#F9FAFB]">{data.adMoment}</p>
+              <CampaignVisualCard identity={identity} title={data.tagline} />
+              <div className="rounded-[30px] border border-white/10 bg-[#1F2937]/94 p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Sample ad moment</div>
+                  <div className="text-[10px] uppercase tracking-[0.24em] text-white/34">Editorial world</div>
+                </div>
+                <p className="mt-4 text-[17px] leading-8 text-[#F9FAFB]">{data.adMoment}</p>
               </div>
-              <ProductTieCard title="Product tie-back" body={data.productTieBack} />
+              <ProductTieCard title="Product tie-back" body={data.productTieBack} className="bg-[#1F2937]/94" />
               <div className="grid gap-4 md:grid-cols-2">
                 <MiniArtifact type="clinic" title="" compact />
                 <MiniArtifact
-                  type={
-                    displayed === 'Second Opinion?'
-                      ? 'comparison'
-                      : displayed === 'At Last.'
-                        ? 'itinerary'
-                        : displayed === 'Stay A Little Longer.'
-                          ? 'destination'
-                          : displayed === 'Word Travels.'
-                            ? 'whatsapp'
-                            : 'summary'
-                  }
+                  type={activeVisualType}
                   title=""
                   compact
                 />
               </div>
             </div>
-            <div className="mt-8 rounded-[30px] border border-white/10 bg-[#1F2937] p-6">
+            <div className="mt-8 rounded-[30px] border border-white/10 bg-[#1F2937]/94 p-6">
               <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Master product promise</div>
               <p className="mt-3 max-w-[18rem] text-[28px] font-semibold leading-[1] tracking-[-0.04em] text-[#F9FAFB]">
                 Same concierge product underneath every acquisition story.
