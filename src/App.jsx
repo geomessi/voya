@@ -66,7 +66,7 @@ const entryOptions = [
   {
     label: 'I just want it handled',
     tab: 'Holiday, Handled',
-    slogan: 'The trusted VNTrip account, now for life beyond work.',
+    slogan: 'The trusted Vntrip account, now for life beyond work.',
     traveler: 'Utility-first planner',
     insight: 'One account, one operator, fewer moving parts, less cognitive load.',
     cta: 'See where your points can take you',
@@ -136,8 +136,8 @@ const campaignData = {
     accent: 'bg-[#1d2432]',
   },
   'Holiday, Handled': {
-    segment: 'Owned-channel VNTrip user',
-    headline: 'The trusted VNTrip account, now for life beyond work.',
+    segment: 'Owned-channel Vntrip user',
+    headline: 'The trusted Vntrip account, now for life beyond work.',
     insight: 'Owned channels make this fast and practical.',
     sloganStack: [
       'Handled from hello.',
@@ -146,7 +146,7 @@ const campaignData = {
       'One guide. One plan. One trip.',
     ],
     adMoment: 'A points-led card that turns corporate travel history into a family trip or personal-care itinerary in one tap.',
-    productTieBack: 'This lens shows how VNTrip can extend from infrastructure into concierge operating system, with Voya as the care layer.',
+    productTieBack: 'This lens shows how Vntrip can extend from infrastructure into concierge operating system, with Voya as the care layer.',
     cta: 'See where your points can take you',
     accent: 'bg-[#203021]',
   },
@@ -241,7 +241,7 @@ const journeySteps = [
   { title: 'Upload or share your quote', body: 'Start with the care question, not the booking flow.', type: 'price' },
   { title: 'Linh shortlists verified clinics', body: 'A human guide turns the search into a real shortlist.', type: 'chat' },
   { title: 'Compare prices and consultation options', body: 'See care, logistics, and trip total in one view.', type: 'comparison' },
-  { title: 'VNTrip books flights and hotel', body: 'Travel infrastructure shifts from background to advantage.', type: 'itinerary' },
+  { title: 'Vntrip books flights and hotel', body: 'Travel infrastructure shifts from background to advantage.', type: 'itinerary' },
   { title: 'Arrive in Ho Chi Minh City', body: 'Airport pickup and arrival support are already arranged.', type: 'pickup' },
   { title: 'Attend consultation', body: 'Clinic timing, local transport, and translation are coordinated.', type: 'summary' },
   { title: 'Complete procedure', body: 'The treatment sits inside one managed journey.', type: 'clinic' },
@@ -259,7 +259,7 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#111827]/92 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 md:px-8">
-        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">VNTrip</div>
+        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">Vntrip</div>
         <nav className="hidden items-center gap-6 text-sm text-[#9CA3AF] lg:flex">
           <a href="#entry-selector" className="transition hover:text-white">
             Journey
@@ -635,7 +635,7 @@ function HeroSection() {
     >
       <div className="flex flex-col items-center text-center">
         <div className="max-w-[42rem] pt-2">
-          <Eyebrow>VNTRIP PRESENTS</Eyebrow>
+          <Eyebrow>Vntrip Presents</Eyebrow>
           <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
@@ -970,7 +970,7 @@ function ClosingSection() {
         <div className="max-w-3xl">
           <Eyebrow>CLOSING</Eyebrow>
           <SectionTitle className="mt-4">Vietnam’s health and travel package.</SectionTitle>
-          <Body className="mt-6 max-w-xl">VNTrip already owns the travel infrastructure. Voya adds the trust, care, and coordination layer.</Body>
+          <Body className="mt-6 max-w-xl">Vntrip already owns the travel infrastructure. Voya adds the trust, care, and coordination layer.</Body>
           <div className="mt-9">
             <CTAButton>Prototype the Voya journey</CTAButton>
           </div>
@@ -980,7 +980,7 @@ function ClosingSection() {
             'Verified clinics, clearly framed',
             'Named local concierge support',
             'Recovery-aware trip planning',
-            'A premium product VNTrip can own',
+            'A premium product Vntrip can own',
           ].map((item) => (
             <div key={item} className="rounded-[24px] border border-white/10 bg-[#1F2937] px-5 py-5 text-[16px] leading-7 text-[#F9FAFB]">
               {item}
@@ -995,7 +995,7 @@ function ClosingSection() {
 function Footer() {
   return (
     <footer className="mx-auto max-w-[1280px] px-4 pb-12 text-center text-sm text-white/54 md:px-8">
-      Voya by VNTrip · Vietnam&apos;s health and travel package · © 2026
+      Voya by Vntrip · Vietnam&apos;s health and travel package · © 2026
     </footer>
   )
 }
