@@ -584,22 +584,21 @@ function HeroSection() {
       id="hero"
       className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
     >
-      <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-        <div className="max-w-[42rem] pt-2 lg:pt-8">
+      <div className="flex flex-col items-center text-center">
+        <div className="max-w-[42rem] pt-2">
           <Eyebrow>VNTRIP PRESENTS</Eyebrow>
-          <h1 className="mt-4 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
+          <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
-          <Body className="mt-5 max-w-[34rem] text-[20px] md:text-[24px]">
-            Your medical trip to Vietnam, handled. Verified clinics, travel booking, local concierge support, and recovery-aware itineraries, all inside one managed experience.
-          </Body>
-          <div className="mt-7 flex flex-wrap items-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
             <a href="#campaign-lab" className="text-sm font-medium text-white/72 underline-offset-4 transition hover:text-white hover:underline">
               Explore campaign directions
             </a>
           </div>
         </div>
-        <AppMockups />
+        <div className="mt-8 w-full">
+          <AppMockups />
+        </div>
       </div>
     </section>
   )
