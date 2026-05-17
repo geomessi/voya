@@ -249,6 +249,8 @@ const journeySteps = [
   { title: 'Fly home with follow-up support', body: 'The trip ends with a plan, not a handoff into silence.', type: 'checklist' },
 ]
 
+const heroMockupImage = `${import.meta.env.BASE_URL}voya-hero-mockups.jpeg`
+
 function cn(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -639,7 +641,11 @@ function HeroSection() {
           </h1>
         </div>
         <div className="mt-8 w-full">
-          <AppMockups />
+          <img
+            src={heroMockupImage}
+            alt="Voya product mockups"
+            className="mx-auto w-full max-w-[1180px] rounded-[28px] object-contain shadow-[0_30px_80px_rgba(0,0,0,0.32)]"
+          />
         </div>
       </div>
     </section>
