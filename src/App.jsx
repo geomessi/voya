@@ -278,6 +278,68 @@ const messagingCategories = {
   ],
 }
 
+const positioningSystem = {
+  'Core promise': [
+    'Your medical trip to Vietnam, handled.',
+    'One concierge layer across care, travel, and recovery.',
+    'A premium Voya journey built on Vntrip infrastructure.',
+  ],
+  'Emotional hook': [
+    'Question the quote. Not the care.',
+    'Something for yourself, finally.',
+    'Recovery, recast as retreat.',
+    'Private proof, passed along.',
+  ],
+  'Functional proof': [
+    'Verified clinic shortlists with clear tradeoffs.',
+    'Named concierge support before, during, and after travel.',
+    'Recovery-aware hotel, transfer, and follow-up planning.',
+    'One view of care cost, trip cost, and next steps.',
+  ],
+  'Audience angle': [
+    'For travelers comparing high-stakes care options.',
+    'For people pairing a long-delayed treatment with a trip.',
+    'For patients who need recovery to feel considered, not clinical.',
+    'For Vntrip users who already trust the booking layer.',
+  ],
+}
+
+const productMoments = [
+  {
+    title: "I'm overwhelmed. Help me choose the right care path.",
+    body: 'Voya turns open-ended research into a shortlist with reasoning, timing, and support context.',
+    type: 'clinic',
+  },
+  {
+    title: 'Compare my options and explain the tradeoffs.',
+    body: 'Price, consultation timing, credentials, and trip logic appear in one calmer view.',
+    type: 'comparison',
+  },
+  {
+    title: 'Build me a recovery plan around my trip.',
+    body: 'The hotel, destination, departure date, and follow-up pacing are designed around recovery.',
+    type: 'destination',
+  },
+  {
+    title: 'Prepare questions for my consultation.',
+    body: 'The concierge thread helps the traveler arrive with better context and fewer unknowns.',
+    type: 'chat',
+  },
+]
+
+const productOutcomes = [
+  { title: 'Clarifies your options', body: 'Reduces search fatigue and makes the decision legible.', icon: FileCheck2 },
+  { title: 'Coordinates next steps', body: 'Moves from shortlist to booking without losing context.', icon: CalendarCheck2 },
+  { title: 'Translates complexity', body: 'Brings care, travel, cost, and logistics into one story.', icon: MessageSquare },
+  { title: 'Supports recovery', body: 'Extends beyond the appointment into the days that follow.', icon: HeartHandshake },
+]
+
+const brandApplications = [
+  { title: 'Concierge interface', body: 'Calm, premium product surfaces with one named guide.' },
+  { title: 'Campaign worlds', body: 'Different emotional entry points inside one Voya master brand.' },
+  { title: 'Travel + care artifacts', body: 'Shortlists, itineraries, comparisons, and follow-up objects.' },
+]
+
 const productCards = [
   {
     title: 'Verified clinics',
@@ -354,17 +416,20 @@ function Header() {
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 md:px-8">
         <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">Vntrip</div>
         <nav className="hidden items-center gap-6 text-sm text-[#9CA3AF] lg:flex">
-          <a href="#entry-selector" className="transition hover:text-white">
-            Journey
-          </a>
-          <a href="#artifacts" className="transition hover:text-white">
-            Artifacts
-          </a>
-          <a href="#messaging-lab" className="transition hover:text-white">
-            Messaging
-          </a>
           <a href="#campaign-lab" className="transition hover:text-white">
             Campaigns
+          </a>
+          <a href="#experience" className="transition hover:text-white">
+            Product
+          </a>
+          <a href="#messaging-lab" className="transition hover:text-white">
+            Positioning
+          </a>
+          <a href="#artifacts" className="transition hover:text-white">
+            Brand
+          </a>
+          <a href="#entry-selector" className="transition hover:text-white">
+            Audience
           </a>
         </nav>
       </div>
@@ -738,6 +803,9 @@ function HeroSection() {
           <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
+          <p className="mx-auto mt-5 max-w-[34rem] text-[18px] leading-8 text-[#D1D5DB] md:text-[20px]">
+            A premium concierge for travelers coming to Vietnam for care, recovery, and better-coordinated decisions.
+          </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {[
               'Verified clinics',
@@ -788,8 +856,11 @@ function EntrySelectorSection() {
   return (
     <section id="entry-selector" className="grid gap-10 py-4">
       <div className="max-w-4xl">
-        <Eyebrow>INTERACTIVE ENTRY SELECTOR</Eyebrow>
-        <SectionTitle className="mt-4">What brings you to Vietnam?</SectionTitle>
+        <Eyebrow>USE CASES / AUDIENCE</Eyebrow>
+        <SectionTitle className="mt-4">Who Voya is for, and what brings them in.</SectionTitle>
+        <Body className="mt-5 max-w-3xl">
+          These are concrete audience situations the team can build around, from price-sensitive comparison to recovery-first planning and referral-led discovery.
+        </Body>
       </div>
       <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
         <div className="grid gap-3">
@@ -807,20 +878,30 @@ function EntrySelectorSection() {
                 )}
               >
                 <div className={cn('text-[16px] font-medium', active ? 'text-[#F9FAFB]' : 'text-[#D1D5DB]')}>{option.label}</div>
+                <div className="mt-2 text-[13px] leading-6 text-[#9CA3AF]">{option.traveler}</div>
               </button>
             )
           })}
         </div>
 
-        <div className="overflow-hidden rounded-[34px] border border-white/8 bg-[#111827] shadow-[0_24px_60px_rgba(0,0,0,0.22)]">
+        <div className="overflow-hidden rounded-[34px] border border-white/8 bg-[linear-gradient(145deg,#131d2d_0%,#101827_86%)] shadow-[0_24px_60px_rgba(0,0,0,0.22)]">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
             <div className="px-6 py-8 md:px-8 md:py-9">
-              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Chosen Voya journey</div>
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Example audience moment</div>
               <div className="mt-4 text-[36px] font-semibold leading-[0.96] tracking-[-0.05em] text-[#F9FAFB]">{selected.slogan}</div>
               <div className="mt-6 inline-flex rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623]">{selected.traveler}</div>
               <p className="mt-6 max-w-md text-[16px] leading-7 text-[#9CA3AF]">{selected.insight}</p>
-              <div className="mt-8">
-                <CTAButton>{selected.cta}</CTAButton>
+              <div className="mt-8 grid gap-4">
+                <div className="rounded-[22px] border border-white/8 bg-[#1F2937] px-5 py-4">
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Suggested next move</div>
+                  <div className="mt-2 text-[18px] text-[#F9FAFB]">{selected.cta}</div>
+                </div>
+                <div className="rounded-[22px] border border-white/8 bg-[#1F2937] px-5 py-4">
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Why this matters</div>
+                  <div className="mt-2 text-[15px] leading-7 text-[#D1D5DB]">
+                    The same product can meet different emotional starting points without changing the underlying concierge model.
+                  </div>
+                </div>
               </div>
             </div>
             <div className="border-t border-white/8 bg-[linear-gradient(180deg,#14213A_0%,#111827_100%)] p-6 lg:border-l lg:border-t-0">
@@ -840,20 +921,70 @@ function EntrySelectorSection() {
 function ProductExperience() {
   return (
     <section id="experience" className="grid gap-12 py-4">
-      <div className="max-w-3xl">
+      <div className="max-w-4xl">
         <Eyebrow>PRODUCT EXPERIENCE</Eyebrow>
-        <SectionTitle className="mt-4">Not a clinic directory. A concierge layer.</SectionTitle>
+        <SectionTitle className="mt-4">How Voya could work in practice.</SectionTitle>
+        <Body className="mt-5 max-w-3xl">
+          This section shows concrete moments the product needs to support, from making sense of options to coordinating the next step with confidence.
+        </Body>
       </div>
-      <div className="grid gap-6 lg:grid-cols-3">
-        {productCards.map(({ title, body, icon: Icon }) => (
-          <div key={title} className="rounded-[34px] border border-white/8 bg-[#1F2937] p-8 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-10">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#14213A] text-[#F9FAFB]">
-              <Icon className="h-5 w-5" />
+
+      <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-[36px] border border-white/8 bg-[linear-gradient(150deg,#131d2d_0%,#101827_72%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Demo moments</div>
+              <div className="mt-2 text-[30px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">Specific user needs, not abstract features.</div>
             </div>
-            <h3 className="mt-8 text-[32px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#F9FAFB]">{title}</h3>
-            <p className="mt-4 max-w-[18rem] text-[16px] leading-7 text-[#9CA3AF]">{body}</p>
+            <div className="hidden rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623] md:block">Consumer-facing prototype</div>
           </div>
-        ))}
+          <div className="grid gap-4">
+            {productMoments.map((moment, index) => (
+              <div key={moment.title} className="grid gap-4 rounded-[28px] border border-white/8 bg-[#1F2937] p-5 transition duration-300 hover:border-white/16 hover:bg-[#243040] md:grid-cols-[1fr_240px] md:items-center">
+                <div>
+                  <div className="text-[12px] uppercase tracking-[0.22em] text-[#F5A623]">Moment {index + 1}</div>
+                  <div className="mt-2 text-[24px] font-semibold leading-tight tracking-[-0.03em] text-[#F9FAFB]">{moment.title}</div>
+                  <div className="mt-3 max-w-xl text-[15px] leading-7 text-[#9CA3AF]">{moment.body}</div>
+                </div>
+                <div className="md:justify-self-end md:w-[220px]">
+                  <MiniArtifact type={moment.type} title={moment.title} compact />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-6">
+          <div className="rounded-[36px] border border-white/8 bg-[linear-gradient(140deg,#14213A_0%,#111827_100%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+            <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">What the product adds</div>
+            <div className="mt-2 text-[30px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">Not a directory. A guide with judgment.</div>
+            <div className="mt-6 grid gap-4">
+              {productCards.map(({ title, body, icon: Icon }) => (
+                <div key={title} className="rounded-[26px] border border-white/8 bg-[#1F2937]/92 p-5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#111827] text-[#F5A623]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="mt-4 text-[24px] font-semibold leading-tight tracking-[-0.03em] text-[#F9FAFB]">{title}</div>
+                  <div className="mt-3 text-[15px] leading-7 text-[#9CA3AF]">{body}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[36px] border border-white/8 bg-[#111827] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+            <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Outcome-oriented view</div>
+            <div className="mt-2 text-[30px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">What the traveler gets back.</div>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {productOutcomes.map(({ title, body, icon: Icon }) => (
+                <div key={title} className="rounded-[24px] border border-white/8 bg-[#1F2937] p-5">
+                  <Icon className="h-5 w-5 text-[#F5A623]" />
+                  <div className="mt-4 text-[22px] font-semibold leading-tight tracking-[-0.03em] text-[#F9FAFB]">{title}</div>
+                  <div className="mt-3 text-[15px] leading-7 text-[#9CA3AF]">{body}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -1008,30 +1139,84 @@ function ArtifactsSection() {
   return (
     <section id="artifacts" className="grid gap-10 py-4">
       <div className="max-w-4xl">
-        <Eyebrow>VOYA ARTIFACTS</Eyebrow>
-        <SectionTitle className="mt-4">The Voya experience, made tangible.</SectionTitle>
+        <Eyebrow>BRAND SYSTEM</Eyebrow>
+        <SectionTitle className="mt-4">A brand system the team can actually build from.</SectionTitle>
+        <Body className="mt-5 max-w-3xl">
+          A compact preview of how the Voya identity can show up across product, campaigns, and service touchpoints without fragmenting into separate brands.
+        </Body>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {artifacts.map((artifact) => (
-          <div key={artifact.title} className="rounded-[30px] border border-white/8 bg-[#111827] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.20)]">
-            <div className="mb-3 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{artifact.title}</div>
-            <MiniArtifact type={artifact.type} title={artifact.title} compact />
+
+      <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-[36px] border border-white/8 bg-[linear-gradient(145deg,#131d2d_0%,#101827_82%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+          <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Palette + type + motifs</div>
+          <div className="mt-2 text-[30px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">One premium shell, multiple expressive worlds.</div>
+          <div className="mt-6 grid gap-4">
+            {campaignTabs.map((tab) => {
+              const identity = campaignIdentities[tab]
+              return (
+                <div key={tab} className="rounded-[28px] border border-white/8 bg-[#1F2937]/92 p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <div className="text-[20px] font-semibold tracking-[-0.03em] text-[#F9FAFB]">{tab}</div>
+                      <div className="mt-1 text-[13px] uppercase tracking-[0.22em] text-white/42">{identity.theme}</div>
+                    </div>
+                    <CampaignIdentityStrip identity={identity} />
+                  </div>
+                  <div className="mt-5 grid gap-4 md:grid-cols-[1fr_220px] md:items-center">
+                    <div>
+                      <div className={cn('text-[28px] font-semibold leading-[0.94] text-[#F9FAFB]', identity.titleClass)}>{identity.tagline}</div>
+                      <div className="mt-3 text-[15px] leading-7 text-[#9CA3AF]">
+                        Typography treatment, palette, and motif system all sit inside the same Voya product language.
+                      </div>
+                    </div>
+                    <CampaignVisualCard identity={identity} title={identity.theme} />
+                  </div>
+                </div>
+              )
+            })}
           </div>
-        ))}
+        </div>
+
+        <div className="grid gap-6">
+          <div className="rounded-[36px] border border-white/8 bg-[linear-gradient(140deg,#14213A_0%,#111827_100%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+            <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Example applications</div>
+            <div className="mt-2 text-[30px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">How the system shows up.</div>
+            <div className="mt-6 grid gap-4">
+              {brandApplications.map((application) => (
+                <div key={application.title} className="rounded-[26px] border border-white/8 bg-[#1F2937]/92 p-5">
+                  <div className="text-[22px] font-semibold tracking-[-0.03em] text-[#F9FAFB]">{application.title}</div>
+                  <div className="mt-3 text-[15px] leading-7 text-[#9CA3AF]">{application.body}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {artifacts.slice(0, 4).map((artifact) => (
+              <div key={artifact.title} className="rounded-[30px] border border-white/8 bg-[#111827] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.20)]">
+                <div className="mb-3 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{artifact.title}</div>
+                <MiniArtifact type={artifact.type} title={artifact.title} compact />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
 function MessagingLab() {
-  const categories = Object.keys(messagingCategories)
+  const categories = Object.keys(positioningSystem)
   const [activeCategory, setActiveCategory] = useState(categories[0])
 
   return (
     <section id="messaging-lab" className="grid gap-10 py-4">
       <div className="max-w-4xl">
-        <Eyebrow>MESSAGING LAB</Eyebrow>
-        <SectionTitle className="mt-4">Messaging lab.</SectionTitle>
+        <Eyebrow>POSITIONING SYSTEM</Eyebrow>
+        <SectionTitle className="mt-4">A working set of messages the team can test.</SectionTitle>
+        <Body className="mt-5 max-w-3xl">
+          A concise positioning system for shaping campaigns, product narration, and internal alignment across different audiences and acquisition moments.
+        </Body>
       </div>
       <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-3">
@@ -1047,13 +1232,26 @@ function MessagingLab() {
                 )}
               >
                 <div className={cn('text-[16px] font-medium', active ? 'text-[#F9FAFB]' : 'text-[#D1D5DB]')}>{category}</div>
+                <div className="mt-1 text-[13px] leading-6 text-[#9CA3AF]">
+                  {category === 'Core promise' && 'The clearest plain-English explanation of what Voya is.'}
+                  {category === 'Emotional hook' && 'The feeling-led angles that make the idea resonate.'}
+                  {category === 'Functional proof' && 'Evidence the service is structured, not aspirational only.'}
+                  {category === 'Audience angle' && 'Different ways the team can frame the same product for different people.'}
+                </div>
               </button>
             )
           })}
         </div>
-        <div className="rounded-[34px] border border-white/8 bg-[#111827] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+        <div className="rounded-[34px] border border-white/8 bg-[linear-gradient(145deg,#131d2d_0%,#101827_86%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Active bucket</div>
+              <div className="mt-2 text-[28px] font-semibold tracking-[-0.04em] text-[#F9FAFB]">{activeCategory}</div>
+            </div>
+            <div className="rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623]">Internal working language</div>
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
-            {messagingCategories[activeCategory].map((line) => (
+            {positioningSystem[activeCategory].map((line) => (
               <div key={line} className="rounded-[24px] border border-white/8 bg-[#1F2937] px-5 py-5 text-[20px] font-medium leading-tight tracking-[-0.03em] text-[#F9FAFB]">
                 {line}
               </div>
@@ -1120,9 +1318,11 @@ function CampaignLab() {
   return (
     <section id="campaign-lab" className="grid gap-12 py-4">
       <div className="max-w-4xl">
-        <Eyebrow>CAMPAIGN LAB</Eyebrow>
+        <Eyebrow>CAMPAIGN TERRITORIES</Eyebrow>
         <SectionTitle className="mt-4">Five ways travelers discover Voya.</SectionTitle>
-        <Body className="mt-5 max-w-2xl">Each campaign speaks to a different emotional entry point, but all roads lead back to the same concierge product.</Body>
+        <Body className="mt-5 max-w-3xl">
+          These are example campaign territories the team can use to position Voya for different audiences, decision moments, and acquisition channels, while keeping one master product story intact.
+        </Body>
       </div>
 
       <div className="flex overflow-x-auto pb-2">
@@ -1222,18 +1422,20 @@ function ClosingSection() {
       <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
         <div className="max-w-3xl">
           <Eyebrow>CLOSING</Eyebrow>
-          <SectionTitle className="mt-4">Vietnam’s health and travel package.</SectionTitle>
-          <Body className="mt-6 max-w-xl">Vntrip already owns the travel infrastructure. Voya adds the trust, care, and coordination layer.</Body>
+          <SectionTitle className="mt-4">A trusted, intelligent guide for care, wellness, and recovery.</SectionTitle>
+          <Body className="mt-6 max-w-2xl">
+            Vntrip already owns the travel infrastructure. Voya adds the judgment, coordination, and emotional reassurance that can turn cross-border care into a premium managed journey.
+          </Body>
           <div className="mt-9">
-            <CTAButton>Prototype the Voya journey</CTAButton>
+            <CTAButton>Build the care journey</CTAButton>
           </div>
         </div>
         <div className="grid gap-4">
           {[
-            'Verified clinics, clearly framed',
-            'Named local concierge support',
-            'Recovery-aware trip planning',
             'A premium product Vntrip can own',
+            'A campaign system leadership can evaluate clearly',
+            'A concierge experience travelers can understand quickly',
+            'A brand world that holds together across care and travel',
           ].map((item) => (
             <div key={item} className="rounded-[24px] border border-white/10 bg-[#1F2937] px-5 py-5 text-[16px] leading-7 text-[#F9FAFB]">
               {item}
@@ -1260,13 +1462,11 @@ export default function App() {
       <main className="px-4 pb-8 pt-[92px] md:px-8">
         <div className="mx-auto grid max-w-[1280px] gap-12 md:gap-16">
           <HeroSection />
-          <EntrySelectorSection />
-          <ProductExperience />
-          <TrustLayer />
-          <ArtifactsSection />
-          <MessagingLab />
-          <JourneySection />
           <CampaignLab />
+          <ProductExperience />
+          <MessagingLab />
+          <ArtifactsSection />
+          <EntrySelectorSection />
           <ClosingSection />
         </div>
         <Footer />
