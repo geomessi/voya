@@ -461,8 +461,8 @@ function MiniArtifact({ type, title, compact = false }) {
 
 function AppMockups() {
   return (
-    <div className="relative flex min-h-[620px] items-center justify-center lg:min-h-[640px]">
-      <PhoneFrame className="absolute left-0 top-16 rotate-[-10deg]">
+    <div className="relative flex min-h-[540px] items-start justify-center pt-6 lg:min-h-[600px]">
+      <PhoneFrame className="absolute left-0 top-10 rotate-[-10deg]">
         <div className="flex items-center justify-between">
           <div>
             <div className="text-[11px] uppercase tracking-[0.22em] text-white/40">Curated clinics</div>
@@ -507,7 +507,7 @@ function AppMockups() {
         </div>
       </PhoneFrame>
 
-      <PhoneFrame className="relative z-10 scale-[1.08]">
+      <PhoneFrame className="relative z-10 mt-2 scale-[1.08]">
         <div className="text-center">
           <div className="text-[13px] text-[#F9FAFB]">Voya Concierge</div>
           <div className="mt-1 text-[12px] text-[#22C55E]">● Online</div>
@@ -544,7 +544,7 @@ function AppMockups() {
         </div>
       </PhoneFrame>
 
-      <PhoneFrame className="absolute right-0 top-16 rotate-[11deg]">
+      <PhoneFrame className="absolute right-0 top-10 rotate-[11deg]">
         <div>
           <div className="text-[15px] text-[#F9FAFB]">Your Voya trip — 8 nights</div>
           <div className="mt-1 text-[13px] text-white/58">Ho Chi Minh City, Vietnam</div>
@@ -582,10 +582,10 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-14 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-18 lg:px-16"
+      className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
     >
-      <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-        <div className="max-w-[42rem] py-0">
+      <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <div className="max-w-[42rem] pt-2 lg:pt-8">
           <Eyebrow>VNTRIP PRESENTS</Eyebrow>
           <h1 className="mt-4 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
