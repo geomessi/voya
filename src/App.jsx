@@ -321,6 +321,26 @@ function PhoneFrame({ children, className = '' }) {
   )
 }
 
+function MockClinicThumbnail({ variant = 0 }) {
+  const variants = [
+    'from-[#d6cfc3] via-[#f5f0e7] to-[#b59f88]',
+    'from-[#d8d0c5] via-[#fbf8f2] to-[#c2b09b]',
+    'from-[#cdbda6] via-[#f4eee4] to-[#9d8a73]',
+  ]
+
+  return (
+    <div className={cn('relative aspect-[4/3] overflow-hidden rounded-[18px] bg-gradient-to-br', variants[variant % variants.length])}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_38%)]" />
+      <div className="absolute left-4 right-4 top-4 h-3 rounded-full bg-white/55" />
+      <div className="absolute left-5 top-12 h-14 w-20 rounded-[12px] bg-white/58 shadow-[0_8px_18px_rgba(0,0,0,0.08)]" />
+      <div className="absolute right-5 top-12 h-20 w-24 rounded-[14px] bg-white/42 shadow-[0_12px_28px_rgba(0,0,0,0.08)]" />
+      <div className="absolute bottom-5 left-5 h-10 w-24 rounded-[12px] bg-[#d7c1a8]/80" />
+      <div className="absolute bottom-5 right-5 h-10 w-16 rounded-[12px] bg-white/65" />
+      <div className="absolute bottom-8 left-1/2 h-9 w-28 -translate-x-1/2 rounded-[14px] bg-white/72 shadow-[0_12px_24px_rgba(0,0,0,0.10)]" />
+    </div>
+  )
+}
+
 function MiniArtifact({ type, title, compact = false }) {
   const wrapper = compact ? 'rounded-[22px] p-4' : 'rounded-[26px] p-5'
 
@@ -480,7 +500,9 @@ function AppMockups() {
             ['Alpha Wellness Clinic', 'Weight loss surgery', '$3,900'],
           ].map(([name, specialty, price], index) => (
             <div key={name} className="overflow-hidden rounded-[22px] border border-white/10 bg-white/5">
-              <div className="h-28 bg-[linear-gradient(135deg,#d8d2c6_0%,#f5f1eb_45%,#b6a38d_100%)]" />
+              <div className="p-3 pb-0">
+                <MockClinicThumbnail variant={index} />
+              </div>
               <div className="grid grid-cols-[1fr_auto] gap-4 p-4">
                 <div>
                   <div className="text-[18px] leading-tight text-[#F9FAFB]">{name}</div>
@@ -590,11 +612,6 @@ function HeroSection() {
           <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <a href="#campaign-lab" className="text-sm font-medium text-white/72 underline-offset-4 transition hover:text-white hover:underline">
-              Explore campaign directions
-            </a>
-          </div>
         </div>
         <div className="mt-8 w-full">
           <AppMockups />
