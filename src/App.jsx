@@ -20,9 +20,9 @@ import {
 
 const campaignTabs = [
   'Second Opinion?',
-  "You've Earned This",
-  'While You Recover',
-  'Your Friend Already Did It',
+  'At Last.',
+  'Stay A Little Longer.',
+  'Word Travels.',
   'Holiday, Handled',
 ]
 
@@ -38,7 +38,7 @@ const entryOptions = [
   },
   {
     label: "I've been putting something off",
-    tab: "You've Earned This",
+    tab: 'At Last.',
     slogan: 'Self-investment, beautifully handled.',
     traveler: 'Opportunistic vacationer',
     insight: 'Travel desire lowers the emotional friction around finally doing the thing.',
@@ -47,7 +47,7 @@ const entryOptions = [
   },
   {
     label: 'I want to recover somewhere beautiful',
-    tab: 'While You Recover',
+    tab: 'Stay A Little Longer.',
     slogan: 'Recovery becomes part of the product.',
     traveler: 'Recovery-first traveler',
     insight: 'The days after matter as much as the appointment itself.',
@@ -56,7 +56,7 @@ const entryOptions = [
   },
   {
     label: 'My friend already did it',
-    tab: 'Your Friend Already Did It',
+    tab: 'Word Travels.',
     slogan: 'Recommendation is the channel.',
     traveler: 'Peer-led decision maker',
     insight: 'Private proof often works better than polished brand persuasion.',
@@ -90,44 +90,44 @@ const campaignData = {
     cta: 'Get a free second opinion',
     accent: 'bg-[#182234]',
   },
-  "You've Earned This": {
+  'At Last.': {
     segment: 'Opportunistic vacationer',
     headline: 'Self-investment, beautifully handled.',
     insight: 'Travel desire softens care friction.',
     sloganStack: [
-      "You've earned this.",
+      'At Last.',
+      'For once, for you.',
       'The trip you wanted anyway.',
-      'Care, without compromise.',
-      'Something for yourself, finally.',
+      'Make room for yourself.',
     ],
     adMoment: 'A warm hotel-room moment in Da Nang, with one line of copy over it and the treatment only revealed in the details.',
     productTieBack: 'Voya packages the clinic visit inside a better-feeling trip, so the product lands as hospitality plus care.',
     cta: 'Plan your Voya itinerary',
     accent: 'bg-[#2a241f]',
   },
-  'While You Recover': {
+  'Stay A Little Longer.': {
     segment: 'Recovery-first traveler',
     headline: 'Recovery becomes part of the product.',
     insight: 'The days after matter as much as the appointment.',
     sloganStack: [
-      'While you recover.',
+      'Stay A Little Longer.',
+      'Rest, arranged.',
       'Recovery does not have to feel clinical.',
-      'Spend days 3 through 7 somewhere beautiful.',
-      'Heal somewhere worth waking up to.',
+      'Where recovery begins.',
     ],
     adMoment: 'A destination-led carousel where the procedure is a quiet middle slide and the recovery setting does most of the persuasion.',
     productTieBack: 'Voya differentiates by designing the hotel, pacing, follow-up, and departure around recovery, not just booking around the procedure.',
     cta: 'Build a recovery-aware trip',
     accent: 'bg-[#162733]',
   },
-  'Your Friend Already Did It': {
+  'Word Travels.': {
     segment: 'Peer-led decision maker',
     headline: 'Recommendation is the channel.',
     insight: 'Trust is passed along, not announced.',
     sloganStack: [
-      'Your friend already did it.',
+      'Word Travels.',
+      'Before you ask us, ask them.',
       "Ask someone who's been.",
-      'The group chat knew first.',
       'Forwarded from someone you trust.',
     ],
     adMoment: 'A forwarded message thread, a saved highlight, and a creator confession post that all point back to the same Voya concierge flow.',
@@ -160,21 +160,21 @@ const messagingCategories = {
     'Before you say yes, ask Vietnam.',
   ],
   'Self-investment': [
-    "You've earned this.",
+    'At Last.',
+    'For once, for you.',
     'The trip you wanted anyway.',
-    'Care, without compromise.',
-    'Something for yourself, finally.',
+    'Make room for yourself.',
   ],
   'Recovery travel': [
-    'While you recover.',
+    'Stay A Little Longer.',
+    'Rest, arranged.',
     'Recovery does not have to feel clinical.',
-    'Spend days 3 through 7 somewhere beautiful.',
-    'Heal somewhere worth waking up to.',
+    'Where recovery begins.',
   ],
   'Social proof': [
-    'Your friend already did it.',
+    'Word Travels.',
+    'Before you ask us, ask them.',
     "Ask someone who's been.",
-    'The group chat knew first.',
     'Forwarded from someone you trust.',
   ],
   'Concierge handled': [
@@ -257,7 +257,7 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#111827]/92 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 md:px-8">
-        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">Voya by VNTrip</div>
+        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">VNTrip</div>
         <nav className="hidden items-center gap-6 text-sm text-[#9CA3AF] lg:flex">
           <a href="#entry-selector" className="transition hover:text-white">
             Journey
@@ -584,16 +584,16 @@ function HeroSection() {
       id="hero"
       className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-16 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-24 lg:px-16"
     >
-      <div className="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
-        <div className="max-w-2xl py-4 md:py-8">
-          <Eyebrow>VOYA BY VNTRIP</Eyebrow>
-          <h1 className="mt-5 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
+      <div className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-end">
+        <div className="max-w-2xl py-2 md:py-4 lg:pb-10">
+          <Eyebrow>VNTRIP PRESENTS</Eyebrow>
+          <h1 className="mt-4 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
-          <Body className="mt-6 max-w-xl text-[20px] md:text-[24px]">
+          <Body className="mt-5 max-w-[34rem] text-[20px] md:text-[24px]">
             Your medical trip to Vietnam, handled. Verified clinics, travel booking, local concierge support, and recovery-aware itineraries, all inside one managed experience.
           </Body>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="#campaign-lab" className="text-sm font-medium text-white/72 underline-offset-4 transition hover:text-white hover:underline">
               Explore campaign directions
             </a>
@@ -890,11 +890,11 @@ function CampaignLab() {
                   type={
                     displayed === 'Second Opinion?'
                       ? 'comparison'
-                      : displayed === "You've Earned This"
+                      : displayed === 'At Last.'
                         ? 'itinerary'
-                        : displayed === 'While You Recover'
+                        : displayed === 'Stay A Little Longer.'
                           ? 'destination'
-                          : displayed === 'Your Friend Already Did It'
+                          : displayed === 'Word Travels.'
                             ? 'whatsapp'
                             : 'summary'
                   }
