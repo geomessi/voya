@@ -461,7 +461,7 @@ function MiniArtifact({ type, title, compact = false }) {
 
 function AppMockups() {
   return (
-    <div className="relative flex min-h-[720px] items-center justify-center">
+    <div className="relative flex min-h-[620px] items-center justify-center lg:min-h-[640px]">
       <PhoneFrame className="absolute left-0 top-16 rotate-[-10deg]">
         <div className="flex items-center justify-between">
           <div>
@@ -582,10 +582,10 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-16 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-24 lg:px-16"
+      className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-14 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-18 lg:px-16"
     >
-      <div className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-end">
-        <div className="max-w-2xl py-2 md:py-4 lg:pb-10">
+      <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="max-w-[42rem] py-0">
           <Eyebrow>VNTRIP PRESENTS</Eyebrow>
           <h1 className="mt-4 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
@@ -593,7 +593,7 @@ function HeroSection() {
           <Body className="mt-5 max-w-[34rem] text-[20px] md:text-[24px]">
             Your medical trip to Vietnam, handled. Verified clinics, travel booking, local concierge support, and recovery-aware itineraries, all inside one managed experience.
           </Body>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <a href="#campaign-lab" className="text-sm font-medium text-white/72 underline-offset-4 transition hover:text-white hover:underline">
               Explore campaign directions
             </a>
