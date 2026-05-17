@@ -304,8 +304,19 @@ function CTAButton({ children, dark = false }) {
 
 function PhoneFrame({ children, className = '' }) {
   return (
-    <div className={cn('w-[290px] rounded-[40px] border border-white/12 bg-[#0e1627] p-3 shadow-[0_40px_100px_rgba(0,0,0,0.42)]', className)}>
-      <div className="rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,#f6f1e8_0%,#ffffff_100%)] p-5">{children}</div>
+    <div className={cn('w-[310px] rounded-[42px] border border-white/12 bg-[#0c1320] p-[10px] shadow-[0_40px_100px_rgba(0,0,0,0.45)]', className)}>
+      <div className="relative overflow-hidden rounded-[32px] border border-white/8 bg-[linear-gradient(180deg,#07111f_0%,#0b1628_100%)] p-5">
+        <div className="mb-4 flex items-center justify-between text-white">
+          <span className="text-[11px] font-semibold">9:41</span>
+          <div className="h-7 w-28 rounded-full bg-black/70" />
+          <div className="flex items-center gap-1 text-[10px] text-white/80">
+            <span className="h-2 w-2 rounded-full bg-white/80" />
+            <span className="h-2 w-2 rounded-full bg-white/80" />
+            <span className="h-2 w-5 rounded-sm bg-white/80" />
+          </div>
+        </div>
+        {children}
+      </div>
     </div>
   )
 }
@@ -450,68 +461,118 @@ function MiniArtifact({ type, title, compact = false }) {
 
 function AppMockups() {
   return (
-    <div className="relative flex min-h-[680px] items-center justify-center">
-      <PhoneFrame className="absolute left-0 top-14 rotate-[-11deg]">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-[#89837a]">
-          <span>Browse clinics</span>
-          <span>Voya</span>
+    <div className="relative flex min-h-[720px] items-center justify-center">
+      <PhoneFrame className="absolute left-0 top-16 rotate-[-10deg]">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.22em] text-white/40">Curated clinics</div>
+            <div className="mt-2 text-[17px] leading-tight text-[#F9FAFB]">Clinics in</div>
+            <div className="text-[17px] leading-tight text-[#F9FAFB]">Ho Chi Minh City</div>
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/6 text-[#F5A623]">
+            <Sparkles className="h-4 w-4" />
+          </div>
         </div>
-        <div className="mt-4 space-y-3">
-          <div className="rounded-[18px] bg-[#121826] p-4 text-white">
-            <div className="text-xs uppercase tracking-[0.22em] text-white/50">Kim Dental</div>
-            <div className="mt-2 flex items-center gap-2">
-              <BadgeCheck className="h-4 w-4 text-[#F5A623]" />
-              <span className="text-sm text-white/84">Voya Verified</span>
+        <div className="mt-5 space-y-3">
+          {[
+            ['Kim Dental', 'Dental implants', '$1,400'],
+            ['VietMed Aesthetics', 'Rhinoplasty', '$2,450'],
+            ['Alpha Wellness Clinic', 'Weight loss surgery', '$3,900'],
+          ].map(([name, specialty, price], index) => (
+            <div key={name} className="overflow-hidden rounded-[22px] border border-white/10 bg-white/5">
+              <div className="h-28 bg-[linear-gradient(135deg,#d8d2c6_0%,#f5f1eb_45%,#b6a38d_100%)]" />
+              <div className="grid grid-cols-[1fr_auto] gap-4 p-4">
+                <div>
+                  <div className="text-[18px] leading-tight text-[#F9FAFB]">{name}</div>
+                  <div className="mt-1 text-[14px] text-white/70">{specialty}</div>
+                  <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#112518] px-3 py-1 text-[11px] text-[#22C55E]">
+                    <BadgeCheck className="h-3.5 w-3.5" />
+                    Voya Verified
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[11px] uppercase tracking-[0.18em] text-white/38">from</div>
+                  <div className="mt-1 text-[18px] font-semibold text-[#F5A623]">{price}</div>
+                </div>
+              </div>
             </div>
-            <div className="mt-3 text-[14px] leading-6 text-white/68">Dental implant package</div>
-            <div className="mt-3 text-lg font-semibold text-[#F5A623]">From $1,400</div>
-          </div>
-          <div className="rounded-[18px] bg-[#121826] p-4 text-white">
-            <div className="text-sm">Veneers package</div>
-            <div className="mt-2 text-xs text-white/56">Consultation + transfer support</div>
-          </div>
+          ))}
+        </div>
+        <div className="mt-4 grid grid-cols-4 gap-2 border-t border-white/8 pt-4 text-center text-[11px] text-white/56">
+          {['Clinics', 'Concierge', 'Trip', 'Profile'].map((item, index) => (
+            <div key={item} className={cn('rounded-[14px] px-2 py-2', index === 0 && 'bg-white/6 text-[#F5A623]')}>
+              {item}
+            </div>
+          ))}
         </div>
       </PhoneFrame>
 
-      <PhoneFrame className="relative z-10 scale-[1.06]">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-[#89837a]">
-          <span>Concierge chat</span>
-          <span>Linh</span>
+      <PhoneFrame className="relative z-10 scale-[1.08]">
+        <div className="text-center">
+          <div className="text-[13px] text-[#F9FAFB]">Voya Concierge</div>
+          <div className="mt-1 text-[12px] text-[#22C55E]">● Online</div>
         </div>
-        <div className="mt-4 space-y-3">
-          <div className="flex justify-start">
-            <div className="max-w-[86%] rounded-[18px] rounded-bl-md bg-[#eef1f6] px-4 py-3 text-[14px] leading-6 text-[#273140]">
-              I’ve shortlisted 3 clinics for your consultation. Want to see them?
+        <div className="mt-5 rounded-[24px] border border-white/8 bg-[#091325] px-4 py-5">
+          <div className="rounded-full bg-white/8 px-3 py-1 text-center text-[11px] text-white/54">Today</div>
+          <div className="mt-5 flex items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5A623] text-[18px] text-[#111827]">L</div>
+            <div className="max-w-[82%] rounded-[22px] rounded-tl-md bg-white/10 px-4 py-4 text-[16px] leading-7 text-[#F9FAFB]">
+              <div className="mb-1 text-[14px] text-[#F5A623]">Linh, your Voya guide</div>
+              I&apos;ve shortlisted 3 clinics for your consultation. Want to see them?
+              <div className="mt-2 text-right text-[12px] text-white/38">9:41 AM</div>
             </div>
           </div>
-          <div className="flex justify-end">
-            <div className="max-w-[82%] rounded-[18px] rounded-br-md bg-[#F5A623] px-4 py-3 text-[14px] leading-6 text-[#141923]">
-              Yes, and can you keep them close to Da Nang?
+          <div className="mt-4 flex justify-end">
+            <div className="max-w-[72%] rounded-[22px] rounded-tr-md bg-[#E8F7C7] px-4 py-4 text-[16px] leading-7 text-[#111827]">
+              Yes, show me.
+              <div className="mt-2 text-right text-[12px] text-[#53604b]">9:41 AM</div>
             </div>
           </div>
-          <div className="flex justify-start">
-            <div className="max-w-[86%] rounded-[18px] rounded-bl-md bg-[#eef1f6] px-4 py-3 text-[14px] leading-6 text-[#273140]">
-              Absolutely. I’ll filter for recovery-friendly hotels and the shortest transfer time too.
-            </div>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            {['View clinics', 'See availability', 'Ask a question'].map((item, index) => (
+              <div key={item} className={cn('rounded-full border border-white/10 bg-white/8 px-4 py-3 text-center text-[13px] text-[#F9FAFB]', index === 2 && 'col-span-2')}>
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-5 flex items-center gap-3 rounded-full bg-white/8 px-4 py-3">
+          <div className="flex-1 text-[14px] text-white/42">Type a message</div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5A623] text-[#111827]">
+            <MessageSquare className="h-4 w-4" />
           </div>
         </div>
       </PhoneFrame>
 
       <PhoneFrame className="absolute right-0 top-16 rotate-[11deg]">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-[#89837a]">
-          <span>Trip timeline</span>
-          <span>6 days</span>
+        <div>
+          <div className="text-[15px] text-[#F9FAFB]">Your Voya trip — 8 nights</div>
+          <div className="mt-1 text-[13px] text-white/58">Ho Chi Minh City, Vietnam</div>
         </div>
-        <div className="mt-4 space-y-3">
-          {['Arrival', 'Consultation', 'Procedure', 'Recovery', 'Follow-up', 'Departure'].map((item, index) => (
-            <div key={item} className="flex items-start gap-3 rounded-[16px] bg-[#f5f2eb] px-3 py-3">
-              <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#141923] text-[11px] font-semibold text-white">
-                {index + 1}
+        <div className="mt-6 space-y-5">
+          {[
+            ['Flight Arrival', 'Sat, Jun 1, 2024', "We'll pick you up at the airport.", Plane],
+            ['Consultation Day 1', 'Sun, Jun 2, 2024', 'Meet your doctor and review your plan.', Stethoscope],
+            ['Procedure Day 2', 'Mon, Jun 3, 2024', 'Your procedure is scheduled in the morning.', HeartHandshake],
+            ['Recovery Stay (Days 3–7)', 'Tue, Jun 4 – Sat, Jun 8, 2024', 'Rest, recover, and follow-up care with our team.', Hotel],
+            ['Departure Day 8', 'Sun, Jun 9, 2024', "We'll take you to the airport. Safe travels!", Plane],
+          ].map(([title, date, body, Icon], index) => (
+            <div key={title} className="grid grid-cols-[36px_1fr] gap-4">
+              <div className="relative flex justify-center">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/6 text-[#F5A623]">
+                  <Icon className="h-4 w-4" />
+                </div>
+                {index < 4 && <div className="absolute top-10 h-[54px] w-px bg-white/16" />}
               </div>
-              <div className="text-[14px] leading-6 text-[#273140]">{item}</div>
+              <div>
+                <div className="text-[15px] text-[#F9FAFB]">{title}</div>
+                <div className="mt-1 text-[12px] text-white/46">{date}</div>
+                <div className="mt-2 text-[13px] leading-6 text-white/70">{body}</div>
+              </div>
             </div>
           ))}
         </div>
+        <div className="mt-6 rounded-[18px] bg-[#F5A623] px-5 py-4 text-center text-[15px] font-medium text-[#111827]">View trip details</div>
       </PhoneFrame>
     </div>
   )
@@ -526,14 +587,13 @@ function HeroSection() {
       <div className="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
         <div className="max-w-2xl py-4 md:py-8">
           <Eyebrow>VOYA BY VNTRIP</Eyebrow>
-          <h1 className="mt-5 max-w-2xl text-[64px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[102px]">
-            Your medical trip to Vietnam, handled.
+          <h1 className="mt-5 max-w-2xl text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
+            Voya
           </h1>
-          <Body className="mt-7 max-w-lg text-[18px] md:text-[20px]">
-            Voya combines verified clinics, travel booking, local concierge support, and recovery-aware itineraries into one managed experience.
+          <Body className="mt-6 max-w-xl text-[20px] md:text-[24px]">
+            Your medical trip to Vietnam, handled. Verified clinics, travel booking, local concierge support, and recovery-aware itineraries, all inside one managed experience.
           </Body>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <CTAButton>Talk to a Voya concierge</CTAButton>
             <a href="#campaign-lab" className="text-sm font-medium text-white/72 underline-offset-4 transition hover:text-white hover:underline">
               Explore campaign directions
             </a>
