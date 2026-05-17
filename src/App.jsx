@@ -2,18 +2,23 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowRight,
   BadgeCheck,
-  CalendarDays,
+  CalendarCheck2,
+  CheckCheck,
   CircleDollarSign,
   Clock3,
+  FileCheck2,
+  HeartHandshake,
+  Hotel,
   MapPinned,
   MessageSquare,
+  Plane,
   ShieldCheck,
   Sparkles,
   Stethoscope,
   UserRound,
 } from 'lucide-react'
 
-const tabs = [
+const campaignTabs = [
   'Second Opinion?',
   "You've Earned This",
   'While You Recover',
@@ -21,103 +26,227 @@ const tabs = [
   'Holiday, Handled',
 ]
 
+const entryOptions = [
+  {
+    label: 'I need a second opinion',
+    tab: 'Second Opinion?',
+    slogan: 'Question the quote. Not the care.',
+    traveler: 'Specialist seeker',
+    insight: 'The patient trusts the diagnosis, but wants a smarter path to the outcome.',
+    cta: 'Get a free second opinion',
+    treatment: 'Crisp comparison card',
+  },
+  {
+    label: "I've been putting something off",
+    tab: "You've Earned This",
+    slogan: 'Self-investment, beautifully handled.',
+    traveler: 'Opportunistic vacationer',
+    insight: 'Travel desire lowers the emotional friction around finally doing the thing.',
+    cta: 'Plan your Voya itinerary',
+    treatment: 'Warm itinerary preview',
+  },
+  {
+    label: 'I want to recover somewhere beautiful',
+    tab: 'While You Recover',
+    slogan: 'Recovery becomes part of the product.',
+    traveler: 'Recovery-first traveler',
+    insight: 'The days after matter as much as the appointment itself.',
+    cta: 'Build a recovery-aware trip',
+    treatment: 'Coastal recovery timeline',
+  },
+  {
+    label: 'My friend already did it',
+    tab: 'Your Friend Already Did It',
+    slogan: 'Recommendation is the channel.',
+    traveler: 'Peer-led decision maker',
+    insight: 'Private proof often works better than polished brand persuasion.',
+    cta: 'Join the Voya patient community',
+    treatment: 'Chat-native social proof',
+  },
+  {
+    label: 'I just want it handled',
+    tab: 'Holiday, Handled',
+    slogan: 'The trusted VNTrip account, now for life beyond work.',
+    traveler: 'Utility-first planner',
+    insight: 'One account, one operator, fewer moving parts, less cognitive load.',
+    cta: 'See where your points can take you',
+    treatment: 'Handled end-to-end dashboard',
+  },
+]
+
 const campaignData = {
   'Second Opinion?': {
+    segment: 'Specialist seeker',
     headline: 'Question the quote. Not the care.',
-    audience: 'Cambodia, Laos, India',
     insight: 'Sticker shock becomes the entry point.',
-    heroCopy: 'Your doctor may be right. Your hospital’s price tag is a separate decision.',
-    socialCopy: 'Compare the pathway, the credentials, and the full trip cost, not just one number.',
-    visualDirection: 'Crisp, editorial, high-stakes.',
+    sloganStack: [
+      'Second Opinion?',
+      "Your doctor's advice. A different price tag.",
+      'What changes is the cost. Not the care.',
+      'Before you say yes, ask Vietnam.',
+    ],
+    adMoment: 'A clean comparison screen that shows Bangkok, Australia, and Vietnam side by side, with Voya highlighting the total managed trip cost.',
+    productTieBack: 'Voya turns quote anxiety into a managed comparison flow with verified clinics, trip totals, and consultation support.',
     cta: 'Get a free second opinion',
-    mockupTitle: 'Comparison view',
-    mockupBody: 'Vietnam vs Bangkok vs Australia package comparison, with verified clinic notes and estimated trip total.',
+    accent: 'bg-[#182234]',
   },
   "You've Earned This": {
+    segment: 'Opportunistic vacationer',
     headline: 'Self-investment, beautifully handled.',
-    audience: 'Indonesia, Malaysia, Singapore',
     insight: 'Travel desire softens care friction.',
-    heroCopy: 'The trip you meant to take. The treatment you’ve been putting off.',
-    socialCopy: 'Added one appointment to a Vietnam trip I already wanted. That was the whole point.',
-    visualDirection: 'Warm, wellness-led, quietly luxurious.',
+    sloganStack: [
+      "You've earned this.",
+      'The trip you wanted anyway.',
+      'Care, without compromise.',
+      'Something for yourself, finally.',
+    ],
+    adMoment: 'A warm hotel-room moment in Da Nang, with one line of copy over it and the treatment only revealed in the details.',
+    productTieBack: 'Voya packages the clinic visit inside a better-feeling trip, so the product lands as hospitality plus care.',
     cta: 'Plan your Voya itinerary',
-    mockupTitle: 'Voya itinerary',
-    mockupBody: 'Arrival, spa hotel check-in, clinic consultation, treatment day, and a recovery stay paced around comfort.',
+    accent: 'bg-[#2a241f]',
   },
   'While You Recover': {
+    segment: 'Recovery-first traveler',
     headline: 'Recovery becomes part of the product.',
-    audience: 'Travel-first patients',
     insight: 'The days after matter as much as the appointment.',
-    heroCopy: 'Most recoveries are something to get through. This one is planned properly.',
-    socialCopy: 'A calmer hotel, better pacing, and the right amount of support after the procedure.',
-    visualDirection: 'Coastal, calm, destination-led.',
+    sloganStack: [
+      'While you recover.',
+      'Recovery does not have to feel clinical.',
+      'Spend days 3 through 7 somewhere beautiful.',
+      'Heal somewhere worth waking up to.',
+    ],
+    adMoment: 'A destination-led carousel where the procedure is a quiet middle slide and the recovery setting does most of the persuasion.',
+    productTieBack: 'Voya differentiates by designing the hotel, pacing, follow-up, and departure around recovery, not just booking around the procedure.',
     cta: 'Build a recovery-aware trip',
-    mockupTitle: 'Recovery timeline',
-    mockupBody: 'Procedure day, hotel transfer, room-service recovery, follow-up check, and departure support in one view.',
+    accent: 'bg-[#162733]',
   },
   'Your Friend Already Did It': {
+    segment: 'Peer-led decision maker',
     headline: 'Recommendation is the channel.',
-    audience: 'Peer-driven markets',
     insight: 'Trust is passed along, not announced.',
-    heroCopy: 'The best recommendations rarely arrive as advertisements.',
-    socialCopy: 'Forwarded posts, private questions, and one story from someone who already did it.',
-    visualDirection: 'Chat-inspired, social-proof, still polished.',
+    sloganStack: [
+      'Your friend already did it.',
+      "Ask someone who's been.",
+      'The group chat knew first.',
+      'Forwarded from someone you trust.',
+    ],
+    adMoment: 'A forwarded message thread, a saved highlight, and a creator confession post that all point back to the same Voya concierge flow.',
+    productTieBack: 'Voya becomes the verified operator behind stories that feel personal, not the loudest voice in the room.',
     cta: 'Join the Voya patient community',
-    mockupTitle: 'Community thread',
-    mockupBody: 'Verified patient Q&A, concierge follow-up, and one-tap access to real treatment stories.',
+    accent: 'bg-[#1d2432]',
   },
   'Holiday, Handled': {
+    segment: 'Owned-channel VNTrip user',
     headline: 'The trusted VNTrip account, now for life beyond work.',
-    audience: 'VNTrip corporate users',
     insight: 'Owned channels make this fast and practical.',
-    heroCopy: 'Your next family trip is sitting in the same account you already use for work.',
-    socialCopy: 'Points, hotels, flights, and support already exist. The use case just changes.',
-    visualDirection: 'Friendly utility with premium travel polish.',
+    sloganStack: [
+      'Handled from hello.',
+      'You recover. We coordinate.',
+      'From airport pickup to post-op.',
+      'One guide. One plan. One trip.',
+    ],
+    adMoment: 'A points-led card that turns corporate travel history into a family trip or personal-care itinerary in one tap.',
+    productTieBack: 'This lens shows how VNTrip can extend from infrastructure into concierge operating system, with Voya as the care layer.',
     cta: 'See where your points can take you',
-    mockupTitle: 'Points dashboard',
-    mockupBody: 'Corporate points balance translated into real destination options, hotel nights, and family-trip bundles.',
+    accent: 'bg-[#203021]',
   },
+}
+
+const messagingCategories = {
+  'Price confidence': [
+    'Second Opinion?',
+    "Your doctor's advice. A different price tag.",
+    'What changes is the cost. Not the care.',
+    'Before you say yes, ask Vietnam.',
+  ],
+  'Self-investment': [
+    "You've earned this.",
+    'The trip you wanted anyway.',
+    'Care, without compromise.',
+    'Something for yourself, finally.',
+  ],
+  'Recovery travel': [
+    'While you recover.',
+    'Recovery does not have to feel clinical.',
+    'Spend days 3 through 7 somewhere beautiful.',
+    'Heal somewhere worth waking up to.',
+  ],
+  'Social proof': [
+    'Your friend already did it.',
+    "Ask someone who's been.",
+    'The group chat knew first.',
+    'Forwarded from someone you trust.',
+  ],
+  'Concierge handled': [
+    'Handled from hello.',
+    'You recover. We coordinate.',
+    'From airport pickup to post-op.',
+    'One guide. One plan. One trip.',
+  ],
 }
 
 const productCards = [
   {
     title: 'Verified clinics',
-    body: 'Voya curates and presents trusted clinic options with clearer procedure framing, visible credentials, and pricing context.',
+    body: 'Trusted providers, clearer framing, visible credentials, and procedure context.',
     icon: BadgeCheck,
   },
   {
     title: 'Dedicated local guide',
-    body: 'Patients get a named concierge who coordinates scheduling, airport arrival, local movement, and practical support on the ground.',
+    body: 'A named concierge who coordinates your plan before, during, and after arrival.',
     icon: UserRound,
   },
   {
     title: 'Recovery-aware trip plan',
-    body: 'Travel timing, hotel choice, follow-up visits, and departure logistics are built around the treatment itself, not bolted on afterward.',
-    icon: CalendarDays,
+    body: 'Flights, hotel, follow-up, and departure logic shaped around the procedure itself.',
+    icon: CalendarCheck2,
   },
 ]
 
 const trustCards = [
   {
     question: 'How do I know the clinic is safe?',
-    answer: 'Verified clinic selection, visible credentials, procedure-specific framing, and trust signals that make the shortlist intelligible.',
+    answer: 'Verified clinic cards, visible credentials, and shortlists that actually make sense.',
     icon: ShieldCheck,
   },
   {
     question: 'Who coordinates my appointments?',
-    answer: 'A Voya concierge manages clinic timing, travel sequencing, and in-country communication so the patient does not need to orchestrate vendors.',
+    answer: 'A Voya concierge sequences the care plan, transfers, and communication.',
     icon: MessageSquare,
   },
   {
     question: 'What happens after the procedure?',
-    answer: 'Recovery-aware hotel selection, follow-up planning, transport logic, and one coordinated support thread for the days that matter most.',
+    answer: 'Recovery-aware hotel planning, follow-up support, and one contact thread.',
     icon: Clock3,
   },
   {
     question: 'What does the full trip cost?',
-    answer: 'Voya frames the full package: procedure, flights, hotel, local transfers, support, and the practical trip logic around all of it.',
+    answer: 'Voya shows the total managed journey, not only one clinic line item.',
     icon: CircleDollarSign,
   },
+]
+
+const artifacts = [
+  { title: 'Verified clinic card', type: 'clinic' },
+  { title: 'Concierge intro from Linh', type: 'chat' },
+  { title: 'Quote comparison sheet', type: 'price' },
+  { title: 'Consultation summary', type: 'summary' },
+  { title: 'Airport pickup confirmation', type: 'pickup' },
+  { title: 'Recovery itinerary', type: 'itinerary' },
+  { title: 'Post-procedure checklist', type: 'checklist' },
+  { title: 'WhatsApp support thread', type: 'whatsapp' },
+]
+
+const journeySteps = [
+  { title: 'Upload or share your quote', body: 'Start with the care question, not the booking flow.', type: 'price' },
+  { title: 'Linh shortlists verified clinics', body: 'A human guide turns the search into a real shortlist.', type: 'chat' },
+  { title: 'Compare prices and consultation options', body: 'See care, logistics, and trip total in one view.', type: 'comparison' },
+  { title: 'VNTrip books flights and hotel', body: 'Travel infrastructure shifts from background to advantage.', type: 'itinerary' },
+  { title: 'Arrive in Ho Chi Minh City', body: 'Airport pickup and arrival support are already arranged.', type: 'pickup' },
+  { title: 'Attend consultation', body: 'Clinic timing, local transport, and translation are coordinated.', type: 'summary' },
+  { title: 'Complete procedure', body: 'The treatment sits inside one managed journey.', type: 'clinic' },
+  { title: 'Recover in Da Nang, Hoi An, or Phu Quoc', body: 'Recovery becomes a designed setting, not an afterthought.', type: 'destination' },
+  { title: 'Fly home with follow-up support', body: 'The trip ends with a plan, not a handoff into silence.', type: 'checklist' },
 ]
 
 function cn(...classes) {
@@ -128,16 +257,16 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#111827]/92 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 md:px-8">
-        <div className="text-[17px] font-semibold tracking-[0.08em] text-white">Voya by VNTrip</div>
-        <nav className="hidden items-center gap-6 text-sm text-white/60 lg:flex">
-          <a href="#hero" className="transition hover:text-white">
-            Story
+        <div className="text-[17px] font-semibold tracking-[0.08em] text-[#F9FAFB]">Voya by VNTrip</div>
+        <nav className="hidden items-center gap-6 text-sm text-[#9CA3AF] lg:flex">
+          <a href="#entry-selector" className="transition hover:text-white">
+            Journey
           </a>
-          <a href="#experience" className="transition hover:text-white">
-            Product
+          <a href="#artifacts" className="transition hover:text-white">
+            Artifacts
           </a>
-          <a href="#trust" className="transition hover:text-white">
-            Trust
+          <a href="#messaging-lab" className="transition hover:text-white">
+            Messaging
           </a>
           <a href="#campaign-lab" className="transition hover:text-white">
             Campaigns
@@ -148,20 +277,16 @@ function Header() {
   )
 }
 
-function Eyebrow({ children, light = false }) {
-  return <p className={cn('text-[11px] font-semibold uppercase tracking-[0.28em]', light ? 'text-[#9CA3AF]' : 'text-[#9CA3AF]')}>{children}</p>
+function Eyebrow({ children }) {
+  return <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#9CA3AF]">{children}</p>
 }
 
-function SectionTitle({ children, light = false, className = '' }) {
-  return (
-    <h2 className={cn('text-[42px] font-semibold leading-[0.9] tracking-[-0.05em] md:text-[72px]', light ? 'text-[#F9FAFB]' : 'text-[#F9FAFB]', className)}>
-      {children}
-    </h2>
-  )
+function SectionTitle({ children, className = '' }) {
+  return <h2 className={cn('text-[42px] font-semibold leading-[0.9] tracking-[-0.05em] text-[#F9FAFB] md:text-[72px]', className)}>{children}</h2>
 }
 
-function Body({ children, light = false, className = '' }) {
-  return <p className={cn('text-[16px] leading-7 md:text-[18px]', light ? 'text-[#9CA3AF]' : 'text-[#9CA3AF]', className)}>{children}</p>}
+function Body({ children, className = '' }) {
+  return <p className={cn('text-[16px] leading-7 text-[#9CA3AF] md:text-[18px]', className)}>{children}</p>}
 
 function CTAButton({ children, dark = false }) {
   return (
@@ -185,6 +310,144 @@ function PhoneFrame({ children, className = '' }) {
   )
 }
 
+function MiniArtifact({ type, title, compact = false }) {
+  const wrapper = compact ? 'rounded-[22px] p-4' : 'rounded-[26px] p-5'
+
+  if (type === 'clinic') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="flex items-center justify-between">
+          <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Clinic</div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#112518] px-3 py-1 text-[11px] text-[#22C55E]">
+            <BadgeCheck className="h-3.5 w-3.5" />
+            Voya Verified
+          </div>
+        </div>
+        <div className="mt-4 text-[22px] font-semibold tracking-[-0.03em] text-[#F9FAFB]">Kim Dental</div>
+        <div className="mt-2 text-[14px] leading-6 text-[#9CA3AF]">Dental implant package with consultation and transfer support.</div>
+        <div className="mt-4 text-[18px] font-semibold text-[#F5A623]">From $1,400</div>
+      </div>
+    )
+  }
+
+  if (type === 'chat' || type === 'whatsapp') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{type === 'chat' ? 'Concierge chat' : 'WhatsApp support'}</div>
+        <div className="mt-4 space-y-3">
+          <div className="max-w-[86%] rounded-[18px] rounded-bl-md bg-white/8 px-4 py-3 text-[14px] leading-6 text-[#F9FAFB]">
+            {type === 'chat'
+              ? 'Hi, I’m Linh. I’ve shortlisted 3 clinics for your consultation. Want to see them?'
+              : 'Checking in after your follow-up. Do you want me to move your airport transfer later?'}
+          </div>
+          <div className="ml-auto max-w-[80%] rounded-[18px] rounded-br-md bg-[#F5A623] px-4 py-3 text-[14px] leading-6 text-[#111827]">
+            Yes, please send me the options.
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'price' || type === 'comparison') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{type === 'price' ? 'Quote comparison' : 'Comparison view'}</div>
+        <div className="mt-4 space-y-3">
+          {[
+            ['Bangkok', '$10,000'],
+            ['Australia', '$15,000'],
+            ['Vietnam', '$5,500'],
+          ].map(([market, price]) => (
+            <div key={market} className="rounded-[16px] bg-white/6 px-4 py-3">
+              <div className="flex items-center justify-between text-[14px] text-[#F9FAFB]">
+                <span>{market}</span>
+                <span className={market === 'Vietnam' ? 'text-[#F5A623]' : 'text-[#F9FAFB]'}>{price}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'itinerary') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Recovery itinerary</div>
+        <div className="mt-4 space-y-3">
+          {['Arrival', 'Consultation', 'Procedure', 'Recovery hotel', 'Follow-up', 'Departure'].map((item, index) => (
+            <div key={item} className="flex items-center gap-3 rounded-[16px] bg-white/6 px-4 py-3">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#14213A] text-[11px] text-[#F9FAFB]">{index + 1}</div>
+              <div className="text-[14px] text-[#F9FAFB]">{item}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'summary') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Consultation summary</div>
+        <div className="mt-4 rounded-[18px] bg-white/6 p-4">
+          <div className="text-[16px] font-semibold text-[#F9FAFB]">Recommended pathway</div>
+          <div className="mt-2 text-[14px] leading-6 text-[#9CA3AF]">Consultation complete. Two verified clinic options. One preferred recovery hotel.</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'pickup') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Airport pickup</div>
+        <div className="mt-4 rounded-[18px] bg-white/6 p-4">
+          <div className="flex items-center gap-3">
+            <Plane className="h-4 w-4 text-[#F5A623]" />
+            <div className="text-[15px] text-[#F9FAFB]">Driver confirmed for SGN arrival</div>
+          </div>
+          <div className="mt-3 text-[14px] leading-6 text-[#9CA3AF]">Meet-and-greet, clinic transfer, hotel check-in support.</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'checklist') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Post-procedure checklist</div>
+        <div className="mt-4 space-y-3">
+          {['Medication timing confirmed', 'Follow-up appointment booked', 'Airport transfer held', 'Support thread active'].map((item) => (
+            <div key={item} className="flex items-center gap-3 rounded-[16px] bg-white/6 px-4 py-3">
+              <CheckCheck className="h-4 w-4 text-[#22C55E]" />
+              <div className="text-[14px] text-[#F9FAFB]">{item}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (type === 'destination') {
+    return (
+      <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Recovery destination</div>
+        <div className="mt-4 rounded-[18px] bg-[linear-gradient(140deg,#1c3442_0%,#2b5567_100%)] p-4">
+          <div className="text-[18px] font-semibold text-[#F9FAFB]">Da Nang, Hoi An, Phu Quoc</div>
+          <div className="mt-2 text-[14px] leading-6 text-white/78">Recovery pacing, hotel comfort, and gentle follow-up flow built in.</div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={cn('border border-white/10 bg-[#1F2937] shadow-[0_16px_36px_rgba(0,0,0,0.16)]', wrapper)}>
+      <div className="text-[16px] text-[#F9FAFB]">{title}</div>
+    </div>
+  )
+}
+
 function AppMockups() {
   return (
     <div className="relative flex min-h-[680px] items-center justify-center">
@@ -193,21 +456,19 @@ function AppMockups() {
           <span>Browse clinics</span>
           <span>Voya</span>
         </div>
-        <div className="mt-4 rounded-[20px] bg-[#121826] p-4 text-white">
-          <div className="text-xs uppercase tracking-[0.22em] text-white/50">Kim Dental</div>
-          <div className="mt-2 flex items-center gap-2">
-            <BadgeCheck className="h-4 w-4 text-[#f5a623]" />
-            <span className="text-sm text-white/84">Voya Verified</span>
+        <div className="mt-4 space-y-3">
+          <div className="rounded-[18px] bg-[#121826] p-4 text-white">
+            <div className="text-xs uppercase tracking-[0.22em] text-white/50">Kim Dental</div>
+            <div className="mt-2 flex items-center gap-2">
+              <BadgeCheck className="h-4 w-4 text-[#F5A623]" />
+              <span className="text-sm text-white/84">Voya Verified</span>
+            </div>
+            <div className="mt-3 text-[14px] leading-6 text-white/68">Dental implant package</div>
+            <div className="mt-3 text-lg font-semibold text-[#F5A623]">From $1,400</div>
           </div>
-          <div className="mt-4 rounded-[16px] bg-white/8 p-3">
-            <div className="text-sm">Dental implant package</div>
-            <div className="mt-1 text-xs text-white/56">Recovery-friendly hotel options included</div>
-            <div className="mt-3 text-lg font-semibold text-[#f5a623]">From $1,400</div>
-          </div>
-          <div className="mt-3 rounded-[16px] bg-white/8 p-3">
+          <div className="rounded-[18px] bg-[#121826] p-4 text-white">
             <div className="text-sm">Veneers package</div>
-            <div className="mt-1 text-xs text-white/56">Consultation + transfer support</div>
-            <div className="mt-3 text-lg font-semibold text-[#f5a623]">From $1,900</div>
+            <div className="mt-2 text-xs text-white/56">Consultation + transfer support</div>
           </div>
         </div>
       </PhoneFrame>
@@ -224,7 +485,7 @@ function AppMockups() {
             </div>
           </div>
           <div className="flex justify-end">
-            <div className="max-w-[82%] rounded-[18px] rounded-br-md bg-[#f5a623] px-4 py-3 text-[14px] leading-6 text-[#141923]">
+            <div className="max-w-[82%] rounded-[18px] rounded-br-md bg-[#F5A623] px-4 py-3 text-[14px] leading-6 text-[#141923]">
               Yes, and can you keep them close to Da Nang?
             </div>
           </div>
@@ -242,14 +503,7 @@ function AppMockups() {
           <span>6 days</span>
         </div>
         <div className="mt-4 space-y-3">
-          {[
-            'Arrival in Ho Chi Minh City',
-            'Consultation and clinic transfer',
-            'Procedure day',
-            'Recovery hotel stay',
-            'Follow-up appointment',
-            'Departure',
-          ].map((item, index) => (
+          {['Arrival', 'Consultation', 'Procedure', 'Recovery', 'Follow-up', 'Departure'].map((item, index) => (
             <div key={item} className="flex items-start gap-3 rounded-[16px] bg-[#f5f2eb] px-3 py-3">
               <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#141923] text-[11px] font-semibold text-white">
                 {index + 1}
@@ -271,11 +525,11 @@ function HeroSection() {
     >
       <div className="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
         <div className="max-w-2xl py-4 md:py-8">
-          <Eyebrow light>VOYA BY VNTRIP</Eyebrow>
+          <Eyebrow>VOYA BY VNTRIP</Eyebrow>
           <h1 className="mt-5 max-w-2xl text-[64px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[102px]">
             Your medical trip to Vietnam, handled.
           </h1>
-          <Body light className="mt-7 max-w-lg text-[18px] md:text-[20px]">
+          <Body className="mt-7 max-w-lg text-[18px] md:text-[20px]">
             Voya combines verified clinics, travel booking, local concierge support, and recovery-aware itineraries into one managed experience.
           </Body>
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -286,6 +540,61 @@ function HeroSection() {
           </div>
         </div>
         <AppMockups />
+      </div>
+    </section>
+  )
+}
+
+function EntrySelectorSection() {
+  const [selected, setSelected] = useState(entryOptions[0])
+
+  return (
+    <section id="entry-selector" className="grid gap-10 py-4">
+      <div className="max-w-4xl">
+        <Eyebrow>INTERACTIVE ENTRY SELECTOR</Eyebrow>
+        <SectionTitle className="mt-4">What brings you to Vietnam?</SectionTitle>
+      </div>
+      <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="grid gap-3">
+          {entryOptions.map((option) => {
+            const active = selected.label === option.label
+            return (
+              <button
+                key={option.label}
+                onClick={() => setSelected(option)}
+                className={cn(
+                  'rounded-[26px] border px-5 py-5 text-left transition',
+                  active
+                    ? 'border-[#F5A623] bg-[#1F2937] shadow-[0_18px_40px_rgba(0,0,0,0.20)]'
+                    : 'border-white/8 bg-[#1F2937] hover:border-white/18 hover:bg-[#243040]',
+                )}
+              >
+                <div className={cn('text-[16px] font-medium', active ? 'text-[#F9FAFB]' : 'text-[#D1D5DB]')}>{option.label}</div>
+              </button>
+            )
+          })}
+        </div>
+
+        <div className="overflow-hidden rounded-[34px] border border-white/8 bg-[#111827] shadow-[0_24px_60px_rgba(0,0,0,0.22)]">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="px-6 py-8 md:px-8 md:py-9">
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Chosen Voya journey</div>
+              <div className="mt-4 text-[36px] font-semibold leading-[0.96] tracking-[-0.05em] text-[#F9FAFB]">{selected.slogan}</div>
+              <div className="mt-6 inline-flex rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623]">{selected.traveler}</div>
+              <p className="mt-6 max-w-md text-[16px] leading-7 text-[#9CA3AF]">{selected.insight}</p>
+              <div className="mt-8">
+                <CTAButton>{selected.cta}</CTAButton>
+              </div>
+            </div>
+            <div className="border-t border-white/8 bg-[linear-gradient(180deg,#14213A_0%,#111827_100%)] p-6 lg:border-l lg:border-t-0">
+              {selected.treatment === 'Crisp comparison card' && <MiniArtifact type="comparison" title="" />}
+              {selected.treatment === 'Warm itinerary preview' && <MiniArtifact type="itinerary" title="" />}
+              {selected.treatment === 'Coastal recovery timeline' && <MiniArtifact type="destination" title="" />}
+              {selected.treatment === 'Chat-native social proof' && <MiniArtifact type="whatsapp" title="" />}
+              {selected.treatment === 'Handled end-to-end dashboard' && <MiniArtifact type="summary" title="" />}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -320,10 +629,8 @@ function TrustLayer() {
       className="overflow-hidden rounded-[40px] bg-[linear-gradient(140deg,#111827_0%,#14213A_100%)] px-6 py-16 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-20 lg:px-16"
     >
       <div className="max-w-3xl">
-        <Eyebrow light>TRUST LAYER</Eyebrow>
-        <SectionTitle light className="mt-4">
-          Designed around the questions patients actually ask.
-        </SectionTitle>
+        <Eyebrow>TRUST LAYER</Eyebrow>
+        <SectionTitle className="mt-4">Designed around the questions patients actually ask.</SectionTitle>
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {trustCards.map(({ question, answer, icon: Icon }) => (
@@ -338,22 +645,103 @@ function TrustLayer() {
   )
 }
 
-function ProductTieCard({ title, body }) {
+function ArtifactsSection() {
   return (
-    <div className="rounded-[24px] border border-white/10 bg-[#1F2937] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.16)]">
-      <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">
-        <Sparkles className="h-3.5 w-3.5 text-[#F5A623]" />
-        <span>Voya product tie-in</span>
+    <section id="artifacts" className="grid gap-10 py-4">
+      <div className="max-w-4xl">
+        <Eyebrow>VOYA ARTIFACTS</Eyebrow>
+        <SectionTitle className="mt-4">The Voya experience, made tangible.</SectionTitle>
       </div>
-      <div className="mt-4 text-[24px] font-semibold leading-tight tracking-[-0.03em] text-[#F9FAFB]">{title}</div>
-      <p className="mt-3 text-[15px] leading-7 text-[#9CA3AF]">{body}</p>
-    </div>
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {artifacts.map((artifact) => (
+          <div key={artifact.title} className="rounded-[30px] border border-white/8 bg-[#111827] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.20)]">
+            <div className="mb-3 text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{artifact.title}</div>
+            <MiniArtifact type={artifact.type} title={artifact.title} compact />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function MessagingLab() {
+  const categories = Object.keys(messagingCategories)
+  const [activeCategory, setActiveCategory] = useState(categories[0])
+
+  return (
+    <section id="messaging-lab" className="grid gap-10 py-4">
+      <div className="max-w-4xl">
+        <Eyebrow>MESSAGING LAB</Eyebrow>
+        <SectionTitle className="mt-4">Messaging lab.</SectionTitle>
+      </div>
+      <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="grid gap-3">
+          {categories.map((category) => {
+            const active = category === activeCategory
+            return (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={cn(
+                  'rounded-[24px] border px-5 py-4 text-left transition',
+                  active ? 'border-[#F5A623] bg-[#1F2937]' : 'border-white/8 bg-[#1F2937] hover:border-white/18',
+                )}
+              >
+                <div className={cn('text-[16px] font-medium', active ? 'text-[#F9FAFB]' : 'text-[#D1D5DB]')}>{category}</div>
+              </button>
+            )
+          })}
+        </div>
+        <div className="rounded-[34px] border border-white/8 bg-[#111827] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.20)] md:p-8">
+          <div className="grid gap-4 md:grid-cols-2">
+            {messagingCategories[activeCategory].map((line) => (
+              <div key={line} className="rounded-[24px] border border-white/8 bg-[#1F2937] px-5 py-5 text-[20px] font-medium leading-tight tracking-[-0.03em] text-[#F9FAFB]">
+                {line}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function JourneySection() {
+  return (
+    <section id="journey" className="grid gap-10 py-4">
+      <div className="max-w-4xl">
+        <Eyebrow>VOYA JOURNEY</Eyebrow>
+        <SectionTitle className="mt-4">A Voya trip, step by step.</SectionTitle>
+      </div>
+      <div className="relative rounded-[36px] border border-white/8 bg-[#111827] px-6 py-8 shadow-[0_24px_60px_rgba(0,0,0,0.22)] md:px-8 md:py-10">
+        <div className="absolute bottom-8 left-[26px] top-8 w-px bg-white/10 md:left-[35px]" />
+        <div className="grid gap-5">
+          {journeySteps.map((step, index) => (
+            <div
+              key={step.title}
+              className="grid gap-4 rounded-[28px] border border-white/8 bg-[#1F2937] p-5 transition duration-300 hover:translate-x-1 hover:border-white/14 md:grid-cols-[auto_1fr_280px] md:items-center"
+            >
+              <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#F5A623] text-[13px] font-semibold text-[#111827]">
+                {index + 1}
+              </div>
+              <div>
+                <div className="text-[24px] font-semibold leading-tight tracking-[-0.03em] text-[#F9FAFB]">{step.title}</div>
+                <div className="mt-2 max-w-xl text-[15px] leading-7 text-[#9CA3AF]">{step.body}</div>
+              </div>
+              <div className="md:justify-self-end md:w-[260px]">
+                <MiniArtifact type={step.type} title={step.title} compact />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
 function CampaignLab() {
-  const [active, setActive] = useState(tabs[0])
-  const [displayed, setDisplayed] = useState(tabs[0])
+  const [active, setActive] = useState(campaignTabs[0])
+  const [displayed, setDisplayed] = useState(campaignTabs[0])
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
@@ -362,7 +750,7 @@ function CampaignLab() {
     const timer = window.setTimeout(() => {
       setDisplayed(active)
       setVisible(true)
-    }, 280)
+    }, 260)
     return () => window.clearTimeout(timer)
   }, [active, displayed])
 
@@ -373,14 +761,12 @@ function CampaignLab() {
       <div className="max-w-4xl">
         <Eyebrow>CAMPAIGN LAB</Eyebrow>
         <SectionTitle className="mt-4">Five ways travelers discover Voya.</SectionTitle>
-        <Body className="mt-5 max-w-2xl">
-          Each campaign speaks to a different emotional entry point, but all roads lead back to the same concierge product.
-        </Body>
+        <Body className="mt-5 max-w-2xl">Each campaign speaks to a different emotional entry point, but all roads lead back to the same concierge product.</Body>
       </div>
 
       <div className="flex overflow-x-auto pb-2">
         <div className="mx-auto flex min-w-max gap-2 rounded-full border border-white/8 bg-[#1F2937] p-2 shadow-[0_10px_30px_rgba(0,0,0,0.16)]">
-          {tabs.map((tab) => {
+          {campaignTabs.map((tab) => {
             const selected = tab === active
             return (
               <button
@@ -398,22 +784,19 @@ function CampaignLab() {
         </div>
       </div>
 
-      <div className={cn('overflow-hidden rounded-[40px] border border-white/8 bg-[#111827] shadow-[0_30px_80px_rgba(0,0,0,0.24)] transition-all duration-300', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2')}>
+      <div className={cn('overflow-hidden rounded-[40px] border border-white/8 bg-[#111827] shadow-[0_30px_80px_rgba(0,0,0,0.24)] transition-all duration-300', visible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0')}>
         <div className="grid gap-0 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="px-6 py-10 text-white md:px-10 md:py-12">
-            <div className="text-[11px] uppercase tracking-[0.28em] text-[#9CA3AF]">{displayed}</div>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="rounded-full bg-[#14213A] px-3 py-1 text-[12px] text-[#F5A623]">{data.segment}</div>
+              <div className="text-[11px] uppercase tracking-[0.28em] text-[#9CA3AF]">{displayed}</div>
+            </div>
             <h3 className="mt-5 max-w-[14ch] text-[40px] font-semibold leading-[0.94] tracking-[-0.05em] text-[#F9FAFB] md:text-[60px]">{data.headline}</h3>
-            <p className="mt-6 max-w-[18rem] text-[18px] leading-8 text-[#F5A623]">{data.heroCopy}</p>
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {[
-                ['Targets', data.audience],
-                ['Insight', data.insight],
-                ['Sample ad', data.socialCopy],
-                ['Visual direction', data.visualDirection],
-              ].map(([label, value]) => (
-                <div key={label} className="rounded-[24px] border border-white/8 bg-[#1F2937] p-5">
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">{label}</div>
-                  <p className="mt-3 text-[15px] leading-7 text-[#F9FAFB]">{value}</p>
+            <p className="mt-6 max-w-[18rem] text-[18px] leading-8 text-[#F5A623]">{data.insight}</p>
+            <div className="mt-8 grid gap-3">
+              {data.sloganStack.map((line) => (
+                <div key={line} className="rounded-[22px] border border-white/8 bg-[#1F2937] px-4 py-4 text-[18px] font-medium leading-tight text-[#F9FAFB]">
+                  {line}
                 </div>
               ))}
             </div>
@@ -422,20 +805,30 @@ function CampaignLab() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between border-t border-white/10 bg-[linear-gradient(180deg,#14213A_0%,#111827_100%)] px-6 py-10 text-white md:px-10 md:py-12 lg:border-l lg:border-t-0">
-            <div className="grid gap-6">
-              <ProductTieCard title={data.mockupTitle} body={data.mockupBody} />
-              <div className="grid gap-4">
-                {[
-                  'Verified clinic shortlist',
-                  'Named concierge',
-                  'Trip + treatment + recovery in one flow',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-[20px] border border-white/8 bg-[#1F2937] px-4 py-4">
-                    <MapPinned className="mt-1 h-4 w-4 shrink-0 text-[#F5A623]" />
-                    <p className="text-[15px] leading-7 text-[#F9FAFB]">{item}</p>
-                  </div>
-                ))}
+          <div className={cn('flex flex-col justify-between border-t border-white/10 px-6 py-10 text-white md:px-10 md:py-12 lg:border-l lg:border-t-0', data.accent)}>
+            <div className="grid gap-5">
+              <div className="rounded-[30px] border border-white/10 bg-[#1F2937] p-6">
+                <div className="text-[11px] uppercase tracking-[0.24em] text-[#9CA3AF]">Sample ad moment</div>
+                <p className="mt-4 text-[18px] leading-8 text-[#F9FAFB]">{data.adMoment}</p>
+              </div>
+              <ProductTieCard title="Product tie-back" body={data.productTieBack} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <MiniArtifact type="clinic" title="" compact />
+                <MiniArtifact
+                  type={
+                    displayed === 'Second Opinion?'
+                      ? 'comparison'
+                      : displayed === "You've Earned This"
+                        ? 'itinerary'
+                        : displayed === 'While You Recover'
+                          ? 'destination'
+                          : displayed === 'Your Friend Already Did It'
+                            ? 'whatsapp'
+                            : 'summary'
+                  }
+                  title=""
+                  compact
+                />
               </div>
             </div>
             <div className="mt-8 rounded-[30px] border border-white/10 bg-[#1F2937] p-6">
@@ -458,9 +851,7 @@ function ClosingSection() {
         <div className="max-w-3xl">
           <Eyebrow>CLOSING</Eyebrow>
           <SectionTitle className="mt-4">Vietnam’s health and travel package.</SectionTitle>
-          <Body light className="mt-6 max-w-xl">
-            VNTrip already owns the travel infrastructure. Voya adds the trust, care, and coordination layer.
-          </Body>
+          <Body className="mt-6 max-w-xl">VNTrip already owns the travel infrastructure. Voya adds the trust, care, and coordination layer.</Body>
           <div className="mt-9">
             <CTAButton>Prototype the Voya journey</CTAButton>
           </div>
@@ -497,8 +888,12 @@ export default function App() {
       <main className="px-4 pb-8 pt-[92px] md:px-8">
         <div className="mx-auto grid max-w-[1280px] gap-12 md:gap-16">
           <HeroSection />
+          <EntrySelectorSection />
           <ProductExperience />
           <TrustLayer />
+          <ArtifactsSection />
+          <MessagingLab />
+          <JourneySection />
           <CampaignLab />
           <ClosingSection />
         </div>
