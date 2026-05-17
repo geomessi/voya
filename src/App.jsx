@@ -323,20 +323,45 @@ function PhoneFrame({ children, className = '' }) {
 
 function MockClinicThumbnail({ variant = 0 }) {
   const variants = [
-    'from-[#d6cfc3] via-[#f5f0e7] to-[#b59f88]',
-    'from-[#d8d0c5] via-[#fbf8f2] to-[#c2b09b]',
-    'from-[#cdbda6] via-[#f4eee4] to-[#9d8a73]',
+    {
+      shell: 'from-[#d8d0c5] via-[#f7f3ec] to-[#b89f81]',
+      accent: '#b58c56',
+      sign: 'KIM DENTAL',
+    },
+    {
+      shell: 'from-[#ddd6cb] via-[#faf7f1] to-[#c8b49c]',
+      accent: '#8f816f',
+      sign: 'VIETMED',
+    },
+    {
+      shell: 'from-[#d1c4b1] via-[#f5ede0] to-[#a99072]',
+      accent: '#8f7a56',
+      sign: 'ALPHA',
+    },
   ]
+  const current = variants[variant % variants.length]
 
   return (
-    <div className={cn('relative aspect-[4/3] overflow-hidden rounded-[18px] bg-gradient-to-br', variants[variant % variants.length])}>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_38%)]" />
+    <div className={cn('relative aspect-[4/3] overflow-hidden rounded-[18px] bg-gradient-to-br', current.shell)}>
+      <div className="absolute inset-x-0 top-0 h-[62%] bg-[linear-gradient(180deg,rgba(255,255,255,0.66),rgba(255,255,255,0.18))]" />
+      <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(180deg,#c8b398_0%,#b79f83_100%)]" />
+      <div className="absolute left-0 top-[58%] h-px w-full bg-white/45" />
       <div className="absolute left-4 right-4 top-4 h-3 rounded-full bg-white/55" />
-      <div className="absolute left-5 top-12 h-14 w-20 rounded-[12px] bg-white/58 shadow-[0_8px_18px_rgba(0,0,0,0.08)]" />
-      <div className="absolute right-5 top-12 h-20 w-24 rounded-[14px] bg-white/42 shadow-[0_12px_28px_rgba(0,0,0,0.08)]" />
-      <div className="absolute bottom-5 left-5 h-10 w-24 rounded-[12px] bg-[#d7c1a8]/80" />
-      <div className="absolute bottom-5 right-5 h-10 w-16 rounded-[12px] bg-white/65" />
-      <div className="absolute bottom-8 left-1/2 h-9 w-28 -translate-x-1/2 rounded-[14px] bg-white/72 shadow-[0_12px_24px_rgba(0,0,0,0.10)]" />
+      <div className="absolute left-5 top-10 h-16 w-20 rounded-[14px] bg-white/48 shadow-[0_12px_20px_rgba(0,0,0,0.06)]" />
+      <div className="absolute right-5 top-10 h-24 w-28 rounded-[16px] bg-white/38 shadow-[0_14px_28px_rgba(0,0,0,0.08)]" />
+      <div className="absolute left-1/2 top-[52%] h-12 w-28 -translate-x-1/2 rounded-[14px] bg-white/82 shadow-[0_10px_24px_rgba(0,0,0,0.12)]" />
+      <div className="absolute left-1/2 top-[58%] h-5 w-14 -translate-x-1/2 rounded-full bg-black/12" />
+      <div className="absolute left-8 top-[60%] h-10 w-8 rounded-t-[14px] bg-[#3c6d46]/85" />
+      <div className="absolute left-[30px] top-[56%] h-6 w-12 rounded-full bg-[#4d8657]" />
+      <div className="absolute right-8 top-[60%] h-10 w-8 rounded-t-[14px] bg-[#3c6d46]/85" />
+      <div className="absolute right-[30px] top-[56%] h-6 w-12 rounded-full bg-[#4d8657]" />
+      <div className="absolute left-1/2 top-[18%] -translate-x-1/2 text-[11px] font-semibold tracking-[0.18em]" style={{ color: current.accent }}>
+        {current.sign}
+      </div>
+      <div className="absolute left-1/2 top-[28%] h-8 w-8 -translate-x-1/2 rounded-full border border-white/70" style={{ backgroundColor: `${current.accent}20` }} />
+      <div className="absolute left-1/2 top-[30.5%] h-3 w-3 -translate-x-1/2 rounded-full" style={{ backgroundColor: current.accent }} />
+      <div className="absolute bottom-5 right-5 h-8 w-16 rounded-[12px] bg-white/55 shadow-[0_8px_18px_rgba(0,0,0,0.08)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_36%)]" />
     </div>
   )
 }
