@@ -724,20 +724,57 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="overflow-hidden rounded-[40px] bg-[radial-gradient(circle_at_top_right,#14213A_0%,#111827_38%,#0f172a_76%)] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
+      className="relative overflow-hidden rounded-[40px] bg-[linear-gradient(145deg,#0e1625_0%,#111827_42%,#0f172a_100%)] px-6 py-12 text-white shadow-[0_30px_80px_rgba(0,0,0,0.28)] md:px-12 md:py-14 lg:px-16"
     >
-      <div className="flex flex-col items-center text-center">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(245,166,35,0.14),transparent_28%),radial-gradient(circle_at_18%_18%,rgba(125,211,252,0.12),transparent_24%),radial-gradient(circle_at_82%_22%,rgba(196,181,253,0.12),transparent_24%)]" />
+      <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[#7DD3FC]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 top-16 h-80 w-80 rounded-full bg-[#F5A623]/12 blur-3xl" />
+      <div className="pointer-events-none absolute inset-x-10 top-10 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.18))]" />
+
+      <div className="relative flex flex-col items-center text-center">
         <div className="max-w-[42rem] pt-2">
           <Eyebrow>Vntrip Presents</Eyebrow>
           <h1 className="mt-4 text-[72px] font-semibold leading-[0.88] tracking-[-0.06em] text-[#F9FAFB] md:text-[116px]">
             Voya
           </h1>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {[
+              'Verified clinics',
+              'Local concierge intelligence',
+              'Recovery-aware journeys',
+            ].map((item, index) => (
+              <div
+                key={item}
+                className={cn(
+                  'rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] backdrop-blur-xl',
+                  index === 1
+                    ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F6D08A]'
+                    : 'border-white/10 bg-white/6 text-white/68',
+                )}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="mt-8 w-full">
+        <div className="relative mt-8 w-full">
+          <div className="pointer-events-none absolute left-[8%] top-[12%] hidden rounded-[24px] border border-white/10 bg-white/6 px-4 py-3 text-left shadow-[0_18px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl lg:block">
+            <div className="text-[10px] uppercase tracking-[0.24em] text-white/42">Why it feels real</div>
+            <div className="mt-2 text-[15px] text-[#F9FAFB]">One product system for care, travel, and follow-through.</div>
+          </div>
+          <div className="pointer-events-none absolute right-[7%] top-[18%] hidden rounded-[24px] border border-white/10 bg-[#14213A]/70 px-4 py-3 text-left shadow-[0_18px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl lg:block">
+            <div className="text-[10px] uppercase tracking-[0.24em] text-[#9CA3AF]">Product world</div>
+            <div className="mt-2 flex items-center gap-2 text-[15px] text-[#F9FAFB]">
+              <span className="h-2 w-2 rounded-full bg-[#22C55E]" />
+              Concierge online
+            </div>
+          </div>
+          <div className="pointer-events-none absolute inset-x-[14%] top-6 h-[58%] rounded-full bg-[radial-gradient(circle,rgba(245,166,35,0.12),transparent_58%)] blur-3xl" />
           <img
             src={heroMockupImage}
             alt="Voya product mockups"
-            className="mx-auto w-full max-w-[1180px] object-contain"
+            className="relative z-10 mx-auto w-full max-w-[1020px] object-contain"
           />
         </div>
       </div>
